@@ -27,4 +27,9 @@ body {
   font-style: normal;
   line-height: 1.36;
   letter-spacing: -0.32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
 }
