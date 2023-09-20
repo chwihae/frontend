@@ -16,7 +16,7 @@ const TabBar = ({ tabIndex, setTabIndex }: TTabBar) => {
     <div className="mt-10 flex items-center justify-between">
       <ol className="flex h-[35px] justify-center border-b-[1px] border-b-GS6">
         {TABBAR.map((tab, index) => (
-          <li key={tab}>
+          <li key={tab.type}>
             <button
               className={`scorebody1 tracking-wide-[0.16px] border-b-[3px] px-[14.671px] pb-3 text-center ${
                 index === tabIndex
@@ -25,7 +25,7 @@ const TabBar = ({ tabIndex, setTabIndex }: TTabBar) => {
               }`}
               onClick={() => handleTabBtn(index)}
             >
-              {tab}
+              {tab.title}
             </button>
           </li>
         ))}
