@@ -19,7 +19,7 @@ const Login = () => {
 
   fatchData();
 
-  return <div>로그인</div>;
+  return <div></div>;
 };
 
 export default Login;
