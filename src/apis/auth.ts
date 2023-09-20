@@ -1,3 +1,5 @@
+import { userInfo } from '@/mock/mockData';
+
 import { auth } from './axios';
 
 // 인가코드로 토큰발급 요청
@@ -12,11 +14,21 @@ export const postToken = async (authorizeCode: string | null) => {
       'refreshToken',
       JSON.stringify(data?.data?.refreshToken),
     );
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+  }
+};
+
+// 유저 정보 얻기
+export const getUserInfo = async (authorizationCode: string | null) => {
+  try {
+    const { data } = await userInfo();
+    console.log(authorizationCode);
+    return data;
+  } catch (error) {
+    console.error(error);
   }
 };
