@@ -15,7 +15,7 @@ const PrivateLayout = () => {
         (component) => (
           <header
             key={component.pathname}
-            className="relative flex h-[60px] items-center justify-center bg-amber-300"
+            className="h-[48px] w-full items-center justify-center bg-amber-300"
           >
             {component.component}
           </header>

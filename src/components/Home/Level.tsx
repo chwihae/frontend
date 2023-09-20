@@ -5,7 +5,7 @@ const Level = () => {
   const user = useUserInfo();
 
   return (
-    <section className="flex h-1/3 flex-col items-center justify-center gap-4">
+    <section className="mt-[34px] flex h-1/3 flex-col items-center justify-center gap-4">
       <LevelImage className="h-24 w-24" />
       <p className="text-xl">나는 {user?.level} 별랑이!</p>
       <div className="flex w-full justify-center gap-2">
