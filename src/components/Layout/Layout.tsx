@@ -18,7 +18,7 @@ const Layout = () => {
             </header>
           ),
         )}
-        <main>
+        <main className="h-full">
           <Outlet />
         </main>
       </div>
