@@ -9,8 +9,8 @@ const Login = () => {
   console.log(authorizeCode);
 
   const fatchData = async () => {
+    // 토큰발급
     const res = await postToken(authorizeCode);
-    console.log(res);
 
     if (res.code === 200) {
       navigate('/home');
