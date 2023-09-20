@@ -8,7 +8,6 @@ import Mypage from '@pages/Mypage';
 import NotFound from '@pages/NotFound';
 import QuestionCreate from '@pages/QuestionCreate';
 import QuestionEdit from '@pages/QuestionEdit';
-import SignUp from '@pages/SignUp';
 import Vote from '@pages/Vote';
 
 const router = createBrowserRouter([
@@ -23,10 +22,6 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
-      },
-      {
-        path: '/signup',
-        element: <SignUp />,
       },
       {
         path: '/home',
