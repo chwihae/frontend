@@ -4,6 +4,7 @@ const Intro = () => {
   const handleOAuthLogin = () => {
     window.location.assign(KAKAO_AUTH_URL);
   };
+
   return (
     <div className="flex h-screen flex-col items-center justify-between py-28">
       <div>
