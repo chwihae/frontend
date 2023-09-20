@@ -23,10 +23,9 @@ export const postToken = async (authorizeCode: string | null) => {
 };
 
 // 유저 정보 얻기
-export const getUserInfo = async (authorizationCode: string | null) => {
+export const getUserInfo = async () => {
   try {
     const { data } = await userInfo();
-    console.log(authorizationCode);
     return data;
   } catch (error) {
     console.error(error);
