@@ -7,7 +7,7 @@ const Intro = () => {
 
   return (
     <div className="flex h-screen flex-col items-center justify-between py-28">
-      <div>
+      <div className="flex flex-col items-center">
         <div className="mb-5 flex h-[168px] w-[160px] items-center justify-center rounded-xl bg-amber-200">
           로고
         </div>
