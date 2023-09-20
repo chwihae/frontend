@@ -10,6 +10,7 @@ import Mypage from '@pages/Mypage';
 import NotFound from '@pages/NotFound';
 import QuestionCreate from '@pages/QuestionCreate';
 import QuestionEdit from '@pages/QuestionEdit';
+import Splash from '@pages/Splash';
 import Vote from '@pages/Vote';
 
 const router = createBrowserRouter([
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     element: <Layout />, // 공통 레이아웃 적용
     errorElement: <NotFound />,
     children: [
+      { path: '/', element: <Splash /> },
       {
         element: <PublicLayout />, // 공개 페이지에 레이아웃 적용
         children: [
