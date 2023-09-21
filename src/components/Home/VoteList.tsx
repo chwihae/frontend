@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getQuestionAll } from '@/apis/home';
+import { getQuestionAll } from '@/apis/question';
 import { RADIOOPTIONS, TABBAR } from '@/constants/home';
 import type { IVoteAll } from '@/types/homeType';
 
@@ -15,7 +15,7 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await getQuestionAll();
-      console.log(res);
+      // console.log(res);
       setLists(res?.data);
     };
     fetchData();
@@ -25,14 +25,11 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
     ? lists?.filter((list) => list.type === TABBAR[tabIndex].type)
     : lists;
 
-  console.log(!solvedIndex);
-
   const listFilterSolved = !solvedIndex
     ? listsFilterTab
     : listsFilterTab?.filter(
         (list) => list.status === RADIOOPTIONS[solvedIndex].status,
       );
-  console.log(listFilterSolved);
 
   return (
     <ol>
