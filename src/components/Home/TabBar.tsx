@@ -3,14 +3,14 @@ import { TABBAR } from '@/constants/home';
 type TTabBar = {
   tabIndex: number;
   setTabIndex: (index: number) => void;
+  setSolvedIndex: (arg: number) => void;
 };
 
-const TabBar = ({ tabIndex, setTabIndex }: TTabBar) => {
+const TabBar = ({ tabIndex, setTabIndex, setSolvedIndex }: TTabBar) => {
   const handleTabBtn = (index: number) => {
     setTabIndex(index);
+    setSolvedIndex(0);
   };
-
-  console.log(tabIndex);
 
   return (
     <div className="mt-10 flex items-center justify-between">
