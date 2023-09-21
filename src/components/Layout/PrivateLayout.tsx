@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-import HeaderHome from '@components/Layout//HeaderHome';
 import HeaderBack from '@components/Layout/HeaderBack';
+import HeaderHome from '@components/Layout/HeaderHome';
 
 const PrivateLayout = () => {
   const isLogin = !!localStorage.getItem('accessToken');
@@ -35,4 +35,5 @@ const HEADERS = [
   { pathname: 'home', component: <HeaderHome /> },
   { pathname: 'question', component: <HeaderBack /> },
   { pathname: 'vote', component: <HeaderBack /> },
+  { pathname: 'mypage', component: <HeaderBack /> },
 ];
