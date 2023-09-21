@@ -2,10 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getVoteAll } from '@/apis/home';
-import { TABBAR } from '@/constants/home';
+import { RADIOOPTIONS, TABBAR } from '@/constants/home';
 import type { IVoteAll } from '@/types/homeType';
 
-const VoteList = ({ tabIndex }: { tabIndex: number }) => {
+type TVoteList = {
+  tabIndex: number;
+  solvedIndex: number;
+};
+const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
   const [lists, setLists] = useState<IVoteAll[] | undefined>([]);
 
   useEffect(() => {
@@ -17,15 +21,22 @@ const VoteList = ({ tabIndex }: { tabIndex: number }) => {
     fetchData();
   }, [tabIndex]);
 
-  const newLists = tabIndex
+  const listsFilterTab = tabIndex
     ? lists?.filter((list) => list.type === TABBAR[tabIndex].type)
     : lists;
 
-  console.log(newLists);
+  console.log(!solvedIndex);
+
+  const listFilterSolved = !solvedIndex
+    ? listsFilterTab
+    : listsFilterTab?.filter(
+        (list) => list.status === RADIOOPTIONS[solvedIndex].status,
+      );
+  console.log(listFilterSolved);
 
   return (
     <ol>
-      {newLists?.map((list) => (
+      {listFilterSolved?.map((list) => (
         <li key={list.id}>
           <Link
             to={`/vote/${list.id}`}
@@ -33,6 +44,7 @@ const VoteList = ({ tabIndex }: { tabIndex: number }) => {
           >
             <div className="w-[294px]">
               <p>{list.title}</p>
+              <p>{list.status}</p>
               <div className="flex gap-3">
                 <span>{list.viewCount}</span>
                 <span>{list.commentCount}</span>

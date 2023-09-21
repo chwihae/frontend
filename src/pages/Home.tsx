@@ -22,7 +22,7 @@ const Home = () => {
         solvedIndex={solvedIndex}
         setSolvedIndex={setSolvedIndex}
       />
-      <VoteList tabIndex={tabIndex} />
+      <VoteList tabIndex={tabIndex} solvedIndex={solvedIndex} />
       <Link to="/question">
         <button className="btn absolute bottom-[41px] right-4 h-12 w-12 rounded-full border-0 bg-orange-500 p-0 hover:bg-orange-500">
           작성
