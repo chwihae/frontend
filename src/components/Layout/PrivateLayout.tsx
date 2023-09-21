@@ -10,19 +10,22 @@ const PrivateLayout = () => {
   const pathParts = pathname.split('/').slice(1);
 
   return (
-    <div className="h-[calc(100vh-60px)]">
+    <>
       {HEADERS.filter((header) => header.pathname === pathParts[0]).map(
         (component) => (
-          <header
-            key={component.pathname}
-            className="h-[48px] w-full items-center justify-center bg-amber-300"
-          >
+          <header key={component.pathname} className="h-[48px] bg-amber-300">
             {component.component}
           </header>
         ),
       )}
-      {isLogin ? <Outlet /> : <Navigate to="/intro" />}
-    </div>
+      {isLogin ? (
+        <main className="hide-scroll h-[calc(100%-48px)] overflow-scroll">
+          <Outlet />
+        </main>
+      ) : (
+        <Navigate to="/intro" />
+      )}
+    </>
   );
 };
 

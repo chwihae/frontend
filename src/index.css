@@ -29,6 +29,13 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.hide-scroll::-webkit-scrollbar {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+  display: none;
+}
+
 body {
   font-size: 16px;
   /* font-weight: 400; */
