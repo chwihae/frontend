@@ -14,8 +14,8 @@ export const userInfo = async () => {
   return USERINFO;
 };
 
-export const voteAll = async () => {
-  const VOTEALL = {
+export const questionAll = async () => {
+  const QUESTIONALL = {
     data: {
       code: 200,
       message: 'OK',
@@ -24,7 +24,7 @@ export const voteAll = async () => {
           id: 1,
           title: '회사선택 도와주세용',
           type: 'SPEC',
-          closeAt: '2023-09-20T18:54:10',
+          closeAt: '2023-09-24T18:54:10',
           status: 'IN_PROGRESS',
           viewCount: 10,
           commentCount: 5,
@@ -34,7 +34,7 @@ export const voteAll = async () => {
           id: 2,
           title: '연ㅇ봉ㅇ..!!!!',
           type: 'SPEC',
-          closeAt: '2023-09-20T18:54:10',
+          closeAt: '2023-09-24T18:54:10',
           status: 'COMPLETED',
           viewCount: 10,
           commentCount: 5,
@@ -255,5 +255,5 @@ export const voteAll = async () => {
       ],
     },
   };
-  return VOTEALL;
+  return QUESTIONALL;
 };

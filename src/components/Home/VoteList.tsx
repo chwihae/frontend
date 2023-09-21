@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getVoteAll } from '@/apis/home';
+import { getQuestionAll } from '@/apis/home';
 import { RADIOOPTIONS, TABBAR } from '@/constants/home';
 import type { IVoteAll } from '@/types/homeType';
 
@@ -14,7 +14,7 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getVoteAll();
+      const res = await getQuestionAll();
       console.log(res);
       setLists(res?.data);
     };
