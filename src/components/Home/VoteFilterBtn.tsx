@@ -1,37 +1,35 @@
 type TVoteFilterBtn = {
-  isSolved: boolean;
-  setIsSolved: (arg: boolean) => void;
+  solvedIndex: number;
+  setSolvedIndex: (arg: number) => void;
 };
 
-const VoteFilterBtn = ({ isSolved, setIsSolved }: TVoteFilterBtn) => {
+const VoteFilterBtn = ({ solvedIndex, setSolvedIndex }: TVoteFilterBtn) => {
+  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSolvedIndex(Number(event.target.value));
+  };
+
   return (
     <div className="px-4 pt-4">
-      <div className="mb-3 flex w-40 gap-2">
-        <button
-          type="button"
-          className={`w-full rounded-[37px] py-2 ${
-            isSolved
-              ? 'border-[1px] border-GS6 text-GS4'
-              : ' bg-prime1 text-white'
-          }`}
-          onClick={() => setIsSolved(false)}
-        >
-          해결중
-        </button>
-        <button
-          type="button"
-          className={`w-full rounded-[37px] py-2 ${
-            isSolved
-              ? ' bg-prime1 text-white'
-              : 'border-[1px] border-GS6 text-GS4'
-          }`}
-          onClick={() => setIsSolved(true)}
-        >
-          해결완료
-        </button>
-      </div>
+      {radioOptions.map((option) => (
+        <label key={option.value}>
+          <input
+            type="radio"
+            name="voteFilter"
+            value={option.value}
+            checked={solvedIndex === option.value}
+            onChange={handleRadioChange}
+          />
+          {option.text}
+        </label>
+      ))}
     </div>
   );
 };
 
 export default VoteFilterBtn;
+
+const radioOptions = [
+  { text: '전체', value: 0 },
+  { text: '해결중', value: 1 },
+  { text: '해결완료', value: 2 },
+];
