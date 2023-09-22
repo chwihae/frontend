@@ -83,6 +83,14 @@ body {
   letter-spacing: 0.48px;
 }
 
+.scorebold18 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.36px;
+}
+
 .scorebold16 {
   font-family: 'S-CoreDream-3Light';
   font-size: 16px;

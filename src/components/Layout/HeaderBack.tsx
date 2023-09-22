@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { ReactComponent as IConBackBlack } from '@/assets/icon_back_black.svg';
+
 const HeaderBack = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,11 +18,13 @@ const HeaderBack = () => {
       : null;
 
   return (
-    <div className="relative flex h-full items-center justify-between">
-      <button className="p-[15px] pt-4" onClick={() => navigate('/home')}>
-        뒤로
+    <div className="relative flex h-full items-center justify-between px-4">
+      <button className="" onClick={() => navigate('/home')}>
+        <IConBackBlack />
       </button>
-      <h1 className="absolute left-1/2 translate-x-[-50%]">{findTitle}</h1>
+      <h1 className="scorebold18 absolute left-1/2 translate-x-[-50%]">
+        {findTitle}
+      </h1>
       {pathParts[0] === 'vote' ? (
         <button className="p-[15px] pt-4" onClick={() => navigate('/home')}>
           저장 또는 케밥
