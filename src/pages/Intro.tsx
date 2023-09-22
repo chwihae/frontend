@@ -1,3 +1,5 @@
+import { ReactComponent as IconKakao } from '@/assets/icon_kakao.svg';
+import { ReactComponent as ImgCharGroup } from '@/assets/img_charGroup.svg';
 import { KAKAO_AUTH_URL } from '@/constants/kakao';
 
 const Intro = () => {
@@ -8,20 +10,28 @@ const Intro = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-between py-28">
       <div className="flex flex-col items-center">
-        <div className="mb-5 flex h-[168px] w-[160px] items-center justify-center rounded-xl bg-amber-200">
-          로고
+        <p className="socreintro flex flex-col gap-1 text-black">
+          <span>
+            <span className="text-prime1">취</span>준생 고민
+          </span>
+          <span>
+            <span className="text-prime1">해</span>결 서비스
+          </span>
+        </p>
+        <div className="mb-[43.81px]">
+          <ImgCharGroup />
         </div>
-        <p className="font-bold">취해로 취준생 고민은 해결!</p>
       </div>
       <div>
-        <p className="mb-5 text-center font-bold">
-          함께 고민 해결하러 가볼까요?
+        <p className="scoremedium14 mb-2 text-center text-GS3">
+          함께 고민을 해결하러 갈까요?
         </p>
         <button
-          className="btn h-[46px] w-[300px] rounded-xl border-0 bg-amber-200 text-lg hover:bg-amber-100"
+          className="scoremedium16 btn h-[50px] w-[343px] rounded-[15px] border-0 bg-[#FEE500] px-[58px] py-3 text-[#191919] hover:bg-amber-200"
           onClick={handleOAuthLogin}
         >
-          카카오 계정으로 시작하기
+          <IconKakao />
+          카카오로 시작하기
         </button>
       </div>
     </div>

@@ -38,7 +38,6 @@ html {
 
 body {
   font-size: 16px;
-  /* font-weight: 400; */
   font-stretch: normal;
   font-style: normal;
   line-height: 1.36;
@@ -53,6 +52,15 @@ body {
 }
 
 /* S-CoreDream-3Light */
+.socreintro {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+  letter-spacing: 0.64px;
+}
+
 .scoreheader {
   font-family: 'S-CoreDream-3Light';
   font-size: 24px;
@@ -74,7 +82,7 @@ body {
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
-  line-height: 160%; /* 32px */
+  line-height: 1.6;
   letter-spacing: 0.4px;
 }
 .scoremedium16 {
@@ -82,8 +90,16 @@ body {
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 160%; /* 25.6px */
+  line-height: 1.6;
   letter-spacing: 0.32px;
+}
+.scoremedium14 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.28px;
 }
 .scoretitle2 {
   font-family: 'S-CoreDream-3Light';
