@@ -1,5 +1,3 @@
-import { userInfo } from '@/mock/mockData';
-
 import { auth } from './axios';
 
 // 인가코드로 토큰발급 요청
@@ -25,7 +23,11 @@ export const postToken = async (authorizeCode: string | null) => {
 // 유저 정보 얻기
 export const getUserInfo = async () => {
   try {
-    const { data } = await userInfo();
+    const { data } = await auth.get('/api/v1/users/statistics');
+    localStorage.clear();
+    if (data.state === 200) {
+      localStorage.setItem('userInfo', JSON.stringify(data.data));
+    }
     return data;
   } catch (error) {
     console.error(error);
