@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
-import { ReactComponent as IConLevelFour } from '@/assets/levelfour.svg';
-import { ReactComponent as IConLevelOne } from '@/assets/levelone.svg';
-import { ReactComponent as IConLevelThree } from '@/assets/levelthree.svg';
-import { ReactComponent as IConLevelTwo } from '@/assets/leveltwo.svg';
+import { ReactComponent as IConLevelOne } from '@/assets/char_level1.svg';
+import { ReactComponent as IConLevelTwo } from '@/assets/char_level2.svg';
+import { ReactComponent as IConLevelThree } from '@/assets/char_level3.svg';
+import { ReactComponent as IConLevelFour } from '@/assets/char_level4.svg';
 import useUserInfo from '@/hooks/useUserInfo';
 
 const LevelImage = ({ className }: { className: string }) => {
@@ -12,23 +12,19 @@ const LevelImage = ({ className }: { className: string }) => {
   const LEVEL = [
     {
       level: '학사',
-      img: <IConLevelOne className={`${className} rounded-full bg-rose-400`} />,
+      img: <IConLevelOne className={`${className}`} />,
     },
     {
       level: '석사',
-      img: <IConLevelTwo className={`${className} rounded-full bg-rose-400`} />,
+      img: <IConLevelTwo className={`${className}`} />,
     },
     {
       level: '박사',
-      img: (
-        <IConLevelThree className={`${className} rounded-full bg-rose-400`} />
-      ),
+      img: <IConLevelThree className={`${className}`} />,
     },
     {
       level: '교사',
-      img: (
-        <IConLevelFour className={`${className} rounded-full bg-rose-400`} />
-      ),
+      img: <IConLevelFour className={`${className}`} />,
     },
   ];
 
