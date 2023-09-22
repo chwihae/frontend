@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getQuestionAll } from '@/apis/question';
+import getQuestionAll from '@/apis/question';
 import { ReactComponent as IConBookmarkGray } from '@/assets/icon_bookmarkCount_gray.svg';
 import { ReactComponent as IConCommentGray } from '@/assets/icon_comment_gray.svg';
 import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.svg';
