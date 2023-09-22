@@ -20,18 +20,20 @@ const FieldsOptionArray = () => {
                 className="h-10 w-full rounded-[10px] border-[1px] border-GS6 px-5 py-[11px]"
                 {...context.register(`options.${index}.name`)}
               />
-              <button
-                type="button"
-                className="absolute right-4 top-1/2 translate-y-[-50%]"
-                onClick={() => remove(index)}
-              >
-                제거
-              </button>
+              {index >= 2 ? (
+                <button
+                  type="button"
+                  className="absolute right-4 top-1/2 translate-y-[-50%]"
+                  onClick={() => remove(index)}
+                >
+                  제거
+                </button>
+              ) : null}
             </li>
           );
         })}
       </ul>
-      <section>
+      {fields.length < 10 && (
         <button
           type="button"
           className="text-gs2 h-10 w-full rounded-[10px] bg-GS6 px-5 py-[11px]"
@@ -41,7 +43,7 @@ const FieldsOptionArray = () => {
         >
           항목추가
         </button>
-      </section>
+      )}
     </div>
   );
 };
