@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import type { UseFormProps } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import {
   CATEGORYOPTIONS,
@@ -14,6 +15,8 @@ import FieldsOptionArray from '@components/Question/FieldsOptionArray';
 type TMethods = IQuestion & UseFormProps;
 
 const QuestionCreate = () => {
+  const navigate = useNavigate();
+
   const defaultValues = {
     type: null,
     title: '',
@@ -22,25 +25,19 @@ const QuestionCreate = () => {
     closeAt: '1800000',
   };
   const methods = useForm<TMethods>({ defaultValues });
-
   const { register, watch, handleSubmit } = methods;
-
-  const [showToast, setShowToast] = useState(false);
-
   const watchFields = watch(['title', 'type', 'options']);
-
   const IsOptionArrayEmptied = watchFields[2].some((item) => item.name === '');
 
-  console.log('IsOptionArrayEmptied', IsOptionArrayEmptied);
+  const [showToast, setShowToast] = useState(false);
 
   const handleSubmitBtn = () => {
     if (IsOptionArrayEmptied) setShowToast(true);
   };
 
-  console.log(showToast);
-
   const onSubmit = (data: IQuestion) => {
     console.log(data);
+    navigate('/home');
   };
 
   return (
