@@ -6,6 +6,6 @@ export interface IQuestion {
   type: string | null;
   title: string;
   content: string;
-  closeAt: string | null;
+  closeAt: string;
   options: IQuestionOptions[];
 }

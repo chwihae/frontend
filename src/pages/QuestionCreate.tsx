@@ -17,15 +17,21 @@ const QuestionCreate = () => {
     title: '',
     content: '',
     options: [{ name: '' }, { name: '' }],
-    closeAt: null,
+    closeAt: '1800000',
   };
   const methods = useForm<TMethods>({ defaultValues });
 
-  const { register, handleSubmit } = methods;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
 
   const onSubmit = (data: IQuestion) => {
     console.log(data);
   };
+
+  console.log(errors);
 
   return (
     <FormProvider {...methods}>
@@ -33,7 +39,13 @@ const QuestionCreate = () => {
         <fieldset>
           {CATEGORYOPTIONS.map((tab) => (
             <label key={tab}>
-              <input type="radio" value={tab} {...register('type')} />
+              <input
+                type="radio"
+                value={tab}
+                {...register('type', {
+                  required: true,
+                })}
+              />
               {tab}
             </label>
           ))}
@@ -43,13 +55,20 @@ const QuestionCreate = () => {
             type="text"
             className="h-[52px] w-full py-[13px] pl-4 focus:outline-none"
             placeholder="제목을 입력해주세요.(15자 이내)"
-            {...register('title')}
+            minLength={1}
+            maxLength={15}
+            {...register('title', {
+              required: true,
+              minLength: 1,
+              maxLength: 15,
+            })}
           />
         </fieldset>
         <fieldset>
           <textarea
             className="h-36 w-full resize-none px-4 py-6 focus:outline-none"
             placeholder={PLACEHOLDER_CONTENT}
+            maxLength={800}
             {...register('content')}
           />
         </fieldset>
@@ -60,9 +79,15 @@ const QuestionCreate = () => {
             <span>아이콘</span>
           </div>
           {PERIODOPTIONS.map((period) => (
-            <label key={period}>
-              <input type="radio" value={period} {...register('closeAt')} />
-              {period}
+            <label key={period.value}>
+              <input
+                type="radio"
+                value={period.value}
+                {...register('closeAt', {
+                  required: true,
+                })}
+              />
+              {period.text}
             </label>
           ))}
         </fieldset>

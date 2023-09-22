@@ -18,7 +18,10 @@ const FieldsOptionArray = () => {
                 type="text"
                 placeholder="선택지 입력(20자 이내)"
                 className="h-10 w-full rounded-[10px] border-[1px] border-GS6 px-5 py-[11px]"
-                {...context.register(`options.${index}.name`)}
+                {...context.register(`options.${index}.name`, {
+                  required: true,
+                  maxLength: 20,
+                })}
               />
               {index >= 2 ? (
                 <button
