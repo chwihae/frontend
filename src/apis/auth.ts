@@ -12,6 +12,8 @@ export const postToken = async (authorizeCode: string | null) => {
       'refreshToken',
       JSON.stringify(data?.data?.refreshToken),
     );
+    localStorage.setItem('userId', JSON.stringify(data?.data?.userId));
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -21,12 +23,11 @@ export const postToken = async (authorizeCode: string | null) => {
 };
 
 // 유저 정보 얻기
-export const getUserInfo = async () => {
+export const getUserLevel = async () => {
   try {
     const { data } = await auth.get('/api/v1/users/statistics');
-    localStorage.clear();
-    if (data.state === 200) {
-      localStorage.setItem('userInfo', JSON.stringify(data.data));
+    if (data.code === 200) {
+      localStorage.setItem('userLevel', JSON.stringify(data?.data));
     }
     return data;
   } catch (error) {
