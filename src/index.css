@@ -52,6 +52,19 @@ body {
   background-color: #eee;
 }
 
+.rateProgress::-webkit-progress-bar {
+  background: #fff6ee;
+  border-radius: 8px;
+  height: 16px;
+  width: 128px;
+  overflow: hidden;
+}
+
+.rateProgress::-webkit-progress-value {
+  background: #f57f17;
+  height: 16px;
+}
+
 /* S-CoreDream-3Light */
 .socreintro {
   font-family: 'S-CoreDream-3Light';

@@ -45,12 +45,20 @@ const Level = () => {
         <div className="scoremedium12 w-full text-GS3">
           <div className="mb-[7px] flex w-full justify-between">
             <IConVoteOrange className="w-4" />
-            <div className="relative h-4 w-32 rounded-lg bg-[#fff6ee]"></div>
+            <progress
+              max="100"
+              value={turnout}
+              className="rateProgress"
+            ></progress>
             <span>{turnout}%</span>
           </div>
           <div className="flex w-full justify-between">
             <IConCommentOrange className="w-4" />
-            <div className="relative h-4 w-32 rounded-lg bg-[#fff6ee]"></div>
+            <progress
+              max="100"
+              value={commentRate}
+              className="rateProgress"
+            ></progress>
             <span>{commentRate}%</span>
           </div>
         </div>
