@@ -8,7 +8,7 @@ const Intro = () => {
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-between py-28">
+    <div className="flex h-screen flex-col items-center justify-between py-7">
       <div className="flex flex-col items-center">
         <p className="socreintro flex flex-col gap-1 text-black">
           <span>
@@ -18,7 +18,7 @@ const Intro = () => {
             <span className="text-prime1">해</span>결 서비스
           </span>
         </p>
-        <div className="mb-[43.81px]">
+        <div>
           <ImgCharGroup />
         </div>
       </div>
