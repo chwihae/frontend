@@ -23,9 +23,12 @@ const QuestionCreate = () => {
 
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = methods;
+
+  const watchFields = watch(['title', 'type']);
 
   const onSubmit = (data: IQuestion) => {
     console.log(data);
@@ -91,8 +94,16 @@ const QuestionCreate = () => {
             </label>
           ))}
         </fieldset>
-        <button type="submit" className="btn">
-          작성완료
+        <button
+          type="submit"
+          className={`scoremedium h-14 rounded-2xl px-10 py-3  ${
+            watchFields[0] && watchFields[1]
+              ? 'bg-prime1 text-white'
+              : 'bg-GS6 text-white'
+          }`}
+          disabled={!watchFields[0] || !watchFields[1]}
+        >
+          등록하기
         </button>
       </form>
     </FormProvider>
