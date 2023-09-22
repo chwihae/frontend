@@ -40,6 +40,7 @@ body {
   font-size: 16px;
   font-stretch: normal;
   font-style: normal;
+  color: #232323;
   line-height: 1.36;
   letter-spacing: -0.32px;
 
@@ -78,6 +79,14 @@ body {
   letter-spacing: -0.315px;
 }
 
+.scorebold24 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.48px;
+}
+
 .scorebold16 {
   font-family: 'S-CoreDream-3Light';
   font-size: 16px;
@@ -111,6 +120,25 @@ body {
   line-height: 1.6;
   letter-spacing: 0.28px;
 }
+
+.scoremedium12 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.6px;
+}
+
+.scoreregular12 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+  letter-spacing: 0.6px;
+}
+
 .scoretitle2 {
   font-family: 'S-CoreDream-3Light';
   font-size: 18px;
