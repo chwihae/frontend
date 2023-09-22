@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { getUserLevel } from '@/apis/auth';
 import { ReactComponent as IConCommentOrange } from '@/assets/icon_comment_orange.svg';
-import { ReactComponent as IConVoteOrange } from '@/assets/icon_vote_orange.svg';
+import { ReactComponent as IConVoteOrange } from '@/assets/icon_voterate_orange.svg';
 import { LEVELSTEP } from '@/constants/home';
 import getLocalData from '@/utils/getLocalData';
 import LevelImage from '@components/common/LevelImage';
@@ -31,7 +31,9 @@ const Level = () => {
 
   return (
     <section className="relative flex h-[229px] flex-col">
-      <LevelImage className="absolute right-[21.56px] top-[44.32px] h-[145px] w-[155px]" />
+      <div>
+        <LevelImage className="absolute right-[21.56px] top-[44.32px] h-[121px] w-[156px]" />
+      </div>
       <div className="ml-[16px] mt-[41px] w-[180px]">
         <p className="scorebold24 right-0 flex flex-col text-right">
           <span>나의 등급은</span>
@@ -41,12 +43,14 @@ const Level = () => {
           <span className="scoreregular12 mb-2 text-GS2 ">다음 등급까지</span>
         </p>
         <div className="scoremedium12 w-full text-GS3">
-          <div className="flex">
-            <IConVoteOrange />
+          <div className="mb-[7px] flex w-full justify-between">
+            <IConVoteOrange className="w-4" />
+            <div className="relative h-4 w-32 rounded-lg bg-[#fff6ee]"></div>
             <span>{turnout}%</span>
           </div>
-          <div className="flex">
-            <IConCommentOrange />
+          <div className="flex w-full justify-between">
+            <IConCommentOrange className="w-4" />
+            <div className="relative h-4 w-32 rounded-lg bg-[#fff6ee]"></div>
             <span>{commentRate}%</span>
           </div>
         </div>

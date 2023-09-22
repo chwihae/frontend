@@ -26,11 +26,7 @@ const LevelImage = ({ className }: { className: string }) => {
     },
   ];
 
-  return (
-    <span className="flex items-center">
-      {LEVEL.find((item) => item.level === userLevel?.level)?.img}
-    </span>
-  );
+  return <>{LEVEL.find((item) => item.level === userLevel?.level)?.img}</>;
 };
 
 export default LevelImage;
