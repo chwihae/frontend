@@ -13,15 +13,15 @@ const TabBar = ({ tabIndex, setTabIndex, setSolvedIndex }: TTabBar) => {
   };
 
   return (
-    <div className="mt-10 flex items-center justify-between">
-      <ol className="mb-3 flex h-[35px] justify-center border-b-[1px] border-b-GS6">
+    <div className="flex items-center justify-between">
+      <ol className="mb-3 flex h-[34px] w-full ">
         {TABBAR.map((tab, index) => (
           <li key={tab.type}>
             <button
-              className={`scoremedium16 tracking-wide-[0.16px] border-b-[3px] px-[6.4px] pb-3 text-center ${
+              className={`scoremedium16 px-[6.4px] pb-[7px] text-center ${
                 index === tabIndex
-                  ? 'border-b-emerald-600 font-bold'
-                  : 'border-b-transparent'
+                  ? 'border-b-[3px] border-b-prime1 text-GS1 '
+                  : 'border-b-[1px] border-b-GS6 text-GS4'
               }`}
               onClick={() => handleTabBtn(index)}
             >
