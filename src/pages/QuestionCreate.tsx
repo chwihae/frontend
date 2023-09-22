@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import type { UseFormProps } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import { addQuestion } from '@/apis/question';
 import {
   CATEGORYOPTIONS,
   PERIODOPTIONS,
@@ -36,8 +37,12 @@ const QuestionCreate = () => {
   };
 
   const onSubmit = (data: IQuestion) => {
-    console.log(data);
-    navigate('/home');
+    const fatchData = async () => {
+      const res = await addQuestion(data);
+      console.log(res);
+      navigate('/home', { state: res?.id });
+    };
+    fatchData();
   };
 
   return (
@@ -45,15 +50,15 @@ const QuestionCreate = () => {
       <form className="flex flex-col p-4" onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           {CATEGORYOPTIONS.map((tab) => (
-            <label key={tab}>
+            <label key={tab.title}>
               <input
                 type="radio"
-                value={tab}
+                value={tab.type}
                 {...register('type', {
                   required: true,
                 })}
               />
-              {tab}
+              {tab.title}
             </label>
           ))}
         </fieldset>
