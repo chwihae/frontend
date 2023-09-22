@@ -13,7 +13,7 @@ const PrivateLayout = () => {
     <>
       {HEADERS.filter((header) => header.pathname === pathParts[0]).map(
         (component) => (
-          <header key={component.pathname} className="h-[48px] bg-amber-300">
+          <header key={component.pathname} className="h-11">
             {component.component}
           </header>
         ),

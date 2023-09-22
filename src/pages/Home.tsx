@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ReactComponent as IConEditWhite } from '@/assets/icon_edit_white.svg';
 import Level from '@components/Home/Level';
 import TabBar from '@components/Home/TabBar';
 import VoteFilterBtn from '@components/Home/VoteFilterBtn';
@@ -24,8 +25,8 @@ const Home = () => {
       />
       <VoteList tabIndex={tabIndex} solvedIndex={solvedIndex} />
       <Link to="/question">
-        <button className="btn absolute bottom-[41px] right-[16px] h-12 w-12 rounded-full border-0 bg-orange-500 p-0 hover:bg-orange-500">
-          작성
+        <button className="btn absolute bottom-[41px] right-[16px] h-[50px] w-[50px] rounded-full border-0 bg-orange-500 p-0 hover:bg-orange-500">
+          <IConEditWhite />
         </button>
       </Link>
     </>
