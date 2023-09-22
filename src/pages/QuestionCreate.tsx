@@ -30,27 +30,33 @@ const QuestionCreate = () => {
   return (
     <FormProvider {...methods}>
       <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-        {CATEGORYOPTIONS.map((tab) => (
-          <label key={tab}>
-            <input type="radio" value={tab} {...register('type')} />
-            {tab}
-          </label>
-        ))}
-        <input
-          type="text"
-          className="h-[52px] w-full py-[13px] pl-4 focus:outline-none"
-          placeholder="제목을 입력해주세요.(15자 이내)"
-          {...register('title')}
-        />
-        <textarea
-          className="h-36 w-full resize-none px-4 py-6 focus:outline-none"
-          placeholder={PLACEHOLDER_CONTENT}
-          {...register('content')}
-        />
+        <fieldset>
+          {CATEGORYOPTIONS.map((tab) => (
+            <label key={tab}>
+              <input type="radio" value={tab} {...register('type')} />
+              {tab}
+            </label>
+          ))}
+        </fieldset>
+        <fieldset>
+          <input
+            type="text"
+            className="h-[52px] w-full py-[13px] pl-4 focus:outline-none"
+            placeholder="제목을 입력해주세요.(15자 이내)"
+            {...register('title')}
+          />
+        </fieldset>
+        <fieldset>
+          <textarea
+            className="h-36 w-full resize-none px-4 py-6 focus:outline-none"
+            placeholder={PLACEHOLDER_CONTENT}
+            {...register('content')}
+          />
+        </fieldset>
         <FieldsOptionArray />
-        <div>
+        <fieldset>
           <div className="flex gap-1">
-            <h2>고민 기간 설정</h2>
+            <legend>고민 기간 설정</legend>
             <span>아이콘</span>
           </div>
           {PERIODOPTIONS.map((period) => (
@@ -59,7 +65,7 @@ const QuestionCreate = () => {
               {period}
             </label>
           ))}
-        </div>
+        </fieldset>
         <button type="submit" className="btn">
           작성완료
         </button>

@@ -8,8 +8,8 @@ const FieldsOptionArray = () => {
   });
 
   return (
-    <div className="mb-10">
-      <h2 className="scoretitle1 text-GS1">투표 항목 입력</h2>
+    <fieldset className="mb-10">
+      <legend className="scoretitle1 text-GS1">투표 항목 입력</legend>
       <ul className="mb-3 flex flex-col gap-3">
         {fields.map((item, index) => {
           return (
@@ -44,7 +44,7 @@ const FieldsOptionArray = () => {
           항목추가
         </button>
       )}
-    </div>
+    </fieldset>
   );
 };
 
