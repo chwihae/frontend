@@ -51,3 +51,118 @@ body {
 
   background-color: #eee;
 }
+
+/* S-CoreDream-3Light */
+.scoreheader {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.36px;
+}
+.scoretitle1 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.315px;
+}
+.scoremedium20 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%; /* 32px */
+  letter-spacing: 0.4px;
+}
+.scoremedium16 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%; /* 25.6px */
+  letter-spacing: 0.32px;
+}
+.scoretitle2 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.27px;
+}
+.scorebody1 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.24px;
+}
+.scorebody2 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.21px;
+}
+.scorecaption {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+  letter-spacing: -0.21px;
+}
+/* Noto Sans KR */
+.notosansheader {
+  font-family: 'Noto Sans KR';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.36px;
+}
+.notosanstitle1 {
+  font-family: 'Noto Sans KR';
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.315px;
+}
+.notosanstitle2 {
+  font-family: 'Noto Sans KR';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.27px;
+}
+.notosansbody1 {
+  font-family: 'Noto Sans KR';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.24px;
+}
+.notosansbody2 {
+  font-family: 'Noto Sans KR';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.21px;
+}
+.notosanscaption {
+  font-family: 'Noto Sans KR';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+  letter-spacing: -0.21px;
+}
