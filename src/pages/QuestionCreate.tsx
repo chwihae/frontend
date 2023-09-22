@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import type { UseFormProps } from 'react-hook-form';
 
@@ -7,6 +8,7 @@ import {
   PLACEHOLDER_CONTENT,
 } from '@/constants/question';
 import type { IQuestion } from '@/types/questionType';
+import Toast from '@components/common/Toast';
 import FieldsOptionArray from '@components/Question/FieldsOptionArray';
 
 type TMethods = IQuestion & UseFormProps;
@@ -21,24 +23,29 @@ const QuestionCreate = () => {
   };
   const methods = useForm<TMethods>({ defaultValues });
 
-  const {
-    register,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = methods;
+  const { register, watch, handleSubmit } = methods;
 
-  const watchFields = watch(['title', 'type']);
+  const [showToast, setShowToast] = useState(false);
+
+  const watchFields = watch(['title', 'type', 'options']);
+
+  const IsOptionArrayEmptied = watchFields[2].some((item) => item.name === '');
+
+  console.log('IsOptionArrayEmptied', IsOptionArrayEmptied);
+
+  const handleSubmitBtn = () => {
+    if (IsOptionArrayEmptied) setShowToast(true);
+  };
+
+  console.log(showToast);
 
   const onSubmit = (data: IQuestion) => {
     console.log(data);
   };
 
-  console.log(errors);
-
   return (
     <FormProvider {...methods}>
-      <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col p-4" onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           {CATEGORYOPTIONS.map((tab) => (
             <label key={tab}>
@@ -102,9 +109,16 @@ const QuestionCreate = () => {
               : 'bg-GS6 text-white'
           }`}
           disabled={!watchFields[0] || !watchFields[1]}
+          onClick={handleSubmitBtn}
         >
           등록하기
         </button>
+        {showToast && (
+          <Toast
+            setShowToast={setShowToast}
+            text="투표 선택지를 입력해주세요"
+          />
+        )}
       </form>
     </FormProvider>
   );

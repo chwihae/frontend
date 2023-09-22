@@ -1,9 +1,9 @@
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
 const FieldsOptionArray = () => {
-  const context = useFormContext();
+  const { control, register } = useFormContext();
   const { fields, append, remove } = useFieldArray({
-    control: context.control,
+    control: control,
     name: 'options',
   });
 
@@ -18,7 +18,7 @@ const FieldsOptionArray = () => {
                 type="text"
                 placeholder="선택지 입력(20자 이내)"
                 className="h-10 w-full rounded-[10px] border-[1px] border-GS6 px-5 py-[11px]"
-                {...context.register(`options.${index}.name`, {
+                {...register(`options.${index}.name`, {
                   required: true,
                   maxLength: 20,
                 })}
