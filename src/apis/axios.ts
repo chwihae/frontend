@@ -12,7 +12,7 @@ auth.interceptors.request.use(
     const accessToken = JSON.parse(localStorage.getItem('accessToken') || '{}');
 
     if (accessToken !== null) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+      config.headers.Authorization = accessToken;
     }
 
     return config;
