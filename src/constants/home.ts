@@ -1,8 +1,8 @@
 export const TABBAR = [
   { type: 'All', title: '전체' },
-  { type: 'COMPANY', title: '회사/산업' },
-  { type: 'SPEC', title: '스펙' },
-  { type: 'STUDY', title: '공부' },
+  { type: 'COMPANY', title: '회사/이직' },
+  { type: 'SPEC', title: '스펙/공부' },
+  { type: 'STUDY', title: '진로/직무' },
   { type: 'ETC', title: '기타/일상' },
 ];
 
