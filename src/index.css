@@ -52,6 +52,7 @@ body {
   background-color: #eee;
 }
 
+/* 프로그레스바 */
 .rateProgress::-webkit-progress-bar {
   background: #fff6ee;
   border-radius: 8px;
@@ -65,6 +66,33 @@ body {
   height: 16px;
 }
 
+[type='radio'] {
+  vertical-align: middle;
+  appearance: none;
+  border: 1px solid #cecece;
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+[type='radio']:checked {
+  border: 0.4em solid #f57f17;
+}
+
+[type='radio']:focus-visible {
+  outline: max(2px, 0.1em) dotted #f57f17;
+  outline-offset: max(2px, 0.1em);
+}
+
+[type='radio']:disabled {
+  border: 0.4em solid #cecece;
+  cursor: not-allowed;
+}
+
+[type='radio']:disabled + span {
+  cursor: not-allowed;
+}
+
 /* S-CoreDream-3Light */
 .socreintro {
   font-family: 'S-CoreDream-3Light';
@@ -74,7 +102,6 @@ body {
   line-height: normal;
   letter-spacing: 0.64px;
 }
-
 .scorebold24 {
   font-family: 'S-CoreDream-3Light';
   font-size: 24px;
@@ -82,7 +109,6 @@ body {
   line-height: 1.6;
   letter-spacing: 0.48px;
 }
-
 .scorebold20 {
   font-family: 'S-CoreDream-3Light';
   font-size: 20px;
@@ -90,7 +116,6 @@ body {
   line-height: 1.6;
   letter-spacing: 0.4px;
 }
-
 .scorebold18 {
   font-family: 'S-CoreDream-3Light';
   font-size: 18px;
@@ -98,7 +123,6 @@ body {
   line-height: 1.6;
   letter-spacing: 0.36px;
 }
-
 .scorebold16 {
   font-family: 'S-CoreDream-3Light';
   font-size: 16px;
@@ -107,7 +131,6 @@ body {
   letter-spacing: 0.02em;
   text-align: center;
 }
-
 .scoremedium20 {
   font-family: 'S-CoreDream-3Light';
   font-size: 20px;
@@ -140,6 +163,15 @@ body {
   font-weight: 500;
   line-height: normal;
   letter-spacing: 0.6px;
+}
+
+.scoreregular16 {
+  font-family: 'S-CoreDream-3Light';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: 1.6;
+  letter-spacing: 0.32px;
 }
 
 .scoreregular12 {
@@ -192,6 +224,22 @@ body {
   line-height: 1.6;
   letter-spacing: 0.32px;
 }
+.notosansmedium16 {
+  font-family: 'Noto Sans KR';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.32px;
+}
+.notosansmedium14 {
+  font-family: 'Noto Sans KR';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.28px;
+}
 .notosansmedium12 {
   font-family: 'Noto Sans KR';
   font-size: 12px;
@@ -200,7 +248,16 @@ body {
   line-height: 1.6;
   letter-spacing: 0.24px;
 }
+.notosansregular14 {
+  font-family: 'Noto Sans KR';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.28px;
+}
 
+////////
 .notosansheader {
   font-family: 'Noto Sans KR';
   font-size: 24px;
@@ -240,15 +297,6 @@ body {
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.21px;
-}
-
-.notosansregular14 {
-  font-family: 'Noto Sans KR';
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: -0.28px;
 }
 
 .notosanscaption {

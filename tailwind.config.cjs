@@ -17,6 +17,7 @@ module.exports = {
         GS4: '#989898',
         GS5: '#ADADAD',
         GS6: '#CECECE',
+        bg: '#F3F3F3',
       },
       boxShadow: {
         example: '0 0 18px 0 rgba(191, 192, 196, 0.18)',

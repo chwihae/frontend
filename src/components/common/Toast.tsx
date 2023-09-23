@@ -17,7 +17,7 @@ const Toast = ({ text, setShowToast }: TToast) => {
 
   return (
     <div
-      className={`text-bold absolute bottom-8 left-1/2 w-max translate-x-[-50%] rounded-md bg-GS2 px-12 py-2 text-center text-sm text-white`}
+      className={`text-bold absolute bottom-32 left-1/2 w-max translate-x-[-50%] rounded-md bg-GS2 px-12 py-2 text-center text-sm text-white`}
     >
       {text}
     </div>

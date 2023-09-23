@@ -4,6 +4,7 @@ import type { UseFormProps } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { addQuestion } from '@/apis/question';
+import { ReactComponent as IConInfo } from '@/assets/icon_info_gray_filled.svg';
 import {
   CATEGORYOPTIONS,
   PERIODOPTIONS,
@@ -47,7 +48,7 @@ const QuestionCreate = () => {
 
   return (
     <FormProvider {...methods}>
-      <form className="flex flex-col p-4" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           {CATEGORYOPTIONS.map((tab) => (
             <label key={tab.title}>
@@ -65,7 +66,7 @@ const QuestionCreate = () => {
         <fieldset>
           <input
             type="text"
-            className="h-[52px] w-full py-[13px] pl-4 focus:outline-none"
+            className="notosansmedium16 h-[52px] w-full border-[1px] border-bg px-4 py-[13px] focus:outline-none "
             placeholder="제목을 입력해주세요.(15자 이내)"
             minLength={1}
             maxLength={15}
@@ -78,34 +79,40 @@ const QuestionCreate = () => {
         </fieldset>
         <fieldset>
           <textarea
-            className="h-36 w-full resize-none px-4 py-6 focus:outline-none"
+            className="notosansregular14 hide-scroll h-[259px] w-full resize-none border-b-[10px] border-bg px-4 py-6 placeholder:text-GS4 focus:outline-none"
             placeholder={PLACEHOLDER_CONTENT}
             maxLength={800}
             {...register('content')}
           />
         </fieldset>
         <FieldsOptionArray />
-        <fieldset>
-          <div className="flex gap-1">
-            <legend>고민 기간 설정</legend>
-            <span>아이콘</span>
+        <fieldset className="mb-10 px-4">
+          <div className="mb-6 flex items-center gap-1">
+            <legend className="scorebold16">고민 기간 설정</legend>
+            <IConInfo />
           </div>
-          {PERIODOPTIONS.map((period) => (
-            <label key={period.value}>
-              <input
-                type="radio"
-                value={period.value}
-                {...register('closeAt', {
-                  required: true,
-                })}
-              />
-              {period.text}
-            </label>
-          ))}
+          <ol className="mb-16 flex gap-10">
+            {PERIODOPTIONS.map((period) => (
+              <label
+                key={period.value}
+                className="scoreregular16 flex items-center"
+              >
+                <input
+                  type="radio"
+                  value={period.value}
+                  className="mr-2"
+                  {...register('closeAt', {
+                    required: true,
+                  })}
+                />
+                {period.text}
+              </label>
+            ))}
+          </ol>
         </fieldset>
         <button
           type="submit"
-          className={`scoremedium h-14 rounded-2xl px-10 py-3  ${
+          className={`scoremedium20 mx-4 mb-10 h-14 rounded-2xl px-10 py-3  ${
             watchFields[0] && watchFields[1]
               ? 'bg-prime1 text-white'
               : 'bg-GS6 text-white'
