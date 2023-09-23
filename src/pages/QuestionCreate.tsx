@@ -130,7 +130,7 @@ const QuestionCreate = () => {
           <Toast setToast={setWriteToast} text="투표 선택지를 입력해야해요" />
         )}
         {failedToast && (
-          <Toast setToast={setFailedToast} text="글 등록에 실패하였습니다." />
+          <Toast setToast={setFailedToast} text="글 등록에 실패하였습니다" />
         )}
       </form>
     </FormProvider>
