@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import type { UseFormProps } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-// import { addQuestion } from '@/apis/question';
+import { addQuestion } from '@/apis/question';
 import { ReactComponent as IConInfo } from '@/assets/icon_info_gray_filled.svg';
 import {
   CATEGORYOPTIONS,
@@ -32,6 +32,7 @@ const QuestionCreate = () => {
   const IsOptionArrayEmptied = watchFields[2].some((item) => item.name === '');
 
   const [writeToast, setWriteToast] = useState(false);
+  const [failedToast, setFailedToast] = useState(false);
 
   const handleSubmitBtn = () => {
     if (IsOptionArrayEmptied) setWriteToast(true);
@@ -39,10 +40,12 @@ const QuestionCreate = () => {
 
   const onSubmit = (data: IQuestion) => {
     const fatchData = async () => {
-      // const res = await addQuestion(data);
-      // console.log(res?.id);
-      console.log(data);
-      navigate('/home', { state: { id: 33, toast: true } });
+      const res = await addQuestion(data);
+      if (res?.code === 201) {
+        navigate('/home', { state: { id: res?.id, toast: true } });
+      } else {
+        setFailedToast(true);
+      }
     };
     fatchData();
   };
@@ -125,6 +128,9 @@ const QuestionCreate = () => {
         </button>
         {writeToast && (
           <Toast setToast={setWriteToast} text="투표 선택지를 입력해야해요" />
+        )}
+        {failedToast && (
+          <Toast setToast={setFailedToast} text="글 등록에 실패하였습니다." />
         )}
       </form>
     </FormProvider>

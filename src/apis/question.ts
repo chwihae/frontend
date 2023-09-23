@@ -7,6 +7,7 @@ import type {
   IVoteOptionsRes,
   IVoteSingleRes,
 } from '@/types/voteType';
+import formatDate from '@/utils/formatDate';
 
 import { auth } from './axios';
 
@@ -23,13 +24,13 @@ export default async () => {
 // 질문 등록
 export const addQuestion = async (questions: IQuestion) => {
   try {
-    // console.log(questions);
-    // const { closeAt, ...rest } = questions;
-    // const converData = {
-    //   closeAt: formatDate(Number(closeAt)),
-    //   ...rest,
-    // };
-    const { data } = await auth.post('/api/v1/questions', questions);
+    const { closeAt, ...rest } = questions;
+    const converData = {
+      closeAt: formatDate(Number(closeAt)),
+      ...rest,
+    };
+    const { data } = await auth.post('/api/v1/questions', converData);
+    console.log(data);
 
     return data;
   } catch (error) {
@@ -54,7 +55,7 @@ export const getVoteAll = async ({
   }
 };
 
-// 질문 단건조회
+// 투표 단건조회
 export const getVoteSingle = async (id: string) => {
   try {
     const { data }: IResponse<IVoteSingleRes> = await auth.get(
@@ -66,7 +67,7 @@ export const getVoteSingle = async (id: string) => {
   }
 };
 
-// 질문 옵션조회
+// 투표 옵션조회
 export const getVoteOption = async (id: string) => {
   try {
     const { data }: IResponse<IVoteOptionsRes> = await auth.get(
