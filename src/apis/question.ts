@@ -1,11 +1,6 @@
 import type { IQuestion } from '@/types/questionType';
-import type {
-  IResponse,
-  IVoteAllReq,
-  IVoteOptionsRes,
-  IVoteSingleRes,
-} from '@/types/voteType';
-import formatDate from '@/utils/formatDate';
+import type { IVoteAllReq } from '@/types/voteType';
+import formatDate from '@/utils/toIsoDate';
 
 import { auth } from './axios';
 
@@ -44,11 +39,9 @@ export const getVoteAll = async ({
 };
 
 // 투표 단건조회
-export const getVoteSingle = async (id: string) => {
+export const getVoteSingle = async (id: number) => {
   try {
-    const { data }: IResponse<IVoteSingleRes> = await auth.get(
-      `/api/v1/questions/${id}`,
-    );
+    const { data } = await auth.get(`/api/v1/questions/${id}`);
     return data;
   } catch (error) {
     console.error(error);
@@ -56,11 +49,9 @@ export const getVoteSingle = async (id: string) => {
 };
 
 // 투표 옵션조회
-export const getVoteOption = async (id: string) => {
+export const getVoteOption = async (id: number) => {
   try {
-    const { data }: IResponse<IVoteOptionsRes> = await auth.get(
-      `/api/v1/questions/${id}/options`,
-    );
+    const { data } = await auth.get(`/api/v1/questions/${id}/options`);
     return data;
   } catch (error) {
     console.error(error);
