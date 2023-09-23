@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IConBookmarkOrange } from '@/assets/icon_bookmark_orange.svg';
 import { ReactComponent as IConEditOrange } from '@/assets/icon_edit_orange.svg';
@@ -10,6 +11,7 @@ import LevelImage from '@components/common/LevelImage';
 import ModalPreparing from '@components/common/ModalPreparing';
 
 const Mypage = () => {
+  const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
   const userId = getLocalData('userId');
 
@@ -18,6 +20,14 @@ const Mypage = () => {
   const userLevelName = LEVELSTEP.find(
     (level) => level.type === userLevel?.level,
   );
+
+  // 로그아웃
+  const handleSignOut = () => {
+    if (confirm('로그아웃 하시겠습니까?')) {
+      localStorage.removeItem('accessToken');
+      navigate('/intro');
+    }
+  };
 
   return (
     <div className="relative flex h-full flex-col">
@@ -98,7 +108,7 @@ const Mypage = () => {
       <label
         htmlFor="temp-modal"
         className="scoremedium12 absolute bottom-10 left-1/2 translate-x-[-50%] cursor-pointer border-0 p-0 underline"
-        onClick={() => setIsModal(true)}
+        onClick={handleSignOut}
       >
         로그아웃
       </label>
