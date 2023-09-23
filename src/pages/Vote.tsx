@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { getVoteOption, getVoteSingle } from '@/apis/question';
 import { addVote, deleteVote } from '@/apis/vote';
 import { ReactComponent as IConClockBlack } from '@/assets/icon_clock_black.svg';
+import { ReactComponent as IConSendGray } from '@/assets/icon_send_gray.svg';
+import { ReactComponent as IConSendOrange } from '@/assets/icon_send_orange.svg';
 import useTimer from '@/hooks/useTimer';
 import type { IVoteOptionsRes, IVoteSingleRes } from '@/types/voteType';
 import Statistics from '@components/common/Statistics';
@@ -63,10 +65,20 @@ const Vote = () => {
 
   // console.log(pollOptions);
 
+  //댓글
+  const [inputComment, setInputComment] = useState('');
+  const handleInputCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputComment(e.target.value);
+  };
+
+  const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <div>
       {/* 본문 */}
-      <section className="mt-10 border-b-[10px] border-b-bg px-4 pb-6">
+      <section className="scorebold16 mt-10 border-b-[10px] border-b-bg px-4 pb-6">
         {/* 글 내용 */}
         <div className="mb-[49px]">
           <div className="scoremedium14 mb-6 w-fit rounded-[37px] border-[1px] border-GS6 px-3 py-[6px] text-GS4">
@@ -149,7 +161,27 @@ const Vote = () => {
         </div>
       </section>
       {/* 댓글 */}
-      <section></section>
+      <section className="px-4 pb-[51px] pt-10">
+        <h3 className="mb-6">댓글</h3>
+        {/* 댓글목록 */}
+        <div></div>
+        <form
+          onSubmit={handleCommentSubmit}
+          className="flex h-11 items-center gap-[5px] "
+        >
+          <input
+            type="text"
+            maxLength={500}
+            value={inputComment}
+            placeholder="댓글을 입력해주세요."
+            onChange={handleInputCommentChange}
+            className="notosansmedium14 w-full rounded-[10px] bg-bg px-5 py-[11px] placeholder:text-GS4 focus:outline-none"
+          />
+          <button type="submit" className="p-[10px]">
+            {inputComment === '' ? <IConSendGray /> : <IConSendOrange />}
+          </button>
+        </form>
+      </section>
     </div>
   );
 };
