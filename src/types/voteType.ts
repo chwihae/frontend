@@ -11,12 +11,12 @@ export interface IId {
 // 질문 리스트 조회
 export interface IVoteAllReq {
   type?: string;
-  status?: string;
-  page: number;
-  size: number;
+  status?: string | null;
+  page?: number;
+  size?: number;
 }
 
-interface IVoteAllContent extends IId {
+export interface IVoteAllContent extends IId {
   title: string;
   type: string;
   status: string;
@@ -25,14 +25,19 @@ interface IVoteAllContent extends IId {
   bookmarkCount: number;
 }
 
+interface IVoteAllSort {
+  direction: string;
+  property: string;
+  ascending: boolean;
+  descending: boolean;
+  ignoreCase: boolean;
+  nullHandling: string;
+}
+
 interface IVoteAllPageable {
   pageNumber: number;
   pageSize: number;
-  sort: {
-    empty: boolean;
-    sorted: boolean;
-    unsorted: boolean;
-  };
+  sort: IVoteAllSort[];
   offset: number;
   paged: boolean;
   unpaged: boolean;
@@ -47,11 +52,7 @@ export interface IVoteAllRes {
   first: boolean;
   size: number;
   number: number;
-  sort: {
-    empty: boolean;
-    sorted: boolean;
-    unsorted: boolean;
-  };
+  sort: IVoteAllSort[];
   numberOfElements: number;
   empty: boolean;
 }

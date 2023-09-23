@@ -1,25 +1,13 @@
-import { questionAll } from '@/mock/mockData';
 import type { IQuestion } from '@/types/questionType';
 import type {
   IResponse,
   IVoteAllReq,
-  IVoteAllRes,
   IVoteOptionsRes,
   IVoteSingleRes,
 } from '@/types/voteType';
 import formatDate from '@/utils/formatDate';
 
 import { auth } from './axios';
-
-// 질문 조회  mockUp
-export default async () => {
-  try {
-    const { data } = await questionAll();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 // 질문 등록
 export const addQuestion = async (questions: IQuestion) => {
@@ -40,16 +28,16 @@ export const addQuestion = async (questions: IQuestion) => {
 
 // 투표 전체조회
 export const getVoteAll = async ({
-  type,
-  status,
+  type = '',
+  status = '',
   page = 0,
   size = 10,
 }: IVoteAllReq) => {
   try {
-    const { data }: IResponse<IVoteAllRes> = await auth.get(
+    const { data } = await auth.get(
       `/api/v1/questions?type=${type}&status=${status}&page=${page}&size=${size}`,
     );
-    return data;
+    return data.data;
   } catch (error) {
     console.error(error);
   }

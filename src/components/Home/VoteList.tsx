@@ -1,28 +1,33 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import getQuestionAll from '@/apis/question';
+import { getVoteAll } from '@/apis/question';
 import { ReactComponent as IConBookmarkGray } from '@/assets/icon_bookmarkCount_gray.svg';
 import { ReactComponent as IConCommentGray } from '@/assets/icon_comment_gray.svg';
 import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.svg';
 import { ReactComponent as IConViewCountGray } from '@/assets/icon_viewCount_gray.svg';
 import { RADIOOPTIONS, TABBAR } from '@/constants/home';
-import type { IVoteAll } from '@/types/homeType';
+import type { IVoteAllContent, IVoteAllRes } from '@/types/voteType';
 
 type TVoteList = {
   tabIndex: number;
   solvedIndex: number;
 };
 const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
-  const [lists, setLists] = useState<IVoteAll[] | undefined>([]);
+  const [lists, setLists] = useState<IVoteAllContent[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getQuestionAll();
-      setLists(res?.data);
+      const res: IVoteAllRes = await getVoteAll({
+        type: TABBAR[tabIndex].type,
+        status: RADIOOPTIONS[solvedIndex].status,
+      });
+      setLists(res.content);
     };
     fetchData();
-  }, [tabIndex]);
+  }, [tabIndex, solvedIndex]);
+
+  // console.log(lists);
 
   const listsFilterTab = tabIndex
     ? lists?.filter((list) => list.type === TABBAR[tabIndex].type)
