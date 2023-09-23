@@ -35,20 +35,25 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
       );
 
   return (
-    <ol className="flex flex-col gap-6">
+    <ol className="flex flex-col">
       {listFilterSolved?.map((list) => (
         <li key={list.id}>
           <Link
             to={`/vote/${list.id}`}
-            className="relative flex h-[84px] items-center justify-between"
+            className={`relative flex h-[108px] items-center justify-between px-4 py-4 ${
+              list.status === 'IN_PROGRESS' ? null : 'bg-[#f3f3f3] text-GS3'
+            }`}
           >
             <div className="grid w-[294px] gap-2">
-              <p className="scoremedium12 w-fit rounded-[37px] border-[1px] border-GS6 px-[9px] py-1 text-GS4">
+              {/* 상태뱃지 */}
+              <span className="scoremedium12 w-fit rounded-[37px] border-[1px] border-GS6 px-[9px] py-1 text-GS4">
                 {list.status === 'IN_PROGRESS' ? '해결중' : '해결완료'}
-              </p>
+              </span>
+              {/* 투표제목 */}
               <p className="notosansbold16 overflow-hidden text-ellipsis whitespace-nowrap">
                 {list.title}
               </p>
+              {/* 통계치 */}
               <ul className="notosansmedium12 flex gap-2  text-GS4">
                 <li className="flex items-center gap-[2px]">
                   <IConViewCountGray />

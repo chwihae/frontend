@@ -10,7 +10,7 @@ const VoteFilterBtn = ({ solvedIndex, setSolvedIndex }: TVoteFilterBtn) => {
   };
 
   return (
-    <div className="mb-6 flex w-full gap-2">
+    <div className="mb-6 flex w-full gap-2 px-4 py-3">
       {RADIOOPTIONS.map((option) => (
         <label
           key={option.value}
