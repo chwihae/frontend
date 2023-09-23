@@ -35,13 +35,15 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
       page,
     });
 
+    console.log(res);
+
     if (page === 0) {
       setLists(res.content);
     } else {
+      setIsLastList(res.last);
       setLists((prevLists) => [...prevLists, ...res.content]);
     }
     setCurrentPage(res.number);
-    setIsLastList(res.last);
   };
 
   // 탭바, 정렬 전환시
@@ -52,13 +54,15 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
 
   // 무한스크롤
   useEffect(() => {
-    if (isLastList) {
-      setIsLastListToast(true);
-    } else if (inView) {
+    if (inView && isLastList) {
+      setTimeout(() => {
+        setIsLastListToast(true);
+      }, 1000);
+    } else {
       fetchData(tabIndex, solvedIndex, currentPage + 1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView]);
+  }, [inView, isLastList]);
 
   const listsFilterTab = tabIndex
     ? lists?.filter((list) => list.type === TABBAR[tabIndex].type)
@@ -113,7 +117,7 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
           ))}
           <div ref={ref}></div>
           {isLastListToast && (
-            <Toast setToast={setIsLastListToast} text="마지막 글입니다." />
+            <Toast setToast={setIsLastListToast} text="마지막 페이지입니다." />
           )}
         </>
       ) : (
