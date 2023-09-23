@@ -41,7 +41,7 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
           <Link
             to={`/vote/${list.id}`}
             className={`relative flex h-[108px] items-center justify-between px-4 py-4 ${
-              list.status === 'IN_PROGRESS' ? null : 'bg-[#f3f3f3] text-GS3'
+              list.status === 'IN_PROGRESS' ? null : 'bg-bg text-GS3'
             }`}
           >
             <div className="grid w-[294px] gap-2">
