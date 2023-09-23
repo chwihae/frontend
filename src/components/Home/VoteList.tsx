@@ -9,6 +9,8 @@ import { ReactComponent as IConViewCountGray } from '@/assets/icon_viewCount_gra
 import { RADIOOPTIONS, TABBAR } from '@/constants/home';
 import type { IVoteAllContent, IVoteAllRes } from '@/types/voteType';
 
+import NoResults from './NoResults';
+
 type TVoteList = {
   tabIndex: number;
   solvedIndex: number;
@@ -41,43 +43,49 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
 
   return (
     <ol className="flex flex-col">
-      {listFilterSolved?.map((list) => (
-        <li key={list.id}>
-          <Link
-            to={`/vote/${list.id}`}
-            className={`relative flex h-[108px] items-center justify-between px-4 py-4 ${
-              list.status === 'IN_PROGRESS' ? null : 'bg-bg text-GS3'
-            }`}
-          >
-            <div className="grid w-[294px] gap-2">
-              {/* 상태뱃지 */}
-              <span className="scoremedium12 w-fit rounded-[37px] border-[1px] border-GS6 px-[9px] py-1 text-GS4">
-                {list.status === 'IN_PROGRESS' ? '해결중' : '해결완료'}
-              </span>
-              {/* 투표제목 */}
-              <p className="notosansbold16 overflow-hidden text-ellipsis whitespace-nowrap">
-                {list.title}
-              </p>
-              {/* 통계치 */}
-              <ul className="notosansmedium12 flex gap-2  text-GS4">
-                <li className="flex items-center gap-[2px]">
-                  <IConViewCountGray />
-                  <span>{list.viewCount}</span>
-                </li>
-                <li className="flex items-center gap-[2px]">
-                  <IConCommentGray />
-                  <span>{list.commentCount}</span>
-                </li>
-                <li className="flex items-center gap-[2px]">
-                  <IConBookmarkGray />
-                  <span>{list.bookmarkCount}</span>
-                </li>
-              </ul>
-            </div>
-            <IConForwardGray />
-          </Link>
-        </li>
-      ))}
+      {lists && lists.length !== 0 ? (
+        <>
+          {listFilterSolved?.map((list) => (
+            <li key={list.id}>
+              <Link
+                to={`/vote/${list.id}`}
+                className={`relative flex h-[108px] items-center justify-between px-4 py-4 ${
+                  list.status === 'IN_PROGRESS' ? null : 'bg-bg text-GS3'
+                }`}
+              >
+                <div className="grid w-[294px] gap-2">
+                  {/* 상태뱃지 */}
+                  <span className="scoremedium12 w-fit rounded-[37px] border-[1px] border-GS6 px-[9px] py-1 text-GS4">
+                    {list.status === 'IN_PROGRESS' ? '해결중' : '해결완료'}
+                  </span>
+                  {/* 투표제목 */}
+                  <p className="notosansbold16 overflow-hidden text-ellipsis whitespace-nowrap">
+                    {list.title}
+                  </p>
+                  {/* 통계치 */}
+                  <ul className="notosansmedium12 flex gap-2  text-GS4">
+                    <li className="flex items-center gap-[2px]">
+                      <IConViewCountGray />
+                      <span>{list.viewCount}</span>
+                    </li>
+                    <li className="flex items-center gap-[2px]">
+                      <IConCommentGray />
+                      <span>{list.commentCount}</span>
+                    </li>
+                    <li className="flex items-center gap-[2px]">
+                      <IConBookmarkGray />
+                      <span>{list.bookmarkCount}</span>
+                    </li>
+                  </ul>
+                </div>
+                <IConForwardGray />
+              </Link>
+            </li>
+          ))}
+        </>
+      ) : (
+        <NoResults />
+      )}
     </ol>
   );
 };
