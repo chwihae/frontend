@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 
 import { getVoteAll } from '@/apis/question';
@@ -8,28 +9,57 @@ import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.sv
 import { ReactComponent as IConViewCountGray } from '@/assets/icon_viewCount_gray.svg';
 import { RADIOOPTIONS, TABBAR } from '@/constants/home';
 import type { IVoteAllContent, IVoteAllRes } from '@/types/voteType';
-
-import NoResults from './NoResults';
+import Toast from '@components/common/Toast';
+import NoResults from '@components/Home/NoResults';
 
 type TVoteList = {
   tabIndex: number;
   solvedIndex: number;
 };
 const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
+  const [ref, inView] = useInView();
+  const [currentPage, setCurrentPage] = useState<number>(0);
   const [lists, setLists] = useState<IVoteAllContent[]>([]);
+  const [isLastList, setIsLastList] = useState(false);
+  const [isLastListToast, setIsLastListToast] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res: IVoteAllRes = await getVoteAll({
-        type: TABBAR[tabIndex].type,
-        status: RADIOOPTIONS[solvedIndex].status,
-      });
+  // 질문전체리스트 조회 호출 함수
+  const fetchData = async (tab: number, solved: number, page?: number) => {
+    if (page === undefined) {
+      page = 0;
+    }
+
+    const res: IVoteAllRes = await getVoteAll({
+      type: TABBAR[tab].type,
+      status: RADIOOPTIONS[solved].status,
+      page,
+    });
+
+    if (page === 0) {
       setLists(res.content);
-    };
-    fetchData();
+    } else {
+      setLists((prevLists) => [...prevLists, ...res.content]);
+    }
+    setCurrentPage(res.number);
+    console.log(res.last, '마지막 글!!!!');
+    setIsLastList(res.last);
+  };
+
+  // 탭바, 정렬 전환시
+  useEffect(() => {
+    setCurrentPage(0);
+    fetchData(tabIndex, solvedIndex, 0);
   }, [tabIndex, solvedIndex]);
 
-  // console.log(lists);
+  // 무한스크롤
+  useEffect(() => {
+    if (isLastList) {
+      setIsLastListToast(true);
+    } else if (inView) {
+      fetchData(tabIndex, solvedIndex, currentPage + 1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
 
   const listsFilterTab = tabIndex
     ? lists?.filter((list) => list.type === TABBAR[tabIndex].type)
@@ -82,6 +112,10 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
               </Link>
             </li>
           ))}
+          <div ref={ref}></div>
+          {isLastListToast && (
+            <Toast setToast={setIsLastListToast} text="마지막 글입니다." />
+          )}
         </>
       ) : (
         <NoResults />
