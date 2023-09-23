@@ -24,11 +24,11 @@ const QuestionCreate = () => {
     title: '',
     content: '',
     options: [{ name: '' }, { name: '' }],
-    closeAt: '1800000',
+    closeAt: '3일',
   };
   const methods = useForm<TMethods>({ defaultValues });
   const { register, watch, handleSubmit } = methods;
-  const watchFields = watch(['title', 'type', 'options']);
+  const watchFields = watch(['title', 'type', 'options', 'closeAt']);
   const IsOptionArrayEmptied = watchFields[2].some((item) => item.name === '');
 
   const [writeToast, setWriteToast] = useState(false);
@@ -97,19 +97,16 @@ const QuestionCreate = () => {
           </div>
           <ol className="mb-16 flex gap-10">
             {PERIODOPTIONS.map((period) => (
-              <label
-                key={period.value}
-                className="scoreregular16 flex items-center"
-              >
+              <label key={period} className="scoreregular16 flex items-center">
                 <input
                   type="radio"
-                  value={period.value}
+                  value={period}
                   className="mr-2"
                   {...register('closeAt', {
                     required: true,
                   })}
                 />
-                {period.text}
+                {period}
               </label>
             ))}
           </ol>

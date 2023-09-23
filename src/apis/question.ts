@@ -1,6 +1,6 @@
 import type { IQuestion } from '@/types/questionType';
 import type { IVoteAllReq } from '@/types/voteType';
-import formatDate from '@/utils/toIsoDate';
+import nowIsoTime from '@/utils/nowIsoTime';
 
 import { auth } from './axios';
 
@@ -8,12 +8,15 @@ import { auth } from './axios';
 export const addQuestion = async (questions: IQuestion) => {
   try {
     const { closeAt, ...rest } = questions;
+
     const converData = {
-      closeAt: formatDate(Number(closeAt)),
+      closeAt: nowIsoTime(closeAt),
       ...rest,
     };
+
+    console.log(converData);
+
     const { data } = await auth.post('/api/v1/questions', converData);
-    console.log(data);
 
     return data;
   } catch (error) {
