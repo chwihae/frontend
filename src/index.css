@@ -248,6 +248,14 @@ body {
   line-height: 1.6;
   letter-spacing: 0.24px;
 }
+.notosansregular16 {
+  font-family: 'Noto Sans KR';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.32px;
+}
 .notosansregular14 {
   font-family: 'Noto Sans KR';
   font-size: 14px;
