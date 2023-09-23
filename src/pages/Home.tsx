@@ -14,6 +14,7 @@ const Home = () => {
   const [completedToast, setCompletedToast] = useState(false);
   const location = useLocation();
 
+  // 질문작성에서 넘어올 때, 등록 완료 토스트
   useEffect(() => {
     if (location.state !== null) {
       location.state.toast && setCompletedToast(true);
