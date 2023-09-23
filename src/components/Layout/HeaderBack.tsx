@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IConBackBlack } from '@/assets/icon_back_black.svg';
+import { ReactComponent as IConBookmarkGray } from '@/assets/icon_bookmark_gray.svg';
 import { ReactComponent as IConCloseBlack } from '@/assets/icon_close_black.svg';
 
 const HeaderBack = () => {
@@ -37,8 +38,8 @@ const HeaderBack = () => {
         {findTitle}
       </h1>
       {pathParts[0] === 'vote' ? (
-        <button className="p-[15px] pt-4" onClick={() => navigate('/home')}>
-          저장 또는 케밥
+        <button className="">
+          <IConBookmarkGray />
         </button>
       ) : null}
     </div>
