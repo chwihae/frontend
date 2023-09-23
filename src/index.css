@@ -66,6 +66,18 @@ body {
   height: 16px;
 }
 
+/* 프로그레스바 */
+.resultsProgress::-webkit-progress-bar {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #cecece;
+  overflow: hidden;
+}
+
+.resultsProgress::-webkit-progress-value {
+  background: #f57f17;
+}
+
 [type='radio'] {
   vertical-align: middle;
   appearance: none;
@@ -162,7 +174,7 @@ body {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.24px;
 }
 
 .scoreregular16 {

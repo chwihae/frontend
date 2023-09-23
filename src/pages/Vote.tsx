@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getVoteOption, getVoteSingle } from '@/apis/question';
-import { addVote } from '@/apis/vote';
+import { addVote, deleteVote } from '@/apis/vote';
 import { ReactComponent as IConClockBlack } from '@/assets/icon_clock_black.svg';
 import useTimer from '@/hooks/useTimer';
 import type { IVoteOptionsRes, IVoteSingleRes } from '@/types/voteType';
@@ -17,19 +17,22 @@ const Vote = () => {
   const [pollPost, setPollPost] = useState<IVoteSingleRes>();
   const [pollOptions, setPollOptions] = useState<IVoteOptionsRes>();
 
-  useEffect(() => {
-    const fetchVoteSingle = async () => {
-      const res = await getVoteSingle(postId);
-      setPollPost(res?.data);
-      console.log(res?.data);
-    };
-    fetchVoteSingle();
+  const fetchVoteSingle = async () => {
+    const res = await getVoteSingle(postId);
+    setPollPost(res?.data);
+    console.log(res?.data);
+  };
 
-    const fetchVoteOptions = async () => {
-      const res = await getVoteOption(postId);
-      setPollOptions(res?.data);
-    };
+  const fetchVoteOptions = async () => {
+    const res = await getVoteOption(postId);
+    setPollOptions(res?.data);
+  };
+
+  useEffect(() => {
+    fetchVoteSingle();
     fetchVoteOptions();
+    console.log(pollOptions);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId]);
 
   // 타이머
@@ -39,12 +42,23 @@ const Vote = () => {
   //옵션선택
   const handleChooseOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     const optionId = Number(e.target.value);
+    // console.log(optionId);
 
     const postData = async (optid: number) => {
-      const res = await addVote(postId, optid);
-      console.log(res);
+      console.log(postId, optid);
+      if (pollOptions) {
+        const res = await addVote(postId, optid);
+        if (res.code !== 201) {
+          fetchVoteOptions();
+        }
+      }
     };
     postData(optionId);
+  };
+
+  //재투표
+  const handleRevoteBtn = () => {
+    pollOptions && deleteVote(postId, pollOptions.votedOptionId);
   };
 
   // console.log(pollOptions);
@@ -63,31 +77,67 @@ const Vote = () => {
         </div>
         {/* 투표항목 */}
         <div>
-          {/* 마감시간 */}
-          <div className="mb-3 flex items-center gap-1">
-            <IConClockBlack />
-            <span className="scoremedium12">{timer} 남음</span>
+          <div className="scoremedium12 mb-3 flex items-center justify-between text-GS3 ">
+            <div className="flex items-center gap-1">
+              <IConClockBlack />
+              <span className="scoremedium12">{timer} 남음</span>
+            </div>
+            {pollOptions?.showVoteCount && (
+              <button
+                type="button"
+                className="scoremedium12"
+                onClick={handleRevoteBtn}
+              >
+                다시 투표 하기
+              </button>
+            )}
           </div>
           {/* 투표항목 */}
-          <ul className="mb-[46px] flex flex-col gap-3">
+          <ul className="relative mb-2 flex flex-col gap-3">
             {pollOptions?.options
               .sort((a, b) => a.id - b.id)
               .map((option) => (
                 <label
                   key={option.id}
-                  className="notosansmedium14 flex h-14 w-[343px] items-center rounded-[10px] border-[1px] border-GS6 px-4"
+                  className={`notosansregular14 flex h-14 w-[343px] items-center rounded-[10px]   ${
+                    pollOptions?.showVoteCount === false
+                      ? 'border-[1px] border-GS6 px-4'
+                      : ''
+                  }`}
                 >
-                  {option.name}
                   <input
                     type="radio"
                     name={`${postId}-option`}
                     value={option.id}
                     className="hidden"
+                    disabled={pollOptions?.showVoteCount === true}
                     onChange={handleChooseOption}
                   />
+                  <span className="absolute left-4">{option.name}</span>
+                  {pollOptions?.showVoteCount && (
+                    <>
+                      <progress
+                        max={pollPost?.voteCount}
+                        value={option?.voteCount}
+                        className="resultsProgress h-14 w-[343px]"
+                      ></progress>
+                      <span className="notosansmedium14 absolute right-4">
+                        {pollPost &&
+                          Math.round(
+                            (option?.voteCount / pollPost?.voteCount) * 100,
+                          )}
+                        %
+                      </span>
+                    </>
+                  )}
                 </label>
               ))}
           </ul>
+          {pollOptions?.showVoteCount && (
+            <div className="scoreregular12 mb-[46px] text-right text-GS4 ">
+              투표수 {pollPost?.voteCount}
+            </div>
+          )}
           {/* 통계치 */}
           {pollPost && (
             <Statistics
