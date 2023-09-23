@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 
 type TToast = {
   text: string;
-  setShowToast: (arg: boolean) => void;
+  setToast: (arg: boolean) => void;
 };
 
-const Toast = ({ text, setShowToast }: TToast) => {
+const Toast = ({ text, setToast }: TToast) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowToast(false);
+      setToast(false);
     }, 3000);
     return () => {
       clearTimeout(timer);

@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 import { ReactComponent as IConEditWhite } from '@/assets/icon_edit_white.svg';
+import Toast from '@components/common/Toast';
 import Level from '@components/Home/Level';
 import TabBar from '@components/Home/TabBar';
 import VoteFilterBtn from '@components/Home/VoteFilterBtn';
@@ -10,6 +11,15 @@ import VoteList from '@components/Home/VoteList';
 const Home = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [solvedIndex, setSolvedIndex] = useState(0);
+  const [completedToast, setCompletedToast] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state !== null) {
+      location.state.toast && setCompletedToast(true);
+      location.state = {};
+    }
+  }, [location]);
 
   return (
     <>
@@ -29,6 +39,9 @@ const Home = () => {
           <IConEditWhite />
         </button>
       </Link>
+      {completedToast && (
+        <Toast setToast={setCompletedToast} text="고민이 등록되었어요" />
+      )}
     </>
   );
 };

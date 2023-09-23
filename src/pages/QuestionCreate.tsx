@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import type { UseFormProps } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { addQuestion } from '@/apis/question';
+// import { addQuestion } from '@/apis/question';
 import { ReactComponent as IConInfo } from '@/assets/icon_info_gray_filled.svg';
 import {
   CATEGORYOPTIONS,
@@ -31,17 +31,18 @@ const QuestionCreate = () => {
   const watchFields = watch(['title', 'type', 'options']);
   const IsOptionArrayEmptied = watchFields[2].some((item) => item.name === '');
 
-  const [showToast, setShowToast] = useState(false);
+  const [writeToast, setWriteToast] = useState(false);
 
   const handleSubmitBtn = () => {
-    if (IsOptionArrayEmptied) setShowToast(true);
+    if (IsOptionArrayEmptied) setWriteToast(true);
   };
 
   const onSubmit = (data: IQuestion) => {
     const fatchData = async () => {
-      const res = await addQuestion(data);
-      console.log(res);
-      navigate('/home', { state: res?.id });
+      // const res = await addQuestion(data);
+      // console.log(res?.id);
+      console.log(data);
+      navigate('/home', { state: { id: 33, toast: true } });
     };
     fatchData();
   };
@@ -122,11 +123,8 @@ const QuestionCreate = () => {
         >
           등록하기
         </button>
-        {showToast && (
-          <Toast
-            setShowToast={setShowToast}
-            text="투표 선택지를 입력해주세요"
-          />
+        {writeToast && (
+          <Toast setToast={setWriteToast} text="투표 선택지를 입력해야해요" />
         )}
       </form>
     </FormProvider>
