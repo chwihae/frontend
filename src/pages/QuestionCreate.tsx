@@ -83,7 +83,7 @@ const QuestionCreate = () => {
         </fieldset>
         <fieldset>
           <textarea
-            className="notosansregular14 hide-scroll h-[259px] w-full resize-none border-b-[10px] border-bg px-4 py-6 placeholder:text-GS4 focus:outline-none"
+            className="notosansregular14 hide-scroll h-[259px] w-full resize-none border-b-[10px] border-bg px-4 py-6 placeholder:whitespace-pre-line placeholder:text-GS4 focus:outline-none"
             placeholder={PLACEHOLDER_CONTENT}
             maxLength={800}
             {...register('content')}

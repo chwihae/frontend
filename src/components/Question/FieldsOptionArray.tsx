@@ -21,7 +21,7 @@ const FieldsOptionArray = () => {
             <li key={item.id} className="relative flex">
               <input
                 type="text"
-                placeholder="선택지 입력(20자 이내)"
+                placeholder="항목 입력(20자 이내)"
                 className={`notosansmedium14 h-11 w-full rounded-[10px] border-[1px] border-GS6 px-5 py-[11px] outline-none placeholder:text-GS4 focus:border-prime1 ${`options.${index}.name`}`}
                 {...register(`options.${index}.name`, {
                   required: true,
@@ -50,7 +50,7 @@ const FieldsOptionArray = () => {
           }}
         >
           <IConAdd />
-          항목추가
+          항목 추가
         </button>
       )}
     </fieldset>

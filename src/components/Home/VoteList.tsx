@@ -7,7 +7,7 @@ import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.sv
 import { RADIOOPTIONS, TABBAR } from '@/constants/home';
 import type { IVoteAllContent, IVoteAllRes } from '@/types/voteType';
 import Statistics from '@components/common/Statistics';
-import Toast from '@components/common/Toast';
+// import Toast from '@components/common/Toast';
 import NoResults from '@components/Home/NoResults';
 
 type TVoteList = {
@@ -19,7 +19,7 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [lists, setLists] = useState<IVoteAllContent[]>([]);
   const [isLastList, setIsLastList] = useState(false);
-  const [isLastListToast, setIsLastListToast] = useState(false);
+  // const [isLastListToast, setIsLastListToast] = useState(false);
 
   // 질문전체리스트 조회 호출 함수
   const fetchData = async (tab: number, solved: number, page?: number) => {
@@ -32,8 +32,6 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
       status: RADIOOPTIONS[solved].status,
       page,
     });
-
-    console.log(res);
 
     if (page === 0) {
       setLists(res.content);
@@ -52,13 +50,16 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
 
   // 무한스크롤
   useEffect(() => {
-    if (inView && isLastList) {
-      setTimeout(() => {
-        setIsLastListToast(true);
-      }, 1000);
-    } else {
+    if (inView) {
       fetchData(tabIndex, solvedIndex, currentPage + 1);
     }
+    // if (inView && isLastList) {
+    //   setTimeout(() => {
+    //     setIsLastListToast(true);
+    //   }, 1000);
+    // } else {
+    //   fetchData(tabIndex, solvedIndex, currentPage + 1);
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, isLastList]);
 
@@ -104,9 +105,9 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
             </li>
           ))}
           <div ref={ref}></div>
-          {isLastListToast && (
+          {/* {isLastListToast && (
             <Toast setToast={setIsLastListToast} text="마지막 페이지입니다." />
-          )}
+          )} */}
         </>
       ) : (
         <NoResults />
