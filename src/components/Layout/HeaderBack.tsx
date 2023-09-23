@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IConBackBlack } from '@/assets/icon_back_black.svg';
+import { ReactComponent as IConCloseBlack } from '@/assets/icon_close_black.svg';
 
 const HeaderBack = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const HeaderBack = () => {
     pathParts[1] === 'edit'
       ? '글수정'
       : pathParts[0] === 'question'
-      ? '글작성'
+      ? '글쓰기'
       : pathParts[0] === 'mypage'
       ? '마이페이지'
       : null;
@@ -20,7 +21,7 @@ const HeaderBack = () => {
   return (
     <div className="relative flex h-full items-center justify-between px-4">
       <button className="" onClick={() => navigate('/home')}>
-        <IConBackBlack />
+        {pathParts[0] === 'question' ? <IConCloseBlack /> : <IConBackBlack />}
       </button>
       <h1 className="scorebold18 absolute left-1/2 translate-x-[-50%]">
         {findTitle}
