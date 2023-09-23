@@ -18,9 +18,20 @@ const HeaderBack = () => {
       ? '마이페이지'
       : null;
 
+  console.log(findTitle);
+  const handleBackBtn = () => {
+    if (findTitle === '글쓰기') {
+      if (confirm(`글쓰기를 그만두시겠어요?\n작성중인 내용이 삭제됩니다.`)) {
+        navigate('/home');
+      }
+    } else {
+      navigate('/home');
+    }
+  };
+
   return (
     <div className="relative flex h-full items-center justify-between px-4">
-      <button className="" onClick={() => navigate('/home')}>
+      <button className="" onClick={handleBackBtn}>
         {pathParts[0] === 'question' ? <IConCloseBlack /> : <IConBackBlack />}
       </button>
       <h1 className="scorebold18 absolute left-1/2 translate-x-[-50%]">
