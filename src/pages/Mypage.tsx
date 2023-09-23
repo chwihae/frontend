@@ -37,11 +37,12 @@ const Mypage = () => {
             <IConForwardWhite />
           </label>
         </div>
-        <ol className="p flex flex-col gap-4 border-b-[10px] border-[#f3f3f3] px-4 pb-[40px]">
+        <ol className="p flex flex-col gap-4 border-b-[10px] border-bg px-4 pb-[40px]">
           <li>
             <label
               htmlFor="temp-modal"
               className="scoremedium16 flex cursor-pointer gap-1"
+              onClick={() => setIsModal(true)}
             >
               <IConEditOrange />
               내가 작성한 글
@@ -51,6 +52,7 @@ const Mypage = () => {
             <label
               htmlFor="temp-modal"
               className="scoremedium16 flex cursor-pointer gap-1"
+              onClick={() => setIsModal(true)}
             >
               <IConVoteOrange />
               내가 투표한 글
@@ -60,6 +62,7 @@ const Mypage = () => {
             <label
               htmlFor="temp-modal"
               className="scoremedium16 flex cursor-pointer gap-1"
+              onClick={() => setIsModal(true)}
             >
               <IConBookmarkOrange />
               내가 저장한 글
@@ -70,14 +73,22 @@ const Mypage = () => {
       {/* 도움말 */}
       <div className="px-4">
         <h2 className="scoremedium14 pb-14 pt-10 text-GS4">도움말</h2>
-        <ol className="scoremedium16 flex flex-col gap-8">
+        <ol className="scoremedium16 flex flex-col gap-8 ">
           <li className="h-fit">
-            <label htmlFor="temp-modal" className="h-0 border-0 p-0">
+            <label
+              htmlFor="temp-modal"
+              className="h-0 cursor-pointer border-0 p-0"
+              onClick={() => setIsModal(true)}
+            >
               개인정보 처리방침
             </label>
           </li>
           <li className="h-fit">
-            <label htmlFor="temp-modal" className="h-0 border-0 p-0">
+            <label
+              htmlFor="temp-modal"
+              className="h-0 cursor-pointer border-0 p-0"
+              onClick={() => setIsModal(true)}
+            >
               서비스 이용약관
             </label>
           </li>
@@ -87,6 +98,7 @@ const Mypage = () => {
       <label
         htmlFor="temp-modal"
         className="scoremedium12 absolute bottom-10 left-1/2 translate-x-[-50%] cursor-pointer border-0 p-0 underline"
+        onClick={() => setIsModal(true)}
       >
         로그아웃
       </label>
