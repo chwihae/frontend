@@ -3,12 +3,10 @@ import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 
 import { getVoteAll } from '@/apis/question';
-import { ReactComponent as IConBookmarkGray } from '@/assets/icon_bookmarkCount_gray.svg';
-import { ReactComponent as IConCommentGray } from '@/assets/icon_comment_gray.svg';
 import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.svg';
-import { ReactComponent as IConViewCountGray } from '@/assets/icon_viewCount_gray.svg';
 import { RADIOOPTIONS, TABBAR } from '@/constants/home';
 import type { IVoteAllContent, IVoteAllRes } from '@/types/voteType';
+import Statistics from '@components/common/Statistics';
 import Toast from '@components/common/Toast';
 import NoResults from '@components/Home/NoResults';
 
@@ -95,21 +93,11 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
                   <p className="notosansbold16 overflow-hidden text-ellipsis whitespace-nowrap">
                     {list.title}
                   </p>
-                  {/* 통계치 */}
-                  <ul className="notosansmedium12 flex gap-2  text-GS4">
-                    <li className="flex items-center gap-[2px]">
-                      <IConViewCountGray />
-                      <span>{list.viewCount}</span>
-                    </li>
-                    <li className="flex items-center gap-[2px]">
-                      <IConCommentGray />
-                      <span>{list.commentCount}</span>
-                    </li>
-                    <li className="flex items-center gap-[2px]">
-                      <IConBookmarkGray />
-                      <span>{list.bookmarkCount}</span>
-                    </li>
-                  </ul>
+                  <Statistics
+                    viewCount={list.viewCount}
+                    commentCount={list.commentCount}
+                    bookmarkCount={list.bookmarkCount}
+                  />
                 </div>
                 <IConForwardGray />
               </Link>
