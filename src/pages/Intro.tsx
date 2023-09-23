@@ -8,8 +8,8 @@ const Intro = () => {
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-between py-7">
-      <div className="flex flex-col items-center">
+    <div className="relative flex h-screen flex-col items-center justify-between">
+      <div className="absolute top-1/2 flex translate-y-[-55%]  flex-col items-center ">
         <p className="socreintro flex flex-col gap-1 text-black">
           <span>
             <span className="text-prime1">취</span>준생 고민
@@ -22,7 +22,7 @@ const Intro = () => {
           <ImgCharGroup />
         </div>
       </div>
-      <div>
+      <div className="absolute bottom-10">
         <p className="scoremedium14 mb-2 text-center text-GS3">
           함께 고민을 해결하러 갈까요?
         </p>
