@@ -41,7 +41,6 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
       setLists((prevLists) => [...prevLists, ...res.content]);
     }
     setCurrentPage(res.number);
-    console.log(res.last, '마지막 글!!!!');
     setIsLastList(res.last);
   };
 

@@ -6,7 +6,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const authorizeCode = searchParams.get('code');
-  console.log(authorizeCode);
 
   // 토큰발급
   const tokenData = async () => {

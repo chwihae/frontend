@@ -13,7 +13,6 @@ export const postToken = async (authorizeCode: string | null) => {
       JSON.stringify(data?.data?.refreshToken),
     );
     localStorage.setItem('userId', JSON.stringify(data?.data?.userId));
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
