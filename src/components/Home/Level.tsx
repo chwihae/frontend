@@ -50,7 +50,13 @@ const Level = () => {
               value={turnout}
               className="rateProgress"
             ></progress>
-            <span className="w-[26px] text-right">{turnout}%</span>
+            {turnout && (
+              <>
+                <span className="min-w-[34px] text-right">
+                  {turnout > 100 ? 100 : turnout}%
+                </span>
+              </>
+            )}
           </div>
           <div className="flex w-full justify-between">
             <IConCommentOrange className="w-4" />
@@ -59,7 +65,13 @@ const Level = () => {
               value={commentRate}
               className="rateProgress"
             ></progress>
-            <span>{commentRate}%</span>
+            {commentRate && (
+              <>
+                <span className="min-w-[34px] text-right">
+                  {commentRate > 100 ? 100 : commentRate}%
+                </span>
+              </>
+            )}
           </div>
         </div>
       </div>
