@@ -32,7 +32,7 @@ const Level = () => {
   return (
     <section className="relative flex h-[229px] flex-col">
       <div>
-        <LevelImage className="absolute right-[21.56px] top-[44.32px] h-[121px] w-[156px]" />
+        <LevelImage className="absolute right-[21.56px] top-[44.32px] h-[139px] w-[156px]" />
       </div>
       <div className="ml-[16px] mt-[41px] w-[180px]">
         <p className="scorebold24 right-0 flex flex-col text-right">
