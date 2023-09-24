@@ -24,10 +24,6 @@ const Vote = () => {
   const { pollPost, pollOptions } = useVoteQuery(postId);
   const [optionId, setOptionId] = useState<number>(0);
 
-  console.log('질문단건조회', pollPost);
-
-  console.log('질문옵션조회', pollOptions);
-
   const { mutate: chooseOptMutation } = useMutation({
     mutationFn: () => addVote(postId, optionId),
     onSuccess: () => {
@@ -86,6 +82,8 @@ const Vote = () => {
     setInputComment('');
   };
 
+  // console.log(pollOptions?.options[0].voteCount);
+
   return (
     <div>
       {/* 본문 */}
@@ -105,7 +103,8 @@ const Vote = () => {
               <IConClockBlack />
               <span className="scoremedium12">{timer} 남음</span>
             </div>
-            {pollPost?.status === 'IN_PROGRESS' &&
+            {pollPost?.editable === false &&
+              pollPost?.status === 'IN_PROGRESS' &&
               pollOptions?.showVoteCount && (
                 <button
                   type="button"
@@ -127,10 +126,14 @@ const Vote = () => {
               .map((option) => (
                 <label
                   key={option.id}
-                  className={`notosansregular14 flex h-14 w-[343px] cursor-pointer items-center rounded-[10px] ${
+                  className={`notosansregular14 flex h-14 w-[343px]  items-center rounded-[10px] ${
                     pollOptions?.showVoteCount === false
                       ? 'border-[1px] border-GS6 px-4'
-                      : 'cursor-no-drop'
+                      : ''
+                  }${
+                    pollOptions?.votedOptionId !== null || pollPost?.editable
+                      ? 'cursor-no-drop'
+                      : 'cursor-pointer'
                   }`}
                 >
                   <input
@@ -154,10 +157,11 @@ const Vote = () => {
                         }`}
                       ></progress>
                       <span className="notosansmedium14 absolute right-4">
-                        {pollPost &&
+                        {(pollPost &&
                           Math.round(
-                            (option?.voteCount / pollPost?.voteCount) * 100,
-                          )}
+                            (option.voteCount / pollPost?.voteCount) * 100,
+                          )) ||
+                          0}
                         %
                       </span>
                     </>
@@ -167,7 +171,7 @@ const Vote = () => {
           </ul>
           {pollOptions?.showVoteCount && (
             <div className="scoreregular12 mb-[46px] text-right text-GS4 ">
-              총 투표수 {pollPost?.voteCount}
+              총 투표수 {pollPost?.voteCount} 개
             </div>
           )}
           {/* 통계치 */}
