@@ -2,15 +2,23 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getVoteOption, getVoteSingle } from '@/apis/question';
-import { addVote, deleteVote } from '@/apis/vote';
+import { addComment, addVote, deleteVote, getComment } from '@/apis/vote';
 import { ReactComponent as IConClockBlack } from '@/assets/icon_clock_black.svg';
+import { ReactComponent as IConKebabGray } from '@/assets/icon_kebab.gray.svg';
 import { ReactComponent as IConSendGray } from '@/assets/icon_send_gray.svg';
 import { ReactComponent as IConSendOrange } from '@/assets/icon_send_orange.svg';
 import useTimer from '@/hooks/useTimer';
-import type { IVoteOptionsRes, IVoteSingleRes } from '@/types/voteType';
+import type {
+  ICommentRes,
+  IVoteOptionsRes,
+  IVoteSingleRes,
+} from '@/types/voteType';
+import ModalPreparing from '@components/common/ModalPreparing';
 import Statistics from '@components/common/Statistics';
 
 const Vote = () => {
+  const [isModal, setIsModal] = useState(false);
+
   // 투표글 아이디
   const params = useParams();
   const postId = Number(params.id);
@@ -22,7 +30,6 @@ const Vote = () => {
   const fetchVoteSingle = async () => {
     const res = await getVoteSingle(postId);
     setPollPost(res?.data);
-    console.log(res?.data);
   };
 
   const fetchVoteOptions = async () => {
@@ -33,7 +40,6 @@ const Vote = () => {
   useEffect(() => {
     fetchVoteSingle();
     fetchVoteOptions();
-    console.log(pollOptions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId]);
 
@@ -63,17 +69,32 @@ const Vote = () => {
     pollOptions && deleteVote(postId, pollOptions.votedOptionId);
   };
 
-  // console.log(pollOptions);
-
   //댓글
   const [inputComment, setInputComment] = useState('');
-  const handleInputCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const [commentList, setCommentList] = useState<ICommentRes[]>([]);
+
+  const handleInputCommentChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setInputComment(e.target.value);
   };
 
   const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    addComment(postId, inputComment);
   };
+
+  useEffect(() => {
+    const fetchCommentGet = async (id: number) => {
+      const res = await getComment(id);
+      if (res.code === 200) {
+        setCommentList(res?.data.content);
+      }
+    };
+    fetchCommentGet(postId);
+  }, [postId]);
+
+  // console.log(commentList);
 
   return (
     <div>
@@ -161,19 +182,40 @@ const Vote = () => {
         </div>
       </section>
       {/* 댓글 */}
-      <section className="px-4 pb-[51px] pt-10">
+      <section className="px-4 pb-[49px] pt-10">
         <h3 className="mb-6">댓글</h3>
         {/* 댓글목록 */}
-        <div></div>
+        <ol className="grid gap-3">
+          {commentList.map((comment) => (
+            <li key={comment?.id}>
+              <div className="notosansmedium16 mb-3 flex items-center justify-between">
+                <span>{comment?.commenterAlias}</span>
+                <label
+                  htmlFor="temp-modal"
+                  className="cursor-pointer"
+                  onClick={() => setIsModal(true)}
+                >
+                  <IConKebabGray />
+                </label>
+              </div>
+              <p className="notosansregular16 mb-1 text-GS2">
+                {comment?.content}
+              </p>
+              <span className="notosansregular12 text-GS4">
+                {comment?.createdAt.replaceAll('-', '.').replace('T', '. ')}
+              </span>
+            </li>
+          ))}
+        </ol>
         <form
           onSubmit={handleCommentSubmit}
-          className="flex h-11 items-center gap-[5px] "
+          className="mt-9 flex h-11 items-center gap-[5px]"
         >
           <input
             type="text"
             maxLength={500}
             value={inputComment}
-            placeholder="댓글을 입력해주세요."
+            placeholder="댓글을 입력해주세요"
             onChange={handleInputCommentChange}
             className="notosansmedium14 w-full rounded-[10px] bg-bg px-5 py-[11px] placeholder:text-GS4 focus:outline-none"
           />
@@ -182,6 +224,7 @@ const Vote = () => {
           </button>
         </form>
       </section>
+      {isModal && <ModalPreparing name="temp-modal" />}
     </div>
   );
 };

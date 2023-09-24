@@ -275,54 +275,11 @@ body {
   line-height: 1.6;
   letter-spacing: 0.28px;
 }
-
-////////
-.notosansheader {
+.notosansregular12 {
   font-family: 'Noto Sans KR';
-  font-size: 24px;
+  font-size: 12px;
   font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  letter-spacing: -0.36px;
-}
-.notosanstitle1 {
-  font-family: 'Noto Sans KR';
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  letter-spacing: -0.315px;
-}
-.notosanstitle2 {
-  font-family: 'Noto Sans KR';
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.27px;
-}
-.notosansbody1 {
-  font-family: 'Noto Sans KR';
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.24px;
-}
-.notosansbody2 {
-  font-family: 'Noto Sans KR';
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.21px;
-}
-
-.notosanscaption {
-  font-family: 'Noto Sans KR';
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 200;
-  line-height: normal;
-  letter-spacing: -0.21px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.24px;
 }

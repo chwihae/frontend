@@ -78,3 +78,13 @@ export interface IVoteOptionsRes {
   showVoteCount: boolean;
   options: Option[];
 }
+
+// 댓글 생성
+
+export interface ICommentRes {
+  commenterAlias: string;
+  content: string;
+  createdAt: string;
+  editable: true;
+  id: number;
+}
