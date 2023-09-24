@@ -7,7 +7,6 @@ import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.sv
 import { RADIOOPTIONS, TABBAR } from '@/constants/home';
 import type { IVoteAllContent, IVoteAllRes } from '@/types/voteType';
 import Statistics from '@components/common/Statistics';
-// import Toast from '@components/common/Toast';
 import NoResults from '@components/Home/NoResults';
 
 type TVoteList = {
@@ -18,8 +17,6 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
   const [ref, inView] = useInView();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [lists, setLists] = useState<IVoteAllContent[]>([]);
-  const [isLastList, setIsLastList] = useState(false);
-  // const [isLastListToast, setIsLastListToast] = useState(false);
 
   // 질문전체리스트 조회 호출 함수
   const fetchData = async (tab: number, solved: number, page?: number) => {
@@ -36,7 +33,6 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
     if (page === 0) {
       setLists(res.content);
     } else {
-      setIsLastList(res.last);
       setLists((prevLists) => [...prevLists, ...res.content]);
     }
     setCurrentPage(res.number);
@@ -53,15 +49,8 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
     if (inView) {
       fetchData(tabIndex, solvedIndex, currentPage + 1);
     }
-    // if (inView && isLastList) {
-    //   setTimeout(() => {
-    //     setIsLastListToast(true);
-    //   }, 1000);
-    // } else {
-    //   fetchData(tabIndex, solvedIndex, currentPage + 1);
-    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView, isLastList]);
+  }, [inView]);
 
   const listsFilterTab = tabIndex
     ? lists?.filter((list) => list.type === TABBAR[tabIndex].type)
@@ -105,9 +94,6 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
             </li>
           ))}
           <div ref={ref}></div>
-          {/* {isLastListToast && (
-            <Toast setToast={setIsLastListToast} text="마지막 페이지입니다." />
-          )} */}
         </>
       ) : (
         <NoResults />
