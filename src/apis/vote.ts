@@ -15,7 +15,10 @@ export const addVote = async (questionId: number, optionId: number) => {
 };
 
 // 투표 취소
-export const deleteVote = async (questionId: number, optionId: number) => {
+export const deleteVote = async (
+  questionId: number,
+  optionId: number | undefined,
+) => {
   try {
     const { data } = await auth.delete(
       `/api/v1/questions/${questionId}/options/${optionId}`,

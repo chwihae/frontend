@@ -45,7 +45,7 @@ export const getVoteAll = async ({
 export const getVoteSingle = async (id: number) => {
   try {
     const { data } = await auth.get(`/api/v1/questions/${id}`);
-    return data;
+    return data.data;
   } catch (error) {
     console.error(error);
   }
@@ -55,7 +55,7 @@ export const getVoteSingle = async (id: number) => {
 export const getVoteOption = async (id: number) => {
   try {
     const { data } = await auth.get(`/api/v1/questions/${id}/options`);
-    return data;
+    return data.data;
   } catch (error) {
     console.error(error);
   }

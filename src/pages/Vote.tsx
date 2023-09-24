@@ -1,48 +1,44 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getVoteOption, getVoteSingle } from '@/apis/question';
 import { addComment, addVote, deleteVote, getComment } from '@/apis/vote';
 import { ReactComponent as IConClockBlack } from '@/assets/icon_clock_black.svg';
 import { ReactComponent as IConKebabGray } from '@/assets/icon_kebab.gray.svg';
 import { ReactComponent as IConSendGray } from '@/assets/icon_send_gray.svg';
 import { ReactComponent as IConSendOrange } from '@/assets/icon_send_orange.svg';
 import useTimer from '@/hooks/useTimer';
-import type {
-  ICommentRes,
-  IVoteOptionsRes,
-  IVoteSingleRes,
-} from '@/types/voteType';
+import useVoteQuery from '@/hooks/useVotequery';
+import type { ICommentRes } from '@/types/voteType';
 import ModalPreparing from '@components/common/ModalPreparing';
 import Statistics from '@components/common/Statistics';
 
 const Vote = () => {
+  const queryClient = useQueryClient();
   const [isModal, setIsModal] = useState(false);
 
   // 투표글 아이디
   const params = useParams();
   const postId = Number(params.id);
 
-  // 투표글 데이터
-  const [pollPost, setPollPost] = useState<IVoteSingleRes>();
-  const [pollOptions, setPollOptions] = useState<IVoteOptionsRes>();
+  const { pollPost, pollOptions } = useVoteQuery(postId);
+  const [optionId, setOptionId] = useState<number>(0);
 
-  const fetchVoteSingle = async () => {
-    const res = await getVoteSingle(postId);
-    setPollPost(res?.data);
-  };
+  const { mutate: chooseOptMutation } = useMutation({
+    mutationFn: () => addVote(postId, optionId),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['voteSingle', postId]);
+      queryClient.invalidateQueries(['voteOptions', postId]);
+    },
+  });
 
-  const fetchVoteOptions = async () => {
-    const res = await getVoteOption(postId);
-    setPollOptions(res?.data);
-  };
-
-  useEffect(() => {
-    fetchVoteSingle();
-    fetchVoteOptions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [postId]);
+  const { mutate: deleteMutation } = useMutation({
+    mutationFn: () => deleteVote(postId, pollOptions?.votedOptionId),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['voteSingle', postId]);
+      queryClient.invalidateQueries(['voteOptions', postId]);
+    },
+  });
 
   // 타이머
   const future = pollPost?.closeAt || '';
@@ -50,29 +46,18 @@ const Vote = () => {
 
   //옵션선택
   const handleChooseOption = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const optionId = Number(e.target.value);
-    // console.log(optionId);
-
-    const postData = async (optid: number) => {
-      console.log(postId, optid);
-      if (pollOptions) {
-        const res = await addVote(postId, optid);
-        if (res.code !== 201) {
-          fetchVoteOptions();
-        }
-      }
-    };
-    postData(optionId);
+    const id = Number(e.target.value);
+    setOptionId(id);
+    chooseOptMutation();
   };
 
   //재투표
   const handleRevoteBtn = () => {
-    pollOptions && deleteVote(postId, pollOptions.votedOptionId);
+    deleteMutation();
   };
 
   //댓글
   const [inputComment, setInputComment] = useState('');
-  const queryClient = useQueryClient();
   const { data: commentList } = useQuery<ICommentRes[]>({
     queryKey: ['comments', postId],
     queryFn: () => getComment(postId),
