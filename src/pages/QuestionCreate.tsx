@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import type { UseFormProps } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { addQuestion } from '@/apis/question';
 import { ReactComponent as IConForwardBlack } from '@/assets/icon_forward_black.svg';
 import { ReactComponent as IConInfo } from '@/assets/icon_info_gray_filled.svg';
-import { PERIODOPTIONS, PLACEHOLDER_CONTENT } from '@/constants/question';
+import {
+  CATEGORYOPTIONS,
+  PERIODOPTIONS,
+  PLACEHOLDER_CONTENT,
+} from '@/constants/question';
 import type { IQuestion } from '@/types/questionType';
 import Toast from '@components/common/Toast';
 import FieldsCategory from '@components/Question/FieldsCategory';
@@ -17,9 +21,10 @@ type TMethods = IQuestion & UseFormProps;
 const QuestionCreate = () => {
   const navigate = useNavigate();
   const [isCategoryModal, setIsCategoryModal] = useState(false);
+  const [categoryName, setCategoryName] = useState('');
 
   const defaultValues = {
-    type: null,
+    type: '',
     title: '',
     content: '',
     options: [{ name: '' }, { name: '' }],
@@ -49,6 +54,12 @@ const QuestionCreate = () => {
     fatchData();
   };
 
+  useEffect(() => {
+    const findName = CATEGORYOPTIONS.find((tab) => tab.type === watchFields[1]);
+    setCategoryName(findName?.title || '');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [watchFields[1]]);
+
   return (
     <FormProvider {...methods}>
       <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
@@ -58,7 +69,9 @@ const QuestionCreate = () => {
             className="scoremedium16 flex h-12  cursor-pointer items-center justify-between px-4"
             onClick={() => setIsCategoryModal(true)}
           >
-            <span>게시글의 카테고리를 선택해주세요.</span>
+            <span>
+              {watchFields[1] ? categoryName : '카테고리를 선택해주세요'}
+            </span>
             <IConForwardBlack />
           </label>
         </fieldset>

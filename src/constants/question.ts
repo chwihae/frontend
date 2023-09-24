@@ -1,7 +1,7 @@
 export const CATEGORYOPTIONS = [
-  { type: 'CAREER', title: '회사/이직' },
+  { type: 'COMPANY', title: '회사/이직' },
   { type: 'SPEC', title: '스펙/공부' },
-  { type: 'COMPANY', title: '진로/직무' },
+  { type: 'CAREER', title: '진로/직무' },
   { type: 'ETC', title: '기타/일상' },
 ];
 
