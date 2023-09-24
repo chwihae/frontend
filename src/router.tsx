@@ -7,6 +7,9 @@ import Home from '@pages/Home';
 import Intro from '@pages/Intro';
 import Login from '@pages/Login';
 import Mypage from '@pages/Mypage';
+import Myposted from '@pages/Myposted';
+import Mysaved from '@pages/Mysaved';
+import Myvoted from '@pages/Myvoted';
 import NotFound from '@pages/NotFound';
 import QuestionCreate from '@pages/QuestionCreate';
 import QuestionEdit from '@pages/QuestionEdit';
@@ -52,7 +55,12 @@ const router = createBrowserRouter([
           },
           {
             path: '/mypage',
-            element: <Mypage />,
+            children: [
+              { index: true, element: <Mypage /> },
+              { path: 'posted', element: <Myposted /> },
+              { path: 'voted', element: <Myvoted /> },
+              { path: 'saved', element: <Mysaved /> },
+            ],
           },
         ],
       },
