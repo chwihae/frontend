@@ -4,20 +4,19 @@ import type { UseFormProps } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { addQuestion } from '@/apis/question';
+import { ReactComponent as IConForwardBlack } from '@/assets/icon_forward_black.svg';
 import { ReactComponent as IConInfo } from '@/assets/icon_info_gray_filled.svg';
-import {
-  CATEGORYOPTIONS,
-  PERIODOPTIONS,
-  PLACEHOLDER_CONTENT,
-} from '@/constants/question';
+import { PERIODOPTIONS, PLACEHOLDER_CONTENT } from '@/constants/question';
 import type { IQuestion } from '@/types/questionType';
 import Toast from '@components/common/Toast';
+import FieldsCategory from '@components/Question/FieldsCategory';
 import FieldsOptionArray from '@components/Question/FieldsOptionArray';
 
 type TMethods = IQuestion & UseFormProps;
 
 const QuestionCreate = () => {
   const navigate = useNavigate();
+  const [isCategoryModal, setIsCategoryModal] = useState(false);
 
   const defaultValues = {
     type: null,
@@ -54,18 +53,14 @@ const QuestionCreate = () => {
     <FormProvider {...methods}>
       <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
-          {CATEGORYOPTIONS.map((tab) => (
-            <label key={tab.title}>
-              <input
-                type="radio"
-                value={tab.type}
-                {...register('type', {
-                  required: true,
-                })}
-              />
-              {tab.title}
-            </label>
-          ))}
+          <label
+            htmlFor="category-modal"
+            className="scoremedium16 flex h-12  cursor-pointer items-center justify-between px-4"
+            onClick={() => setIsCategoryModal(true)}
+          >
+            <span>게시글의 카테고리를 선택해주세요.</span>
+            <IConForwardBlack />
+          </label>
         </fieldset>
         <fieldset>
           <input
@@ -130,6 +125,7 @@ const QuestionCreate = () => {
           <Toast setToast={setFailedToast} text="글 등록에 실패하였습니다" />
         )}
       </form>
+      {isCategoryModal && <FieldsCategory />}
     </FormProvider>
   );
 };

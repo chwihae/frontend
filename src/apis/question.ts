@@ -14,8 +14,6 @@ export const addQuestion = async (questions: IQuestion) => {
       ...rest,
     };
 
-    console.log(converData);
-
     const { data } = await auth.post('/api/v1/questions', converData);
 
     return data;
