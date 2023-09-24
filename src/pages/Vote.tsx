@@ -112,13 +112,17 @@ const Vote = () => {
             )}
           </div>
           {/* 투표항목 */}
-          <ul className="relative mb-2 flex flex-col gap-3">
+          <ul
+            className={`relative ${
+              pollOptions?.showVoteCount ? 'mb-2' : 'mb-[46px]'
+            } flex flex-col gap-3`}
+          >
             {pollOptions?.options
               .sort((a, b) => a.id - b.id)
               .map((option) => (
                 <label
                   key={option.id}
-                  className={`notosansregular14 flex h-14 w-[343px] items-center rounded-[10px]   ${
+                  className={`notosansregular14 flex h-14 w-[343px] cursor-pointer items-center rounded-[10px] ${
                     pollOptions?.showVoteCount === false
                       ? 'border-[1px] border-GS6 px-4'
                       : ''
