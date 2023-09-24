@@ -27,3 +27,34 @@ export const deleteVote = async (questionId: number, optionId: number) => {
     console.error(error);
   }
 };
+
+// 댓글 생성
+export const addComment = async (questionId: number, comment: string) => {
+  try {
+    console.log(comment);
+    const { data } = await auth.post(
+      `/api/v1/questions/${questionId}/comments`,
+      {
+        content: comment,
+      },
+    );
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// 댓글 조회
+export const getComment = async (questionId: number) => {
+  try {
+    const { data } = await auth.get(
+      `/api/v1/questions/${questionId}/comments?page=0&size=10`,
+    );
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
