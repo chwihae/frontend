@@ -1,3 +1,4 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -71,7 +72,18 @@ const Vote = () => {
 
   //댓글
   const [inputComment, setInputComment] = useState('');
-  const [commentList, setCommentList] = useState<ICommentRes[]>([]);
+  const queryClient = useQueryClient();
+  const { data: commentList } = useQuery<ICommentRes[]>({
+    queryKey: ['comments', postId],
+    queryFn: () => getComment(postId),
+  });
+
+  const { mutate: addCommentMutate } = useMutation({
+    mutationFn: addComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['comments', postId]);
+    },
+  });
 
   const handleInputCommentChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -81,20 +93,9 @@ const Vote = () => {
 
   const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addComment(postId, inputComment);
+    addCommentMutate({ questionId: postId, comment: inputComment });
+    setInputComment('');
   };
-
-  useEffect(() => {
-    const fetchCommentGet = async (id: number) => {
-      const res = await getComment(id);
-      if (res.code === 200) {
-        setCommentList(res?.data.content);
-      }
-    };
-    fetchCommentGet(postId);
-  }, [postId]);
-
-  // console.log(commentList);
 
   return (
     <div>
@@ -186,26 +187,28 @@ const Vote = () => {
         <h3 className="mb-6">댓글</h3>
         {/* 댓글목록 */}
         <ol className="grid gap-3">
-          {commentList.map((comment) => (
-            <li key={comment?.id}>
-              <div className="notosansmedium16 mb-3 flex items-center justify-between">
-                <span>{comment?.commenterAlias}</span>
-                <label
-                  htmlFor="temp-modal"
-                  className="cursor-pointer"
-                  onClick={() => setIsModal(true)}
-                >
-                  <IConKebabGray />
-                </label>
-              </div>
-              <p className="notosansregular16 mb-1 text-GS2">
-                {comment?.content}
-              </p>
-              <span className="notosansregular12 text-GS4">
-                {comment?.createdAt.replaceAll('-', '.').replace('T', '. ')}
-              </span>
-            </li>
-          ))}
+          {commentList
+            ?.sort((a, b) => a.id - b.id)
+            .map((comment) => (
+              <li key={comment?.id}>
+                <div className="notosansmedium16 mb-3 flex items-center justify-between">
+                  <span>{comment?.commenterAlias}</span>
+                  <label
+                    htmlFor="temp-modal"
+                    className="cursor-pointer"
+                    onClick={() => setIsModal(true)}
+                  >
+                    <IConKebabGray />
+                  </label>
+                </div>
+                <p className="notosansregular16 mb-1 text-GS2">
+                  {comment?.content}
+                </p>
+                <span className="notosansregular12 text-GS4">
+                  {comment?.createdAt.replaceAll('-', '.').replace('T', '. ')}
+                </span>
+              </li>
+            ))}
         </ol>
         <form
           onSubmit={handleCommentSubmit}
