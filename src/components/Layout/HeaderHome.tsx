@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ReactComponent as IConLogo } from '@/assets/icon_logo.svg';
 import { ReactComponent as IConProfile } from '@/assets/icon_profile.svg';
 import { ReactComponent as IConSearch } from '@/assets/icon_search.svg';
 import ModalPreparing from '@components/common/ModalPreparing';
@@ -10,7 +11,9 @@ const HeaderHome = () => {
 
   return (
     <div className="flex h-full items-center justify-between px-4">
-      <h1>CHWIHAE</h1>
+      <h1>
+        <IConLogo />
+      </h1>
       <div className="flex text-sm font-bold">
         <label
           htmlFor="save-modal"
