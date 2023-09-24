@@ -79,9 +79,9 @@ const QuestionCreate = () => {
           <input
             type="text"
             className="notosansmedium16 h-[52px] w-full border-[1px] border-bg px-4 py-[13px] focus:outline-none "
-            placeholder="제목을 입력해주세요 (30자 이내)"
+            placeholder="제목을 입력해주세요 (20자 이내)"
             minLength={1}
-            maxLength={15}
+            maxLength={20}
             {...register('title', {
               required: true,
               minLength: 1,

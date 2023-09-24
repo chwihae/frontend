@@ -63,7 +63,7 @@ export interface IVoteSingleRes extends IVoteAllContent {
   closeAt: string;
   voteCount: number;
   bookmarked: boolean;
-  editableL: boolean;
+  editable: boolean;
 }
 
 // 질문 옵션 조회
