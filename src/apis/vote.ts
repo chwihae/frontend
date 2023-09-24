@@ -1,3 +1,5 @@
+import type { ICommentReq } from '@/types/voteType';
+
 import { auth } from './axios';
 
 // 투표 등록
@@ -25,7 +27,7 @@ export const deleteVote = async (questionId: number, optionId: number) => {
 };
 
 // 댓글 생성
-export const addComment = async (questionId: number, comment: string) => {
+export const addComment = async ({ questionId, comment }: ICommentReq) => {
   try {
     const { data } = await auth.post(
       `/api/v1/questions/${questionId}/comments`,
@@ -46,7 +48,7 @@ export const getComment = async (questionId: number) => {
       `/api/v1/questions/${questionId}/comments?page=0&size=10`,
     );
 
-    return data;
+    return data.data.content;
   } catch (error) {
     console.error(error);
   }

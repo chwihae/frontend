@@ -81,6 +81,10 @@ export interface IVoteOptionsRes {
 
 // 댓글 생성
 
+export interface ICommentReq {
+  questionId: number;
+  comment: string;
+}
 export interface ICommentRes {
   commenterAlias: string;
   content: string;
