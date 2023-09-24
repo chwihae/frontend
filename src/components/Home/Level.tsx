@@ -50,7 +50,7 @@ const Level = () => {
               value={turnout}
               className="rateProgress"
             ></progress>
-            <span>{turnout}%</span>
+            <span className="w-[26px] text-right">{turnout}%</span>
           </div>
           <div className="flex w-full justify-between">
             <IConCommentOrange className="w-4" />
