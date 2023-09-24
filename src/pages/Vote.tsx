@@ -24,6 +24,10 @@ const Vote = () => {
   const { pollPost, pollOptions } = useVoteQuery(postId);
   const [optionId, setOptionId] = useState<number>(0);
 
+  console.log('질문단건조회', pollPost);
+
+  console.log('질문옵션조회', pollOptions);
+
   const { mutate: chooseOptMutation } = useMutation({
     mutationFn: () => addVote(postId, optionId),
     onSuccess: () => {
@@ -101,15 +105,16 @@ const Vote = () => {
               <IConClockBlack />
               <span className="scoremedium12">{timer} 남음</span>
             </div>
-            {pollOptions?.showVoteCount && (
-              <button
-                type="button"
-                className="scoremedium12"
-                onClick={handleRevoteBtn}
-              >
-                다시 투표 하기
-              </button>
-            )}
+            {pollPost?.status === 'IN_PROGRESS' &&
+              pollOptions?.showVoteCount && (
+                <button
+                  type="button"
+                  className="scoremedium12"
+                  onClick={handleRevoteBtn}
+                >
+                  다시 투표 하기
+                </button>
+              )}
           </div>
           {/* 투표항목 */}
           <ul
@@ -125,7 +130,7 @@ const Vote = () => {
                   className={`notosansregular14 flex h-14 w-[343px] cursor-pointer items-center rounded-[10px] ${
                     pollOptions?.showVoteCount === false
                       ? 'border-[1px] border-GS6 px-4'
-                      : ''
+                      : 'cursor-no-drop'
                   }`}
                 >
                   <input
@@ -142,7 +147,11 @@ const Vote = () => {
                       <progress
                         max={pollPost?.voteCount}
                         value={option?.voteCount}
-                        className="resultsProgress h-14 w-[343px]"
+                        className={`resultsProgress h-14 w-[343px] ${
+                          pollPost?.status === 'COMPLETED'
+                            ? 'cursor-no-drop'
+                            : ''
+                        }`}
                       ></progress>
                       <span className="notosansmedium14 absolute right-4">
                         {pollPost &&
@@ -158,7 +167,7 @@ const Vote = () => {
           </ul>
           {pollOptions?.showVoteCount && (
             <div className="scoreregular12 mb-[46px] text-right text-GS4 ">
-              투표수 {pollPost?.voteCount}
+              총 투표수 {pollPost?.voteCount}
             </div>
           )}
           {/* 통계치 */}
