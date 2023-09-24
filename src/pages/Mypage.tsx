@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IConBookmarkOrange } from '@/assets/icon_bookmark_orange.svg';
 import { ReactComponent as IConEditOrange } from '@/assets/icon_edit_orange.svg';
+import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.svg';
 import { ReactComponent as IConForwardWhite } from '@/assets/icon_forward_white.svg';
 import { ReactComponent as IConVoteOrange } from '@/assets/icon_vote_orange.svg';
 import { LEVELSTEP } from '@/constants/home';
@@ -33,7 +34,7 @@ const Mypage = () => {
     <div className="relative flex h-full flex-col">
       {/* 상단부 */}
       <div className="">
-        <div className="flex items-center justify-between px-4 pb-[76px] pt-[45px]">
+        <div className="flex items-center justify-between px-4 pb-[72px] pt-[45px]">
           <div className="flex items-center gap-3">
             <LevelImage className="h-[43px] w-[43px]" />
             <p className="scorebold20">별랑이{userId}</p>
@@ -47,43 +48,28 @@ const Mypage = () => {
             <IConForwardWhite />
           </label>
         </div>
-        <ol className="p flex flex-col gap-4 border-b-[10px] border-bg px-4 pb-[40px]">
-          <li>
-            <label
-              htmlFor="temp-modal"
-              className="scoremedium16 flex cursor-pointer gap-1"
-              onClick={() => setIsModal(true)}
-            >
-              <IConEditOrange />
-              내가 작성한 글
-            </label>
-          </li>
-          <li>
-            <label
-              htmlFor="temp-modal"
-              className="scoremedium16 flex cursor-pointer gap-1"
-              onClick={() => setIsModal(true)}
-            >
-              <IConVoteOrange />
-              내가 투표한 글
-            </label>
-          </li>
-          <li>
-            <label
-              htmlFor="temp-modal"
-              className="scoremedium16 flex cursor-pointer gap-1"
-              onClick={() => setIsModal(true)}
-            >
-              <IConBookmarkOrange />
-              내가 저장한 글
-            </label>
-          </li>
+        <ol className="p flex flex-col gap-8 border-b-[10px] border-bg px-4 pb-[40px]">
+          {MYPOST.map((list) => (
+            <li key={list.title}>
+              <label
+                htmlFor="temp-modal"
+                className="scoremedium16 flex cursor-pointer items-center justify-between"
+                onClick={() => setIsModal(true)}
+              >
+                <div className="flex gap-1">
+                  {list.icon}
+                  {list.title}
+                </div>
+                <IConForwardGray />
+              </label>
+            </li>
+          ))}
         </ol>
       </div>
       {/* 도움말 */}
-      <div className="px-4">
+      <div className="relative flex-grow-0 px-4">
         <h2 className="scoremedium14 pb-14 pt-10 text-GS4">도움말</h2>
-        <ol className="scoremedium16 flex flex-col gap-8 ">
+        <ol className="scoremedium16 mb-[313px] flex flex-col gap-8">
           <li className="h-fit">
             <label
               htmlFor="temp-modal"
@@ -103,18 +89,25 @@ const Mypage = () => {
             </label>
           </li>
         </ol>
+        {/* 로그아웃 버튼 */}
+        <label
+          htmlFor="temp-modal"
+          className="scoremedium12 block cursor-pointer border-0 p-0 pb-10 text-center underline"
+          onClick={handleSignOut}
+        >
+          로그아웃
+        </label>
       </div>
-      {/* 로그아웃 버튼 */}
-      <label
-        htmlFor="temp-modal"
-        className="scoremedium12 absolute bottom-10 left-1/2 translate-x-[-50%] cursor-pointer border-0 p-0 underline"
-        onClick={handleSignOut}
-      >
-        로그아웃
-      </label>
+
       {isModal && <ModalPreparing name="temp-modal" />}
     </div>
   );
 };
 
 export default Mypage;
+
+const MYPOST = [
+  { title: '내가 작성한 글', icon: <IConEditOrange /> },
+  { title: '내가 투표한 글', icon: <IConVoteOrange /> },
+  { title: '내가 저장한 글', icon: <IConBookmarkOrange /> },
+];
