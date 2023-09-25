@@ -88,7 +88,7 @@ const Vote = () => {
       <section className="scorebold16 mt-10 border-b-[10px] border-b-bg px-4 pb-6">
         {/* 글 내용 */}
         <div className="mb-[49px]">
-          <div className="scoremedium14 mb-6 w-fit rounded-[37px] border-[1px] border-GS6 px-3 py-[6px] text-GS4">
+          <div className="scoremedium14 mb-6 flex w-fit items-center rounded-[37px] border-[1px] border-GS6 px-3 py-[6px] text-GS4">
             {pollPost?.status === 'IN_PROGRESS' ? '해결중' : '해결완료'}
           </div>
           <h2 className="notosansbold16 mb-3">{pollPost?.title}</h2>
