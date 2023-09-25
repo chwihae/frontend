@@ -53,9 +53,9 @@ const Mypage = () => {
             <li key={list.title}>
               <Link
                 to={list.href}
-                className="scoremedium16 flex cursor-pointer items-center justify-between"
+                className="scoremedium16 flex cursor-pointer justify-between"
               >
-                <div className="flex gap-1">
+                <div className="flex items-center gap-1 ">
                   {list.icon}
                   {list.title}
                 </div>
