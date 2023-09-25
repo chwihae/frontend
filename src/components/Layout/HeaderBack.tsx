@@ -25,7 +25,7 @@ const HeaderBack = () => {
         navigate('/home');
       }
     } else {
-      navigate('/home');
+      navigate(-1);
     }
   };
 
