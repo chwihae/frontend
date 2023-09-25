@@ -1,5 +1,7 @@
+import UserPostList from '@components/Mypage/UserPostList';
+
 const Mysaved = () => {
-  return <div>Mysaved</div>;
+  return <UserPostList />;
 };
 
 export default Mysaved;

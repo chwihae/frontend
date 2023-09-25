@@ -1,7 +1,7 @@
 import UserPostList from '@components/Mypage/UserPostList';
 
-const Myvoted = () => {
+const MyWritten = () => {
   return <UserPostList />;
 };
 
-export default Myvoted;
+export default MyWritten;
