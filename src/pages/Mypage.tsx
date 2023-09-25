@@ -51,16 +51,30 @@ const Mypage = () => {
         <ol className="p flex flex-col gap-8 border-b-[10px] border-bg px-4 pb-[40px]">
           {MYPOST.map((list) => (
             <li key={list.title}>
-              <Link
-                to={list.href}
-                className="scoremedium16 flex cursor-pointer justify-between"
-              >
-                <div className="flex items-center gap-1 ">
-                  {list.icon}
-                  {list.title}
-                </div>
-                <IConForwardGray />
-              </Link>
+              {list.type === 'VOTED' ? (
+                <label
+                  htmlFor="temp-modal"
+                  className="scoremedium16 flex cursor-pointer justify-between"
+                  onClick={() => setIsModal(true)}
+                >
+                  <div className="flex items-center gap-1 ">
+                    {list.icon}
+                    {list.title}
+                  </div>
+                  <IConForwardGray />
+                </label>
+              ) : (
+                <Link
+                  to={list.href}
+                  className="scoremedium16 flex cursor-pointer justify-between"
+                >
+                  <div className="flex items-center gap-1 ">
+                    {list.icon}
+                    {list.title}
+                  </div>
+                  <IConForwardGray />
+                </Link>
+              )}
             </li>
           ))}
         </ol>
@@ -107,16 +121,19 @@ export default Mypage;
 
 const MYPOST = [
   {
+    type: 'ME',
     title: '내가 작성한 글',
     icon: <IConEditOrange />,
     href: '/mypage/written',
   },
   {
+    type: 'VOTED',
     title: '내가 투표한 글',
     icon: <IConVoteOrange />,
     href: '/mypage/voted',
   },
   {
+    type: 'BOOKMARKED',
     title: '내가 저장한 글',
     icon: <IConBookmarkOrange />,
     href: '/mypage/saved',
