@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
-import { Link } from 'react-router-dom';
 
 import { getVoteAll } from '@/apis/question';
-import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.svg';
 import { RADIOOPTIONS, TABBAR } from '@/constants/home';
 import type { IVoteAllContent, IVoteAllRes } from '@/types/voteType';
-import Statistics from '@components/common/Statistics';
-import NoResults from '@components/Home/NoResults';
+import PostList from '@components/common/PostList';
 
 type TVoteList = {
   tabIndex: number;
   solvedIndex: number;
 };
 const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
-  const [ref, inView] = useInView();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [lists, setLists] = useState<IVoteAllContent[]>([]);
 
@@ -38,19 +33,16 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
     setCurrentPage(res.number);
   };
 
+  const callFetchData = (page = 0) => {
+    fetchData(tabIndex, solvedIndex, page);
+  };
+
   // 탭바, 정렬 전환시
   useEffect(() => {
     setCurrentPage(0);
-    fetchData(tabIndex, solvedIndex, 0);
-  }, [tabIndex, solvedIndex]);
-
-  // 무한스크롤
-  useEffect(() => {
-    if (inView) {
-      fetchData(tabIndex, solvedIndex, currentPage + 1);
-    }
+    callFetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView]);
+  }, [tabIndex, solvedIndex]);
 
   const listsFilterTab = tabIndex
     ? lists?.filter((list) => list.type === TABBAR[tabIndex].type)
@@ -63,42 +55,11 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
       );
 
   return (
-    <ol className="flex flex-col">
-      {lists && lists.length !== 0 ? (
-        <>
-          {listFilterSolved?.map((list) => (
-            <li key={list.id}>
-              <Link
-                to={`/vote/${list.id}`}
-                className={`relative flex h-[108px] items-center justify-between px-4 py-4 ${
-                  list.status === 'IN_PROGRESS' ? null : 'bg-bg text-GS3'
-                }`}
-              >
-                <div className="grid w-[294px] gap-2">
-                  {/* 상태뱃지 */}
-                  <span className="scoremedium12 w-fit rounded-[37px] border-[1px] border-GS6 px-[9px] py-1 text-GS4">
-                    {list.status === 'IN_PROGRESS' ? '해결중' : '해결완료'}
-                  </span>
-                  {/* 투표제목 */}
-                  <p className="notosansbold16 overflow-hidden text-ellipsis whitespace-nowrap">
-                    {list.title}
-                  </p>
-                  <Statistics
-                    viewCount={list.viewCount}
-                    commentCount={list.commentCount}
-                    bookmarkCount={list.bookmarkCount}
-                  />
-                </div>
-                <IConForwardGray />
-              </Link>
-            </li>
-          ))}
-          <div ref={ref}></div>
-        </>
-      ) : (
-        <NoResults />
-      )}
-    </ol>
+    <PostList
+      lists={listFilterSolved}
+      fetchFn={callFetchData}
+      currentPage={currentPage}
+    />
   );
 };
 

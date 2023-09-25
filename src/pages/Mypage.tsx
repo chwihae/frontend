@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IConBookmarkOrange } from '@/assets/icon_bookmark_orange.svg';
 import { ReactComponent as IConEditOrange } from '@/assets/icon_edit_orange.svg';
@@ -51,17 +51,30 @@ const Mypage = () => {
         <ol className="p flex flex-col gap-8 border-b-[10px] border-bg px-4 pb-[40px]">
           {MYPOST.map((list) => (
             <li key={list.title}>
-              <label
-                htmlFor="temp-modal"
-                className="scoremedium16 flex cursor-pointer items-center justify-between"
-                onClick={() => setIsModal(true)}
-              >
-                <div className="flex gap-1">
-                  {list.icon}
-                  {list.title}
-                </div>
-                <IConForwardGray />
-              </label>
+              {list.type === 'VOTED' ? (
+                <label
+                  htmlFor="temp-modal"
+                  className="scoremedium16 flex cursor-pointer justify-between"
+                  onClick={() => setIsModal(true)}
+                >
+                  <div className="flex items-center gap-1 ">
+                    {list.icon}
+                    {list.title}
+                  </div>
+                  <IConForwardGray />
+                </label>
+              ) : (
+                <Link
+                  to={list.href}
+                  className="scoremedium16 flex cursor-pointer justify-between"
+                >
+                  <div className="flex items-center gap-1 ">
+                    {list.icon}
+                    {list.title}
+                  </div>
+                  <IConForwardGray />
+                </Link>
+              )}
             </li>
           ))}
         </ol>
@@ -107,7 +120,22 @@ const Mypage = () => {
 export default Mypage;
 
 const MYPOST = [
-  { title: '내가 작성한 글', icon: <IConEditOrange /> },
-  { title: '내가 투표한 글', icon: <IConVoteOrange /> },
-  { title: '내가 저장한 글', icon: <IConBookmarkOrange /> },
+  {
+    type: 'ME',
+    title: '내가 작성한 글',
+    icon: <IConEditOrange />,
+    href: '/mypage/written',
+  },
+  {
+    type: 'VOTED',
+    title: '내가 투표한 글',
+    icon: <IConVoteOrange />,
+    href: '/mypage/voted',
+  },
+  {
+    type: 'BOOKMARKED',
+    title: '내가 저장한 글',
+    icon: <IConBookmarkOrange />,
+    href: '/mypage/saved',
+  },
 ];
