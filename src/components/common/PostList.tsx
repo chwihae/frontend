@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.svg';
 import type { IVoteAllContent } from '@/types/voteType';
 import Statistics from '@components/common/Statistics';
-import NoResults from '@components/Home/NoResults';
 
 type TPostList = {
   lists: IVoteAllContent[];
@@ -27,7 +26,7 @@ const PostList = ({ lists, fetchFn, currentPage }: TPostList) => {
   console.log(lists);
 
   return (
-    <ol className="flex flex-col">
+    <ol className="flex h-[calc(100%-48px)] flex-col">
       {lists && lists.length !== 0 ? (
         <>
           {lists?.map((list) => (
@@ -60,7 +59,7 @@ const PostList = ({ lists, fetchFn, currentPage }: TPostList) => {
           <div ref={ref}></div>
         </>
       ) : (
-        <NoResults />
+        <></>
       )}
     </ol>
   );

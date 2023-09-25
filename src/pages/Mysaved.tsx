@@ -1,7 +1,11 @@
-import UserPostList from '@components/Mypage/UserPostList';
+import NoResults from '@components/common/NoResults';
 
 const Mysaved = () => {
-  return <UserPostList />;
+  return (
+    <div className="grid h-full translate-y-[-10%] items-center">
+      <NoResults />
+    </div>
+  );
 };
 
 export default Mysaved;
