@@ -106,8 +106,16 @@ const Mypage = () => {
 export default Mypage;
 
 const MYPOST = [
-  { title: '내가 작성한 글', icon: <IConEditOrange />, href: '/mypage/posted' },
-  { title: '내가 투표한 글', icon: <IConVoteOrange />, href: '/mypage/voted' },
+  {
+    title: '내가 작성한 글',
+    icon: <IConEditOrange />,
+    href: '/mypage/written',
+  },
+  {
+    title: '내가 투표한 글',
+    icon: <IConVoteOrange />,
+    href: '/mypage/voted',
+  },
   {
     title: '내가 저장한 글',
     icon: <IConBookmarkOrange />,
