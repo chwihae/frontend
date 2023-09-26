@@ -15,6 +15,7 @@ import type { IQuestion } from '@/types/questionType';
 import Toast from '@components/common/Toast';
 import FieldsCategory from '@components/Question/FieldsCategory';
 import FieldsOptionArray from '@components/Question/FieldsOptionArray';
+import TooltipPeriod from '@components/Question/TooltipPeriod';
 
 type TMethods = IQuestion & UseFormProps;
 
@@ -22,6 +23,7 @@ const QuestionCreate = () => {
   const navigate = useNavigate();
   const [isCategoryModal, setIsCategoryModal] = useState(false);
   const [categoryName, setCategoryName] = useState('');
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
   const defaultValues = {
     type: '',
@@ -101,7 +103,14 @@ const QuestionCreate = () => {
         <fieldset className="mb-10 px-4">
           <div className="mb-6 flex items-center gap-1">
             <legend className="scorebold16">고민 기간 설정</legend>
-            <IConInfo />
+            <button
+              type="button"
+              className="relative"
+              onClick={() => setIsTooltipOpen((prev) => !prev)}
+            >
+              <IConInfo />
+              {isTooltipOpen && <TooltipPeriod />}
+            </button>
           </div>
           <ol className="mb-16 flex gap-10">
             {PERIODOPTIONS.map((period) => (
@@ -137,8 +146,8 @@ const QuestionCreate = () => {
         {failedToast && (
           <Toast setToast={setFailedToast} text="글 등록에 실패하였습니다" />
         )}
+        {isCategoryModal && <FieldsCategory />}
       </form>
-      {isCategoryModal && <FieldsCategory />}
     </FormProvider>
   );
 };
