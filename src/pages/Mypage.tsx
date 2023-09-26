@@ -48,9 +48,9 @@ const Mypage = () => {
         </label>
       </div>
       {/* MY */}
-      <div className="px-4">
-        <h2 className="scoremedium14 mb-10 text-GS4">MY</h2>
-        <ol className="p flex flex-col gap-8 border-b-[10px] border-bg pb-[40px]">
+      <div>
+        <h2 className="scoremedium14 mb-10 px-4 text-GS4">MY</h2>
+        <ol className="p flex flex-col gap-8 border-b-[10px] border-bg px-4 pb-[40px]">
           {MYPOST.map((list) => (
             <li key={list.title}>
               {list.type === 'VOTED' ? (
