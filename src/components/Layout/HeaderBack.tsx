@@ -19,6 +19,23 @@ const HeaderBack = () => {
       ? '마이페이지'
       : null;
 
+  const MYPOST = [
+    {
+      title: '작성한 글',
+      href: '/mypage/written',
+    },
+    {
+      title: '투표한 글',
+      href: '/mypage/voted',
+    },
+    {
+      title: '저장한 글',
+      href: '/mypage/saved',
+    },
+  ];
+
+  const mypageTitle = MYPOST.find((mypage) => mypage.href === pathname);
+
   const handleBackBtn = () => {
     if (findTitle === '글쓰기') {
       if (confirm(`글쓰기를 그만두시겠어요?\n작성중인 내용이 삭제됩니다.`)) {
@@ -35,7 +52,7 @@ const HeaderBack = () => {
         {pathParts[0] === 'question' ? <IConCloseBlack /> : <IConBackBlack />}
       </button>
       <h1 className="scorebold18 absolute left-1/2 translate-x-[-50%]">
-        {findTitle}
+        {findTitle === '마이페이지' ? mypageTitle?.title : findTitle}
       </h1>
       {pathParts[0] === 'vote' ? (
         <button className="">

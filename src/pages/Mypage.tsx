@@ -31,24 +31,26 @@ const Mypage = () => {
   };
 
   return (
-    <div className="relative flex h-full flex-col">
+    <div className="relative h-full">
       {/* 상단부 */}
-      <div className="">
-        <div className="flex items-center justify-between px-4 pb-[72px] pt-[45px]">
-          <div className="flex items-center gap-3">
-            <LevelImage className="h-[43px] w-[43px]" />
-            <p className="scorebold20">별랑이{userId}</p>
-          </div>
-          <label
-            htmlFor="temp-modal"
-            className="scoremedium12 scoremedium16 flex cursor-pointer items-center gap-[2px] rounded-[18px] bg-prime1 px-[9px] py-1 text-white hover:bg-prime1"
-            onClick={() => setIsModal(true)}
-          >
-            {userLevelName?.name}별랑이
-            <IConForwardWhite />
-          </label>
+      <div className="mb-11 flex items-center justify-between px-4 pt-[40px]">
+        <div className="flex items-center gap-3">
+          <LevelImage className="h-[60px] w-[60px]" />
+          <p className="scorebold20">별랑이{userId}</p>
         </div>
-        <ol className="p flex flex-col gap-8 border-b-[10px] border-bg px-4 pb-[40px]">
+        <label
+          htmlFor="temp-modal"
+          className="scoremedium12 flex cursor-pointer items-center gap-[2px] rounded-[18px] bg-prime1 px-[9px] py-1 text-white hover:bg-prime1"
+          onClick={() => setIsModal(true)}
+        >
+          {userLevelName?.name}별랑이
+          <IConForwardWhite />
+        </label>
+      </div>
+      {/* MY */}
+      <div className="px-4">
+        <h2 className="scoremedium14 mb-10 text-GS4">MY</h2>
+        <ol className="p flex flex-col gap-8 border-b-[10px] border-bg pb-[40px]">
           {MYPOST.map((list) => (
             <li key={list.title}>
               {list.type === 'VOTED' ? (
@@ -122,19 +124,19 @@ export default Mypage;
 const MYPOST = [
   {
     type: 'ME',
-    title: '내가 작성한 글',
+    title: '작성한 글',
     icon: <IConEditOrange />,
     href: '/mypage/written',
   },
   {
     type: 'VOTED',
-    title: '내가 투표한 글',
+    title: '투표한 글',
     icon: <IConVoteOrange />,
     href: '/mypage/voted',
   },
   {
     type: 'BOOKMARKED',
-    title: '내가 저장한 글',
+    title: '저장한 글',
     icon: <IConBookmarkOrange />,
     href: '/mypage/saved',
   },
