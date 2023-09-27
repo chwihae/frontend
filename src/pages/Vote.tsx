@@ -8,7 +8,7 @@ import { ReactComponent as IConKebabGray } from '@/assets/icon_kebab.gray.svg';
 import { ReactComponent as IConSendGray } from '@/assets/icon_send_gray.svg';
 import { ReactComponent as IConSendOrange } from '@/assets/icon_send_orange.svg';
 import useTimer from '@/hooks/useTimer';
-import useVoteQuery from '@/hooks/useVotequery';
+import useVoteQuery from '@/hooks/useVoteQuery';
 import type { ICommentRes } from '@/types/voteType';
 import ModalPreparing from '@components/common/ModalPreparing';
 import Statistics from '@components/common/Statistics';
