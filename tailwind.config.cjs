@@ -19,12 +19,6 @@ module.exports = {
         GS6: '#CECECE',
         bg: '#F3F3F3',
       },
-      boxShadow: {
-        example: '0 0 18px 0 rgba(191, 192, 196, 0.18)',
-      },
-      spacing: {
-        '6px': '0.375rem',
-      },
     },
   },
   plugins: [require('daisyui')],
