@@ -1,3 +1,5 @@
+import { LEVELSTEP } from '@/constants/home';
+
 import { auth } from './axios';
 
 // 인가코드로 토큰발급 요청
@@ -26,7 +28,16 @@ export const getUserLevel = async () => {
   try {
     const { data } = await auth.get('/api/v1/users/statistics');
     if (data.code === 200) {
-      localStorage.setItem('userLevel', JSON.stringify(data?.data));
+      // 레벨한글명, 총투표수 및 총댓글수 로컬스토리지 저장
+      const userLevelClientData = LEVELSTEP.find(
+        (level) => level.type === data?.data?.level,
+      );
+      const convertUserLevelInfo = {
+        ...userLevelClientData,
+        commentCount: data?.data?.commentCount,
+        voteCount: data?.data?.voteCount,
+      };
+      localStorage.setItem('userLevel', JSON.stringify(convertUserLevelInfo));
     }
     return data;
   } catch (error) {

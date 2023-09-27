@@ -9,24 +9,24 @@ const LevelImage = ({ className }: { className: string }) => {
 
   const LEVEL = [
     {
-      level: 'BACHELOR',
+      type: 'BACHELOR',
       img: <IConLevelOne className={`${className}`} />,
     },
     {
-      level: 'MASTER',
+      type: 'MASTER',
       img: <IConLevelTwo className={`${className}`} />,
     },
     {
-      level: 'DOCTOR',
+      type: 'DOCTOR',
       img: <IConLevelThree className={`${className}`} />,
     },
     {
-      level: 'PROFESSOR',
+      type: 'PROFESSOR',
       img: <IConLevelFour className={`${className}`} />,
     },
   ];
 
-  return <>{LEVEL.find((item) => item.level === userLevel?.level)?.img}</>;
+  return <>{LEVEL.find((item) => item.type === userLevel?.type)?.img}</>;
 };
 
 export default LevelImage;

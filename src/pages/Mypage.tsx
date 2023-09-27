@@ -6,7 +6,6 @@ import { ReactComponent as IConEditOrange } from '@/assets/icon_edit_orange.svg'
 import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.svg';
 import { ReactComponent as IConForwardWhite } from '@/assets/icon_forward_white.svg';
 import { ReactComponent as IConVoteOrange } from '@/assets/icon_vote_orange.svg';
-import { LEVELSTEP } from '@/constants/home';
 import getLocalData from '@/utils/getLocalData';
 import LevelImage from '@components/common/LevelImage';
 import ModalPreparing from '@components/common/ModalPreparing';
@@ -15,12 +14,7 @@ const Mypage = () => {
   const navigate = useNavigate();
   const [isModal, setIsModal] = useState(false);
   const userId = getLocalData('userId');
-
-  // 등급 이름
-  const userLevel = getLocalData('userLevel');
-  const userLevelName = LEVELSTEP.find(
-    (level) => level.type === userLevel?.level,
-  );
+  const userLevelInfo = getLocalData('userLevel');
 
   // 로그아웃
   const handleSignOut = () => {
@@ -43,7 +37,7 @@ const Mypage = () => {
           className="scoremedium12 flex cursor-pointer items-center gap-[2px] rounded-[18px] bg-prime1 px-[9px] py-1 text-white hover:bg-prime1"
           onClick={() => setIsModal(true)}
         >
-          {userLevelName?.name}별랑이
+          {userLevelInfo.name}별랑이
           <IConForwardWhite />
         </label>
       </div>
