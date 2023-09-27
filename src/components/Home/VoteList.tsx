@@ -9,19 +9,18 @@ type TVoteList = {
   tabIndex: number;
   solvedIndex: number;
 };
+
 const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [lists, setLists] = useState<IVoteAllContent[]>([]);
 
   // 질문전체리스트 조회 호출 함수
-  const fetchData = async (tab: number, solved: number, page?: number) => {
-    if (page === undefined) {
-      page = 0;
-    }
+  const fetchData = async (page?: number) => {
+    if (page === undefined) page = 0;
 
     const res: IVoteAllRes = await getVoteAll({
-      type: TABBAR[tab].type,
-      status: RADIOOPTIONS[solved].status,
+      type: TABBAR[tabIndex].type,
+      status: RADIOOPTIONS[solvedIndex].status,
       page,
     });
 
@@ -33,14 +32,11 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
     setCurrentPage(res.number);
   };
 
-  const callFetchData = (page = 0) => {
-    fetchData(tabIndex, solvedIndex, page);
-  };
-
   // 탭바, 정렬 전환시
   useEffect(() => {
     setCurrentPage(0);
-    callFetchData();
+    // page는 0이 기본값
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabIndex, solvedIndex]);
 
@@ -57,7 +53,7 @@ const VoteList = ({ tabIndex, solvedIndex }: TVoteList) => {
   return (
     <PostList
       lists={listFilterSolved}
-      fetchFn={callFetchData}
+      fetchFn={fetchData}
       currentPage={currentPage}
     />
   );

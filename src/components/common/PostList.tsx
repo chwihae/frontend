@@ -11,11 +11,11 @@ type TPostList = {
   fetchFn: (page: number) => void;
   currentPage: number;
 };
+
 const PostList = ({ lists, fetchFn, currentPage }: TPostList) => {
   // 무한스크롤
   const [ref, inView] = useInView();
 
-  // 무한스크롤
   useEffect(() => {
     if (inView) {
       fetchFn(currentPage + 1);
@@ -52,7 +52,9 @@ const PostList = ({ lists, fetchFn, currentPage }: TPostList) => {
                     bookmarkCount={list.bookmarkCount}
                   />
                 </div>
-                <IConForwardGray />
+                <button type="button">
+                  <IConForwardGray />
+                </button>
               </Link>
             </li>
           ))}

@@ -13,20 +13,20 @@ const Statistics = ({
   commentCount,
   bookmarkCount,
 }: TStatistics) => {
+  const STATICS_ICON = [
+    { type: 'view', text: viewCount, icon: <IConViewCountGray /> },
+    { type: 'comment', text: commentCount, icon: <IConCommentGray /> },
+    { type: 'bookmark', text: bookmarkCount, icon: <IConBookmarkGray /> },
+  ];
+
   return (
     <ul className="notosansmedium12 flex gap-2  text-GS4">
-      <li className="flex items-center gap-[2px]">
-        <IConViewCountGray />
-        <span>{viewCount}</span>
-      </li>
-      <li className="flex items-center gap-[2px]">
-        <IConCommentGray />
-        <span>{commentCount}</span>
-      </li>
-      <li className="flex items-center gap-[2px]">
-        <IConBookmarkGray />
-        <span>{bookmarkCount}</span>
-      </li>
+      {STATICS_ICON.map((value) => (
+        <li key={value.type} className="flex items-center gap-[2px]">
+          {value.icon}
+          <span>{value.text}</span>
+        </li>
+      ))}
     </ul>
   );
 };
