@@ -38,8 +38,8 @@ export const getUserLevel = async () => {
         voteCount: data?.data?.voteCount,
       };
       localStorage.setItem('userLevel', JSON.stringify(convertUserLevelInfo));
+      return convertUserLevelInfo;
     }
-    return data;
   } catch (error) {
     console.error(error);
   }

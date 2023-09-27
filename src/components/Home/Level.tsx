@@ -1,13 +1,16 @@
 import { ReactComponent as IConCommentOrange } from '@/assets/icon_comment_orange.svg';
 import { ReactComponent as IConVoteOrange } from '@/assets/icon_voterate_orange.svg';
-import getLocalData from '@/utils/getLocalData';
+import useUserLevelQuery from '@/hooks/useUserLevelQuery';
 import LevelImage from '@components/common/LevelImage';
 
 const Level = () => {
-  const userLevel = getLocalData('userLevel');
+  const { userLevel } = useUserLevelQuery();
 
-  const calcRate = (count: number, goal: number) => {
-    return Math.round((count / goal) * 100);
+  const calcRate = (count: number | undefined, goal: number | undefined) => {
+    if (count !== undefined && goal !== undefined) {
+      return Math.round((count / goal) * 100);
+    }
+    return 0;
   };
 
   const turnout = calcRate(userLevel?.voteCount, userLevel?.goalVotes);
