@@ -10,10 +10,11 @@ import VoteList from '@components/Home/VoteList';
 
 const Home = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [tabIndex, setTabIndex] = useState(0);
   const [solvedIndex, setSolvedIndex] = useState(0);
   const [completedToast, setCompletedToast] = useState(false);
-  const location = useLocation();
 
   // 질문작성에서 넘어올 때, 등록 완료 토스트
   useEffect(() => {
@@ -26,16 +27,18 @@ const Home = () => {
   return (
     <>
       <Level />
-      <TabBar
-        tabIndex={tabIndex}
-        setTabIndex={setTabIndex}
-        setSolvedIndex={setSolvedIndex}
-      />
-      <VoteFilterBtn
-        solvedIndex={solvedIndex}
-        setSolvedIndex={setSolvedIndex}
-      />
-      <VoteList tabIndex={tabIndex} solvedIndex={solvedIndex} />
+      <section>
+        <TabBar
+          tabIndex={tabIndex}
+          setTabIndex={setTabIndex}
+          setSolvedIndex={setSolvedIndex}
+        />
+        <VoteFilterBtn
+          solvedIndex={solvedIndex}
+          setSolvedIndex={setSolvedIndex}
+        />
+        <VoteList tabIndex={tabIndex} solvedIndex={solvedIndex} />
+      </section>
       <Link to="/question">
         <button className="btn absolute bottom-[41px] right-[16px] h-[50px] w-[50px] rounded-full border-0 bg-orange-500 p-0 hover:bg-orange-500">
           <IConEditWhite />
