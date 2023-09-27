@@ -51,6 +51,7 @@ body {
 
   background-color: #eee;
 
+  height: 100vh;
   height: -webkit-fill-available;
   height: fill-available;
 }
