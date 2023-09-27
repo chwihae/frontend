@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IConEditWhite } from '@/assets/icon_edit_white.svg';
 import Toast from '@components/common/Toast';
@@ -9,6 +9,7 @@ import VoteFilterBtn from '@components/Home/VoteFilterBtn';
 import VoteList from '@components/Home/VoteList';
 
 const Home = () => {
+  const navigate = useNavigate();
   const [tabIndex, setTabIndex] = useState(0);
   const [solvedIndex, setSolvedIndex] = useState(0);
   const [completedToast, setCompletedToast] = useState(false);
@@ -18,9 +19,9 @@ const Home = () => {
   useEffect(() => {
     if (location.state !== null) {
       location.state.toast && setCompletedToast(true);
-      location.state = {};
+      navigate('', { state: null });
     }
-  }, [location]);
+  }, [location, navigate]);
 
   return (
     <>
