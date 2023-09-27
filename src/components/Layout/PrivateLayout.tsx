@@ -7,17 +7,12 @@ const PrivateLayout = () => {
   const isLogin = !!localStorage.getItem('accessToken');
   const location = useLocation();
   const pathname = location.pathname;
-  const pathParts = pathname.split('/').slice(1);
 
   return (
     <>
-      {HEADERS.filter((header) => header.pathname === pathParts[0]).map(
-        (component) => (
-          <header key={component.pathname} className="h-12">
-            {component.component}
-          </header>
-        ),
-      )}
+      <header className="h-12">
+        {pathname === '/home' ? <HeaderHome /> : <HeaderBack />}
+      </header>
       {isLogin ? (
         <main className="hide-scroll h-[calc(100%-48px)] overflow-scroll">
           <Outlet />
@@ -30,10 +25,3 @@ const PrivateLayout = () => {
 };
 
 export default PrivateLayout;
-
-const HEADERS = [
-  { pathname: 'home', component: <HeaderHome /> },
-  { pathname: 'question', component: <HeaderBack /> },
-  { pathname: 'vote', component: <HeaderBack /> },
-  { pathname: 'mypage', component: <HeaderBack /> },
-];

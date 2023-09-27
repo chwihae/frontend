@@ -16,7 +16,7 @@ const HeaderHome = () => {
       </h1>
       <div className="flex text-sm font-bold">
         <label
-          htmlFor="save-modal"
+          htmlFor="tempt-modal"
           className="btn border-0 p-0"
           onClick={() => setIsModal(true)}
         >
@@ -26,7 +26,7 @@ const HeaderHome = () => {
           <IConProfile className="w-12" />
         </Link>
       </div>
-      {isModal && <ModalPreparing name="save-modal" />}
+      {isModal && <ModalPreparing name="tempt-modal" />}
     </div>
   );
 };
