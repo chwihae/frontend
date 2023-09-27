@@ -50,10 +50,6 @@ body {
   margin: 0;
 
   background-color: #eee;
-
-  height: 100vh;
-  height: -webkit-fill-available;
-  height: fill-available;
 }
 
 /* 프로그레스바 */
