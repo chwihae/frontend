@@ -50,6 +50,13 @@ body {
   margin: 0;
 
   background-color: #eee;
+  height: 100vh;
+}
+
+@supports (-webkit-touch-callout: none) {
+  body {
+    height: -webkit-fill-available;
+  }
 }
 
 /* 프로그레스바 */
