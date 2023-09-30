@@ -12,7 +12,7 @@ export const ROUTER = [
   },
   {
     title: '투표한 글',
-    href: 'voted',
+    href: 'participated',
   },
   {
     title: '저장한 글',

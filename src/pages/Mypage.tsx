@@ -6,6 +6,7 @@ import { ReactComponent as IConEditOrange } from '@/assets/icon_edit_orange.svg'
 import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.svg';
 import { ReactComponent as IConForwardWhite } from '@/assets/icon_forward_white.svg';
 import { ReactComponent as IConVoteOrange } from '@/assets/icon_vote_orange.svg';
+import { HELP } from '@/constants/mypage';
 import getLocalData from '@/utils/getLocalData';
 import LevelImage from '@components/common/LevelImage';
 import ModalPreparing from '@components/common/ModalPreparing';
@@ -47,19 +48,7 @@ const Mypage = () => {
         <ol className="p flex flex-col gap-8 border-b-[10px] border-bg px-4 pb-[40px]">
           {MYPOST.map((list) => (
             <li key={list.title}>
-              {list.type === 'VOTED' ? (
-                <label
-                  htmlFor="temp-modal"
-                  className="scoremedium16 flex cursor-pointer justify-between"
-                  onClick={() => setIsModal(true)}
-                >
-                  <div className="flex items-center gap-1 ">
-                    {list.icon}
-                    {list.title}
-                  </div>
-                  <IConForwardGray />
-                </label>
-              ) : (
+              {
                 <Link
                   to={list.href}
                   className="scoremedium16 flex cursor-pointer justify-between"
@@ -70,7 +59,7 @@ const Mypage = () => {
                   </div>
                   <IConForwardGray />
                 </Link>
-              )}
+              }
             </li>
           ))}
         </ol>
@@ -79,35 +68,27 @@ const Mypage = () => {
       <div className="relative flex-grow-0 px-4">
         <h2 className="scoremedium14 pb-14 pt-10 text-GS4">도움말</h2>
         <ol className="scoremedium16 mb-[313px] flex flex-col gap-8">
-          <li className="h-fit">
-            <label
-              htmlFor="temp-modal"
-              className="h-0 cursor-pointer border-0 p-0"
-              onClick={() => setIsModal(true)}
-            >
-              개인정보 처리방침
-            </label>
-          </li>
-          <li className="h-fit">
-            <label
-              htmlFor="temp-modal"
-              className="h-0 cursor-pointer border-0 p-0"
-              onClick={() => setIsModal(true)}
-            >
-              서비스 이용약관
-            </label>
-          </li>
+          {HELP.map((item) => (
+            <li key={item} className="h-fit">
+              <label
+                htmlFor="temp-modal"
+                className="h-0 cursor-pointer border-0 p-0"
+                onClick={() => setIsModal(true)}
+              >
+                {item}
+              </label>
+            </li>
+          ))}
         </ol>
         {/* 로그아웃 버튼 */}
-        <label
-          htmlFor="temp-modal"
-          className="scoremedium12 block cursor-pointer border-0 p-0 pb-10 text-center underline"
+        <button
+          type="button"
+          className="scoremedium12 mx-auto block cursor-pointer border-0 p-0 pb-10 text-center underline"
           onClick={handleSignOut}
         >
           로그아웃
-        </label>
+        </button>
       </div>
-
       {isModal && <ModalPreparing name="temp-modal" />}
     </div>
   );
@@ -126,7 +107,7 @@ const MYPOST = [
     type: 'VOTED',
     title: '투표한 글',
     icon: <IConVoteOrange />,
-    href: '/mypage/voted',
+    href: '/mypage/participated',
   },
   {
     type: 'BOOKMARKED',

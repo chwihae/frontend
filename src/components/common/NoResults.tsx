@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 
 import { ReactComponent as IConBookmarkGray } from '@/assets/icon_bookmark_gray.svg';
+import { MYNoResultText } from '@/constants/mypage';
 
 const NoResults = () => {
   const { pathname } = useLocation();
@@ -41,9 +42,3 @@ const NoResults = () => {
 };
 
 export default NoResults;
-
-const MYNoResultText = [
-  { href: '/mypage/posted', text: '등록된' },
-  { href: '/mypage/voted', text: '투표한' },
-  { href: '/mypage/saved', text: '저장된' },
-];

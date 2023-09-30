@@ -58,7 +58,7 @@ const router = createBrowserRouter([
             children: [
               { index: true, element: <Mypage /> },
               { path: 'written', element: <MyWritten /> },
-              { path: 'voted', element: <Myvoted /> },
+              { path: 'participated', element: <Myvoted /> },
               { path: 'saved', element: <Mysaved /> },
             ],
           },

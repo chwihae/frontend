@@ -45,7 +45,7 @@ const MYPOST = [
     type: 'VOTED',
     title: '내가 투표한 글',
     icon: <IConVoteOrange />,
-    href: '/mypage/voted',
+    href: '/mypage/participated',
   },
   {
     type: 'BOOKMARKED',
