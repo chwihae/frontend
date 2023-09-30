@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { addVote, cancelVote } from '@/apis/vote';
+import { addVote, bookmarked, cancelVote } from '@/apis/vote';
 import { ReactComponent as IConClockBlack } from '@/assets/icon_clock_black.svg';
 import { ReactComponent as IConViewCountGray } from '@/assets/icon_viewCount_gray.svg';
 import useTimer from '@/hooks/useTimer';
@@ -29,7 +29,7 @@ const Contents = ({ postId }: { postId: number }) => {
     },
   });
 
-  // 타이머
+  //타이머
   const future = pollPost?.closeAt || '';
   const timer = useTimer(future);
 
@@ -44,6 +44,19 @@ const Contents = ({ postId }: { postId: number }) => {
   const handleRevoteBtn = () => {
     deleteMutation();
   };
+
+  //북마크
+  const { mutate: bookmarkMutation } = useMutation({
+    mutationFn: () => bookmarked(postId),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['voteSingle', postId]);
+    },
+  });
+
+  const handleBookMarked = () => {
+    bookmarkMutation();
+  };
+
   return (
     <section className="scorebold16 mt-10 border-b-[10px] border-b-bg px-4 pb-6">
       {/* 글 내용 */}
@@ -143,7 +156,12 @@ const Contents = ({ postId }: { postId: number }) => {
             {!pollPost?.editable && (
               <button
                 type="button"
-                className="scoremedium12 flex gap-1 rounded-[37px] border-[1px] border-GS6 px-[9px] py-1 text-GS4"
+                className={`scoremedium12 flex gap-1 rounded-[37px] border-[1px]  px-[9px] py-1  ${
+                  pollPost.bookmarked
+                    ? 'border-prime1 text-prime1'
+                    : 'border-GS6 text-GS4'
+                }`}
+                onClick={handleBookMarked}
               >
                 <span>저장</span>
                 <span>{pollPost?.bookmarkCount}</span>

@@ -56,3 +56,15 @@ export const getComment = async (questionId: number) => {
     console.error(error);
   }
 };
+
+// 북마크 등록 및 해제
+export const bookmarked = async (questionId: number) => {
+  try {
+    const { data } = await auth.post(
+      `/api/v1/questions/${questionId}/bookmark`,
+    );
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
