@@ -81,7 +81,11 @@ body {
 }
 
 .resultsProgress::-webkit-progress-value {
-  background: #f57f17;
+  background: #cecece;
+}
+
+.resultsProgress_voted::-webkit-progress-value {
+  background: #ffca9c;
 }
 
 [type='radio'] {

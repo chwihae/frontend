@@ -125,6 +125,10 @@ const Contents = ({ postId }: { postId: number }) => {
                           pollPost?.status === 'COMPLETED'
                             ? 'cursor-no-drop'
                             : ''
+                        } ${
+                          pollOptions.votedOptionId === option.id
+                            ? 'resultsProgress_voted'
+                            : null
                         }`}
                       ></progress>
                       <span className="notosansmedium14 absolute right-4">
