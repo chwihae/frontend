@@ -15,7 +15,7 @@ export const addVote = async (questionId: number, optionId: number) => {
 };
 
 // 투표 취소
-export const deleteVote = async (
+export const cancelVote = async (
   questionId: number,
   optionId: number | undefined,
 ) => {
