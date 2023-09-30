@@ -50,11 +50,8 @@ body {
   margin: 0;
 
   background-color: #eee;
-  height: 100vh;
-}
 
-@supports (-webkit-touch-callout: none) {
-  body {
+  @supports (-webkit-touch-callout: none) {
     height: -webkit-fill-available;
   }
 }
