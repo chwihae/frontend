@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.svg';
 import type { IVoteAllContent } from '@/types/voteType';
-import Statistics from '@components/common/Statistics';
+import Statistics from '@components/Home/Statistics';
 
 type TPostList = {
   lists: IVoteAllContent[];

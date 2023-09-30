@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { addComment, getComment } from '@/apis/vote';
-import { ReactComponent as IConKebabGray } from '@/assets/icon_kebab.gray.svg';
+import { ReactComponent as IConKebabGray } from '@/assets/icon_kebab_gray.svg';
 import { ReactComponent as IConSendGray } from '@/assets/icon_send_gray.svg';
 import { ReactComponent as IConSendOrange } from '@/assets/icon_send_orange.svg';
 import type { ICommentRes } from '@/types/voteType';
@@ -41,7 +41,7 @@ const Comments = ({ postId }: { postId: number }) => {
   return (
     <>
       <section className="px-4 pb-[49px] pt-10">
-        <h3 className="mb-6">댓글 {commentList?.length}</h3>
+        <h3 className="scorebold16 mb-6">댓글 {commentList?.length}</h3>
         {/* 댓글목록 */}
         <ol className="grid gap-3">
           {commentList?.length !== 0 ? (

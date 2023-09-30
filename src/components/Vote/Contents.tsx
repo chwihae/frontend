@@ -3,9 +3,9 @@ import { useState } from 'react';
 
 import { addVote, cancelVote } from '@/apis/vote';
 import { ReactComponent as IConClockBlack } from '@/assets/icon_clock_black.svg';
+import { ReactComponent as IConViewCountGray } from '@/assets/icon_viewCount_gray.svg';
 import useTimer from '@/hooks/useTimer';
 import useVoteQuery from '@/hooks/useVoteQuery';
-import Statistics from '@components/common/Statistics';
 
 const Contents = ({ postId }: { postId: number }) => {
   const queryClient = useQueryClient();
@@ -130,16 +130,26 @@ const Contents = ({ postId }: { postId: number }) => {
         </ul>
         {pollOptions?.showVoteCount && (
           <div className="scoreregular12 mb-[46px] text-right text-GS4 ">
-            총 투표수 {pollPost?.voteCount} 개
+            투표 수 {pollPost?.voteCount}
           </div>
         )}
         {/* 통계치 */}
         {pollPost && (
-          <Statistics
-            viewCount={pollPost?.viewCount}
-            commentCount={pollPost?.commentCount}
-            bookmarkCount={pollPost?.bookmarkCount}
-          />
+          <div className="flex justify-between">
+            <p className="scoreregular12 flex items-center gap-1 text-GS4">
+              <IConViewCountGray />
+              {pollPost?.viewCount}명이 봤어요
+            </p>
+            {!pollPost?.editable && (
+              <button
+                type="button"
+                className="scoremedium12 flex gap-1 rounded-[37px] border-[1px] border-GS6 px-[9px] py-1 text-GS4"
+              >
+                <span>저장</span>
+                <span>{pollPost?.bookmarkCount}</span>
+              </button>
+            )}
+          </div>
         )}
       </div>
     </section>
