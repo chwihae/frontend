@@ -22,13 +22,13 @@ const FieldsOptionArray = () => {
               <input
                 type="text"
                 placeholder="항목 입력(20자 이내)"
-                className={`notosansmedium14 h-11 w-full rounded-[10px] border-[1px] border-GS6 px-5 py-[11px] outline-none placeholder:text-GS4 focus:border-prime1 ${`options.${index}.name`}`}
+                className={`notosansmedium14 h-11 w-full rounded-[10px] border-[1px] border-GS6 px-5 py-[11px] outline-none placeholder:text-GS4 focus:border-prime1`}
                 {...register(`options.${index}.name`, {
                   required: true,
                   maxLength: 20,
                 })}
               />
-              {index >= 2 ? (
+              {index >= 2 && (
                 <button
                   type="button"
                   className="absolute right-4 top-1/2 translate-y-[-50%]"
@@ -36,7 +36,7 @@ const FieldsOptionArray = () => {
                 >
                   <IConMinus />
                 </button>
-              ) : null}
+              )}
             </li>
           );
         })}

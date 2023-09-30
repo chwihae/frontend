@@ -21,9 +21,12 @@ type TMethods = IQuestion & UseFormProps;
 
 const QuestionCreate = () => {
   const navigate = useNavigate();
-  const [isCategoryModal, setIsCategoryModal] = useState(false);
+
   const [categoryName, setCategoryName] = useState('');
+  const [isCategoryModal, setIsCategoryModal] = useState(false);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+  const [writeToast, setWriteToast] = useState(false);
+  const [failedToast, setFailedToast] = useState(false);
 
   const defaultValues = {
     type: '',
@@ -34,27 +37,8 @@ const QuestionCreate = () => {
   };
   const methods = useForm<TMethods>({ defaultValues });
   const { register, watch, handleSubmit } = methods;
-  const watchFields = watch(['title', 'type', 'options', 'closeAt']);
+  const watchFields = watch(['title', 'type', 'options']);
   const IsOptionArrayEmptied = watchFields[2].some((item) => item.name === '');
-
-  const [writeToast, setWriteToast] = useState(false);
-  const [failedToast, setFailedToast] = useState(false);
-
-  const handleSubmitBtn = () => {
-    if (IsOptionArrayEmptied) setWriteToast(true);
-  };
-
-  const onSubmit = (data: IQuestion) => {
-    const fatchData = async () => {
-      const res = await addQuestion(data);
-      if (res?.code === 201) {
-        navigate('/home', { state: { id: res?.id, toast: true } });
-      } else {
-        setFailedToast(true);
-      }
-    };
-    fatchData();
-  };
 
   useEffect(() => {
     const findName = CATEGORYOPTIONS.find((tab) => tab.type === watchFields[1]);
@@ -62,18 +46,28 @@ const QuestionCreate = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watchFields[1]]);
 
+  const handleSubmitBtn = () => {
+    if (IsOptionArrayEmptied) setWriteToast(true);
+  };
+  const onSubmit = async (data: IQuestion) => {
+    const res = await addQuestion(data);
+    if (res?.code === 201) {
+      navigate('/home', { state: { id: res?.id, toast: true } });
+    } else {
+      setFailedToast(true);
+    }
+  };
+
   return (
     <FormProvider {...methods}>
       <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <label
             htmlFor="category-modal"
-            className="scoremedium16 flex h-12  cursor-pointer items-center justify-between px-4"
+            className="scoremedium16 flex h-12 cursor-pointer items-center justify-between px-4"
             onClick={() => setIsCategoryModal(true)}
           >
-            <span>
-              {watchFields[1] ? categoryName : '카테고리를 선택해주세요'}
-            </span>
+            <p>{watchFields[1] ? categoryName : '카테고리를 선택해주세요'}</p>
             <IConForwardBlack />
           </label>
         </fieldset>
@@ -105,7 +99,7 @@ const QuestionCreate = () => {
             <legend className="scorebold16">고민 기간 설정</legend>
             <button
               type="button"
-              className="relative"
+              className="relative cursor-pointer"
               onClick={() => setIsTooltipOpen((prev) => !prev)}
             >
               <IConInfo />
@@ -140,13 +134,13 @@ const QuestionCreate = () => {
         >
           등록하기
         </button>
+        {isCategoryModal && <FieldsCategory />}
         {writeToast && (
           <Toast setToast={setWriteToast} text="투표 선택지를 입력해야해요" />
         )}
         {failedToast && (
           <Toast setToast={setFailedToast} text="글 등록에 실패하였습니다" />
         )}
-        {isCategoryModal && <FieldsCategory />}
       </form>
     </FormProvider>
   );
