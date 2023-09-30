@@ -97,7 +97,7 @@ const Contents = ({ postId }: { postId: number }) => {
             .map((option) => (
               <li key={option.id}>
                 <label
-                  className={`notosansregular14 flex h-14 w-[343px]  items-center rounded-[10px] ${
+                  className={`notosansregular14 flex h-14 w-[343px] items-center rounded-[10px] ${
                     pollOptions?.showVoteCount === false
                       ? 'border-[1px] border-GS6 px-4'
                       : ''
@@ -115,23 +115,31 @@ const Contents = ({ postId }: { postId: number }) => {
                     disabled={pollOptions?.showVoteCount === true}
                     onChange={handleChooseOption}
                   />
-                  <span className="absolute left-4">{option.name}</span>
+                  <span
+                    className={`absolute left-4 ${
+                      pollOptions.votedOptionId === option.id && 'text-prime1'
+                    }`}
+                  >
+                    {option.name}
+                  </span>
                   {pollOptions?.showVoteCount && (
                     <>
                       <progress
                         max={pollPost?.voteCount}
                         value={option?.voteCount}
                         className={`resultsProgress h-14 w-[343px] ${
-                          pollPost?.status === 'COMPLETED'
-                            ? 'cursor-no-drop'
-                            : ''
+                          pollPost?.status === 'COMPLETED' && 'cursor-no-drop'
                         } ${
-                          pollOptions.votedOptionId === option.id
-                            ? 'resultsProgress_voted'
-                            : null
+                          pollOptions.votedOptionId === option.id &&
+                          'resultsProgress_voted'
                         }`}
                       ></progress>
-                      <span className="notosansmedium14 absolute right-4">
+                      <span
+                        className={`notosansmedium14 absolute right-4 ${
+                          pollOptions.votedOptionId === option.id &&
+                          'text-prime1'
+                        }`}
+                      >
                         {(pollPost &&
                           Math.round(
                             (option.voteCount / pollPost?.voteCount) * 100,
