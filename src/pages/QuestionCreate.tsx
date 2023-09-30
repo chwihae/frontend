@@ -22,11 +22,11 @@ type TMethods = IQuestion & UseFormProps;
 const QuestionCreate = () => {
   const navigate = useNavigate();
 
-  const [categoryName, setCategoryName] = useState('');
   const [isCategoryModal, setIsCategoryModal] = useState(false);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [writeToast, setWriteToast] = useState(false);
   const [failedToast, setFailedToast] = useState(false);
+  const [categoryName, setCategoryName] = useState('');
 
   const defaultValues = {
     type: '',
