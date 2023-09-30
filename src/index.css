@@ -51,7 +51,7 @@ body {
 
   background-color: #eee;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: hidden;
 
   @supports (-webkit-touch-callout: none) {
     height: -webkit-fill-available;
