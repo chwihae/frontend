@@ -13,10 +13,12 @@ const Contents = ({ postId }: { postId: number }) => {
   const { pollPost, pollOptions } = useVoteQuery(postId);
   const [optionId, setOptionId] = useState<number>(0);
 
+  // console.log(pollOptions);
+
   const { mutate: chooseOptMutation } = useMutation({
     mutationFn: () => addVote(postId, optionId),
     onSuccess: () => {
-      queryClient.invalidateQueries(['voteSingle', postId]);
+      // queryClient.invalidateQueries(['voteSingle', postId]);
       queryClient.invalidateQueries(['voteOptions', postId]);
     },
   });
@@ -24,10 +26,15 @@ const Contents = ({ postId }: { postId: number }) => {
   const { mutate: deleteMutation } = useMutation({
     mutationFn: () => cancelVote(postId, pollOptions?.votedOptionId),
     onSuccess: () => {
-      queryClient.invalidateQueries(['voteSingle', postId]);
+      // queryClient.invalidateQueries(['voteSingle', postId]);
       queryClient.invalidateQueries(['voteOptions', postId]);
     },
   });
+
+  const sumOptionVoteCount = pollOptions?.options
+    .map((item) => item.voteCount)
+    .reduce((prev, curr) => prev + curr, 0);
+  console.log(sumOptionVoteCount);
 
   //타이머
   const future = pollPost?.closeAt || '';
@@ -125,7 +132,7 @@ const Contents = ({ postId }: { postId: number }) => {
                   {pollOptions?.showVoteCount && (
                     <>
                       <progress
-                        max={pollPost?.voteCount}
+                        max={sumOptionVoteCount}
                         value={option?.voteCount}
                         className={`resultsProgress h-14 w-[343px] ${
                           pollPost?.status === 'COMPLETED' && 'cursor-no-drop'
@@ -140,9 +147,9 @@ const Contents = ({ postId }: { postId: number }) => {
                           'text-prime1'
                         }`}
                       >
-                        {(pollPost &&
+                        {(sumOptionVoteCount &&
                           Math.round(
-                            (option.voteCount / pollPost?.voteCount) * 100,
+                            (option.voteCount / sumOptionVoteCount) * 100,
                           )) ||
                           0}
                         %
@@ -155,7 +162,7 @@ const Contents = ({ postId }: { postId: number }) => {
         </ul>
         {pollOptions?.showVoteCount && (
           <div className="scoreregular12 mb-[46px] text-right text-GS4 ">
-            투표 수 {pollPost?.voteCount}
+            투표 수 {sumOptionVoteCount}
           </div>
         )}
         {/* 통계치 */}
