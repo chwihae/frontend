@@ -1,10 +1,21 @@
+import { useEffect, useState } from 'react';
+
+import { getUserLevel } from '@/apis/auth';
 import { ReactComponent as IConCommentOrange } from '@/assets/icon_comment_orange.svg';
 import { ReactComponent as IConVoteOrange } from '@/assets/icon_voterate_orange.svg';
-import useUserLevelQuery from '@/hooks/useUserLevelQuery';
+import type { IUserLevel } from '@/types/authType';
 import LevelImage from '@components/common/LevelImage';
 
 const Level = () => {
-  const { userLevel } = useUserLevelQuery();
+  const [userLevel, setUserLevel] = useState<IUserLevel>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getUserLevel();
+      setUserLevel(res);
+    };
+    fetchData();
+  }, []);
 
   const calcRate = (count: number | undefined, goal: number | undefined) => {
     if (count !== undefined && goal !== undefined) {
