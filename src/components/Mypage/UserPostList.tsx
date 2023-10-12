@@ -5,28 +5,41 @@ import { getUserPostInfo } from '@/apis/mypage';
 import { ReactComponent as IConBookmarkOrange } from '@/assets/icon_bookmark_orange.svg';
 import { ReactComponent as IConEditOrange } from '@/assets/icon_edit_orange.svg';
 import { ReactComponent as IConVoteOrange } from '@/assets/icon_vote_orange.svg';
+import type { IVoteAllContent } from '@/types/voteType';
 import PostList from '@components/common/PostList';
 
 const UserPostList = () => {
   const { pathname } = useLocation();
-  const [lists, setLists] = useState([]);
-  const [currentpage, setPage] = useState(0);
+
+  const [currentpage, setCurrentPage] = useState<number>(0);
+  const [lists, setLists] = useState<IVoteAllContent[]>([]);
+
+  const fetchData = async (page?: number) => {
+    // type
+    const findType = MYPOST.find((item) => item.href === pathname);
+    const type = findType?.type;
+
+    // page
+    if (page === undefined) page = 0;
+    const res = await getUserPostInfo({ type, page });
+
+    if (page === 0) {
+      setLists(res.content);
+    } else {
+      setLists((prevLists) => [...prevLists, ...res.content]);
+    }
+    setCurrentPage(res.number);
+  };
 
   useEffect(() => {
-    const fetchData = async (path: string) => {
-      const findType = MYPOST.find((item) => item.href === path);
-      const type = findType?.type;
-      const res = await getUserPostInfo({ type, page: currentpage });
-      setLists(res.content);
-    };
-    fetchData(pathname);
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   return (
     <>
       {lists && (
-        <PostList lists={lists} fetchFn={setPage} currentPage={currentpage} />
+        <PostList lists={lists} fetchFn={fetchData} currentPage={currentpage} />
       )}
     </>
   );
