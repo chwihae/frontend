@@ -1,8 +1,7 @@
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IConEditWhite } from '@/assets/icon_edit_white.svg';
-import Spinner from '@components/common/Spinner';
 import Toast from '@components/common/Toast';
 import Level from '@components/Home/Level';
 import TabBar from '@components/Home/TabBar';
@@ -27,9 +26,7 @@ const Home = () => {
 
   return (
     <>
-      <Suspense fallback={<Spinner />}>
-        <Level />
-      </Suspense>
+      <Level />
       <section>
         <TabBar
           tabIndex={tabIndex}

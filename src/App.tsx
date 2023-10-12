@@ -5,11 +5,7 @@ import { RouterProvider } from 'react-router-dom';
 import router from './router';
 import './index.css';
 
-const queryClient = new QueryClient({
-  //   defaultOptions: {
-  //     queries: { suspense: true, retry: false },
-  //   },
-});
+const queryClient = new QueryClient({});
 
 const App = () => {
   return (
