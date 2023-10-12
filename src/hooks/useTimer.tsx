@@ -6,13 +6,23 @@ const CountdownTimer = (time: string) => {
     const now = new Date();
     if (future) {
       const diff = future.getTime() - now.getTime();
-      const hh = Math.floor(diff / (1000 * 60 * 60));
+      if (diff < 0) {
+        return '0일 00:00:00';
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hh = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const mm = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const ss = Math.floor((diff % (1000 * 60)) / 1000);
-      if (hh < 0 || mm < 0 || ss < 0) {
-        return '00:00:00';
+
+      if (days === 0) {
+        return `${hh.toString().padStart(2, '0')}:${mm
+          .toString()
+          .padStart(2, '0')}:${ss.toString().padStart(2, '0')}`;
       } else {
-        return `${hh}:${mm}:${ss}`;
+        return `${days}일 ${hh.toString().padStart(2, '0')}:${mm
+          .toString()
+          .padStart(2, '0')}:${ss.toString().padStart(2, '0')}`;
       }
     }
   };

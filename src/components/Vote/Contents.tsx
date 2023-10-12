@@ -76,10 +76,12 @@ const Contents = ({ postId }: { postId: number }) => {
       {/* 투표바, 수치 */}
       <div>
         <div className="scoremedium12 mb-3 flex items-center justify-between text-GS3 ">
-          <div className="flex items-center gap-1">
-            <IConClockBlack />
-            <span className="scoremedium12">{timer} 남음</span>
-          </div>
+          {pollPost?.status === 'IN_PROGRESS' && (
+            <div className="flex items-center gap-1">
+              <IConClockBlack />
+              <span className="scoremedium12">{timer} 남음</span>
+            </div>
+          )}
           {pollPost?.editable === false &&
             pollPost?.status === 'IN_PROGRESS' &&
             pollOptions?.showVoteCount && (
