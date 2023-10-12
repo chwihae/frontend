@@ -25,8 +25,6 @@ const PostList = ({ lists, fetchFn, currentPage }: TPostList) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
-  console.log(lists);
-
   return (
     <ol className="flex h-[calc(100%-48px)] flex-col">
       {lists && lists.length !== 0 ? (

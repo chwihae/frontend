@@ -6,7 +6,6 @@ import { ReactComponent as IConVoteGray } from '@/assets/icon_vote_gray.svg';
 
 const NoResults = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
 
   const text = MYNoResultText.find((items) => items.href === pathname);
 

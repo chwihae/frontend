@@ -34,7 +34,6 @@ const Contents = ({ postId }: { postId: number }) => {
   const sumOptionVoteCount = pollOptions?.options
     .map((item) => item.voteCount)
     .reduce((prev, curr) => prev + curr, 0);
-  console.log(sumOptionVoteCount);
 
   //타이머
   const future = pollPost?.closeAt || '';
