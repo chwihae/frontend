@@ -12,6 +12,7 @@ export const getUserPostInfo = async ({
     const { data } = await auth.get(
       `/api/v1/users/questions?type=${type}&page=${page}&size=${size}`,
     );
+    console.log(data);
     return data.data;
   } catch (error) {
     console.error(error);

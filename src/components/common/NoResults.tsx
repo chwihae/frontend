@@ -1,7 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
 
 import { ReactComponent as IConBookmarkGray } from '@/assets/icon_bookmark_gray.svg';
-import { MYNoResultText } from '@/constants/mypage';
+import { ReactComponent as IConEditGray } from '@/assets/icon_edit_gray.svg';
+import { ReactComponent as IConVoteGray } from '@/assets/icon_vote_gray.svg';
 
 const NoResults = () => {
   const { pathname } = useLocation();
@@ -21,18 +22,17 @@ const NoResults = () => {
             다른 별랑이들이 결정을 도와줄 거예요.
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-3">
-            <IConBookmarkGray className="h-[150px] w-[150px]" />
+          <div className="flex flex-col items-center justify-center gap-5">
+            <div>{text?.icon}</div>
             <div className="scorebold16">{text?.text} 글이 텅 비었어요!</div>
-            <div className="scoremedium12 mb-4 text-GS4">
-              투표할 수 있는 페이지에서 <br /> 북마크 버튼을 누르시면 <br />{' '}
-              더욱 편리하게 이용하실 수 있어요!
+            <div className="scoremedium12 whitespace-pre-wrap text-GS4">
+              {text?.content}
             </div>
             <Link
-              to="/home"
-              className={`scoremedium16 rounded-xl bg-prime1 px-10 py-[10px] text-white`}
+              to={text?.btnHref as string}
+              className={`scoremedium16 mt-5 rounded-xl bg-prime1 px-10 py-[10px] text-white`}
             >
-              글 보러가기
+              {text?.btnTitle}
             </Link>
           </div>
         )}
@@ -42,3 +42,30 @@ const NoResults = () => {
 };
 
 export default NoResults;
+
+export const MYNoResultText = [
+  {
+    href: '/mypage/written',
+    text: '작성한',
+    content: `글을 작성하면\n여기에서 모아볼 수 있어요!`,
+    icon: <IConEditGray className="h-[120px] w-[120px]" />,
+    btnTitle: '글 작성하기',
+    btnHref: '/question',
+  },
+  {
+    href: '/mypage/participated',
+    text: '투표한',
+    content: `투표페이지에서\n질문에 투표하면\n여기에서 모아볼 수 있어요!`,
+    icon: <IConVoteGray className="h-[120px] w-[120px]" />,
+    btnTitle: '글 보러가기',
+    btnHref: '/home',
+  },
+  {
+    href: '/mypage/saved',
+    text: '저장된',
+    content: `투표페이지에서\n북마크 버튼을 누르시면\n더욱 편리하게 이용하실 수 있어요!`,
+    icon: <IConBookmarkGray className="h-[120px] w-[120px]" />,
+    btnTitle: '글 보러가기',
+    btnHref: '/home',
+  },
+];

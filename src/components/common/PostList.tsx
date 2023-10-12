@@ -6,6 +6,8 @@ import { ReactComponent as IConForwardGray } from '@/assets/icon_forward_gray.sv
 import type { IVoteAllContent } from '@/types/voteType';
 import Statistics from '@components/Home/Statistics';
 
+import NoResults from './NoResults';
+
 type TPostList = {
   lists: IVoteAllContent[];
   fetchFn: (page: number) => void;
@@ -61,7 +63,7 @@ const PostList = ({ lists, fetchFn, currentPage }: TPostList) => {
           <div ref={ref}></div>
         </>
       ) : (
-        <></>
+        <NoResults />
       )}
     </ol>
   );
