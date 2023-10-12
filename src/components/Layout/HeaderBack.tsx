@@ -12,8 +12,9 @@ const HeaderBack = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const findTitle = ROUTER.find((page) => pathname.includes(page.href));
+  const isVotePage = findTitle?.href === 'vote';
   const isQuestionPage = findTitle?.href === 'question';
-  const [isEditable, setIsEditable] = useState();
+  const [isEditable, setIsEditable] = useState(false);
 
   const params = useParams();
   const postId = Number(params.id);
@@ -25,8 +26,9 @@ const HeaderBack = () => {
         setIsEditable(res.editable);
       }
     };
-    fetchData();
-  });
+    isVotePage ? fetchData() : setIsEditable(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   const handleBackBtn = () => {
     if (
