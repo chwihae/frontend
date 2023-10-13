@@ -6,12 +6,14 @@ import { ReactComponent as IConClockBlack } from '@/assets/icon_clock_black.svg'
 import { ReactComponent as IConViewCountGray } from '@/assets/icon_viewCount_gray.svg';
 import useTimer from '@/hooks/useTimer';
 import useVoteQuery from '@/hooks/useVoteQuery';
+import Toast from '@components/common/Toast';
 
 const Contents = ({ postId }: { postId: number }) => {
   const queryClient = useQueryClient();
 
   const { pollPost, pollOptions } = useVoteQuery(postId);
   const [optionId, setOptionId] = useState<number>(0);
+  const [toast, setToast] = useState<boolean>(false);
 
   // console.log(pollOptions);
 
@@ -41,10 +43,16 @@ const Contents = ({ postId }: { postId: number }) => {
 
   //옵션선택
   const handleChooseOption = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (pollPost?.editable) {
+      return setToast(true);
+    }
+
     const id = Number(e.target.value);
     setOptionId(id);
     chooseOptMutation();
   };
+
+  // console.log(pollOptions);
 
   //재투표
   const handleRevoteBtn = () => {
@@ -105,14 +113,10 @@ const Contents = ({ postId }: { postId: number }) => {
             .map((option) => (
               <li key={option.id}>
                 <label
-                  className={`notosansregular14 flex h-14 w-[343px] items-center rounded-[10px] ${
+                  className={`notosansregular14 flex h-14 w-[343px] cursor-pointer items-center rounded-[10px] ${
                     pollOptions?.showVoteCount === false
                       ? 'border-[1px] border-GS6 px-4'
                       : ''
-                  }${
-                    pollOptions?.votedOptionId !== null || pollPost?.editable
-                      ? 'cursor-no-drop'
-                      : 'cursor-pointer'
                   }`}
                 >
                   <input
@@ -120,7 +124,7 @@ const Contents = ({ postId }: { postId: number }) => {
                     name={`${postId}-option`}
                     value={option.id}
                     className="hidden"
-                    disabled={pollOptions?.showVoteCount === true}
+                    disabled={pollOptions?.votedOptionId !== null}
                     onChange={handleChooseOption}
                   />
                   <span
@@ -190,6 +194,9 @@ const Contents = ({ postId }: { postId: number }) => {
           </div>
         )}
       </div>
+      {toast && (
+        <Toast text="내가 쓴 글에는 투표할 수 없어요" setToast={setToast} />
+      )}
     </section>
   );
 };
