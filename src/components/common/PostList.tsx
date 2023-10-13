@@ -21,9 +21,12 @@ const PostList = ({ lists, fetchFn, currentPage }: TPostList) => {
   useEffect(() => {
     if (inView) {
       fetchFn(currentPage + 1);
+      console.log('scroll!');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
+
+  console.log(inView);
 
   return (
     <ol className="flex h-[calc(100%-48px)] flex-col">
@@ -58,7 +61,7 @@ const PostList = ({ lists, fetchFn, currentPage }: TPostList) => {
               </Link>
             </li>
           ))}
-          <div ref={ref}></div>
+          <div ref={ref} className="h-1"></div>
         </>
       ) : (
         <NoResults />
