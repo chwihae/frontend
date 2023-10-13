@@ -35,9 +35,12 @@ const Comments = ({ postId }: { postId: number }) => {
 
   const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addCommentMutate({ questionId: postId, comment: inputComment });
-    setInputComment('');
+    if (inputComment !== '') {
+      addCommentMutate({ questionId: postId, comment: inputComment });
+      setInputComment('');
+    }
   };
+
   return (
     <>
       <section className="px-4 pb-[49px] pt-10">
