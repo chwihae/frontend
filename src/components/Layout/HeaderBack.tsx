@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { getVoteSingle } from '@/apis/question';
 import { ReactComponent as IConBackBlack } from '@/assets/icon_back_black.svg';
 import { ReactComponent as IConCloseBlack } from '@/assets/icon_close_black.svg';
 import { ReactComponent as IConKebabBlack } from '@/assets/icon_kebab_black.svg';
 import { ROUTER } from '@/constants/latyout';
+import useVoteQuery from '@/hooks/useVoteQuery';
 
 const HeaderBack = () => {
   const navigate = useNavigate();
@@ -14,21 +13,11 @@ const HeaderBack = () => {
   const findTitle = ROUTER.find((page) => pathname.includes(page.href));
   const isVotePage = findTitle?.href === 'vote';
   const isQuestionPage = findTitle?.href === 'question';
-  const [isEditable, setIsEditable] = useState(false);
 
   const params = useParams();
   const postId = Number(params.id);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (postId) {
-        const res = await getVoteSingle(postId);
-        setIsEditable(res.editable);
-      }
-    };
-    isVotePage ? fetchData() : setIsEditable(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  const { pollPost } = useVoteQuery(postId);
 
   const handleBackBtn = () => {
     if (
@@ -52,7 +41,7 @@ const HeaderBack = () => {
       <h1 className="scorebold18 absolute left-1/2 translate-x-[-50%]">
         {findTitle?.title}
       </h1>
-      {isEditable && (
+      {isVotePage && pollPost?.editable && (
         <button>
           <IConKebabBlack />
         </button>
