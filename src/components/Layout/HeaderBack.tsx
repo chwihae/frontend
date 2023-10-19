@@ -1,10 +1,11 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IConBackBlack } from '@/assets/icon_back_black.svg';
 import { ReactComponent as IConCloseBlack } from '@/assets/icon_close_black.svg';
 import { ReactComponent as IConKebabBlack } from '@/assets/icon_kebab_black.svg';
 import { ROUTER } from '@/constants/latyout';
 import { useIsBottomSheestContext } from '@/contexts/IsBottomSheetProvider';
+import useGetPostId from '@/hooks/useGetPostId';
 import useVoteQuery from '@/hooks/useVoteQuery';
 
 const HeaderBack = () => {
@@ -16,8 +17,7 @@ const HeaderBack = () => {
   const isQuestionPage = findTitle?.href === 'question';
   const { setIsBottomSheetOpen } = useIsBottomSheestContext();
 
-  const params = useParams();
-  const postId = Number(params.id);
+  const { postId } = useGetPostId();
 
   const { pollPost } = useVoteQuery(postId);
 
