@@ -22,6 +22,16 @@ export const addQuestion = async (questions: IQuestion) => {
   }
 };
 
+// 질문 삭제
+export const deleteQuestion = async (id: number) => {
+  try {
+    const { data } = await auth.delete(`/api/v1/questions/${id}`);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // 투표 전체조회
 export const getVoteAll = async ({
   type = '',
