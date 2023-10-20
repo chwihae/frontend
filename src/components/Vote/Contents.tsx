@@ -204,7 +204,7 @@ const Contents = ({ postId }: { postId: number }) => {
       )}
       {isBottomSheetOpen && (
         <BottomSheet
-          id="voteEditable"
+          modalId="bottomSheet-voteEdit-modal"
           isInProgress={pollPost?.status === 'IN_PROGRESS'}
           listArray={['글 수정', '글 삭제']}
         />

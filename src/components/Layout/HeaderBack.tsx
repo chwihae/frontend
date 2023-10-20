@@ -49,7 +49,7 @@ const HeaderBack = () => {
       </h1>
       {isVotePage && pollPost?.editable && (
         <label
-          htmlFor="bottomSheet-modal"
+          htmlFor="bottomSheet-voteEdit-modal"
           className="scoremedium16 flex h-12 cursor-pointer items-center justify-between"
           onClick={handleKebabBtn}
         >

@@ -5,12 +5,12 @@ import { useIsBottomSheestContext } from '@/contexts/IsBottomSheetProvider';
 import useGetPostId from '@/hooks/useGetPostId';
 
 interface IBottomSheest {
-  id: string;
-  isInProgress: boolean;
+  modalId: string;
+  isInProgress?: boolean;
   listArray: string[];
 }
 
-const BottomSheet = ({ id, isInProgress, listArray }: IBottomSheest) => {
+const BottomSheet = ({ modalId, isInProgress, listArray }: IBottomSheest) => {
   const navigate = useNavigate();
   const { postId } = useGetPostId();
   const { setIsBottomSheetOpen } = useIsBottomSheestContext();
@@ -32,7 +32,7 @@ const BottomSheet = ({ id, isInProgress, listArray }: IBottomSheest) => {
 
   return (
     <>
-      <input type="checkbox" id="bottomSheet-modal" className="modal-toggle" />
+      <input type="checkbox" id={modalId} className="modal-toggle" />
       <div className="modal z-10">
         <div className="absolute bottom-0 flex w-[375px] flex-col rounded-t-xl bg-white px-4 pb-[18px] pt-5">
           <ul className="scoremedium16 text-GS1">
@@ -42,7 +42,7 @@ const BottomSheet = ({ id, isInProgress, listArray }: IBottomSheest) => {
                   <button
                     type="button"
                     onClick={
-                      id === 'voteEditable'
+                      modalId !== undefined && modalId.includes('voteEdit')
                         ? handleVoteEditableKebab
                         : undefined
                     }
@@ -53,7 +53,7 @@ const BottomSheet = ({ id, isInProgress, listArray }: IBottomSheest) => {
               ),
             )}
             <li className="modal-action mt-0 justify-normal py-2 text-GS4">
-              <label htmlFor="bottomSheet-modal" className="cursor-pointer">
+              <label htmlFor={modalId} className="cursor-pointer">
                 취소
               </label>
             </li>
