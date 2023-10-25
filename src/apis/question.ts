@@ -9,12 +9,12 @@ export const addQuestion = async (questions: IQuestion) => {
   try {
     const { closeAt, ...rest } = questions;
 
-    const converData = {
+    const convertData = {
       closeAt: nowIsoTime(closeAt),
       ...rest,
     };
 
-    const { data } = await auth.post('/api/v1/questions', converData);
+    const { data } = await auth.post('/api/v1/questions', convertData);
 
     return data;
   } catch (error) {

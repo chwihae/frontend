@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-import { IsBottomSheestProvider } from '@/contexts/IsBottomSheetProvider';
+import { IsBottomSheetProvider } from '@/contexts/IsBottomSheetProvider';
 import HeaderBack from '@components/Layout/HeaderBack';
 import HeaderHome from '@components/Layout/HeaderHome';
 
@@ -11,7 +11,7 @@ const PrivateLayout = () => {
 
   return (
     <>
-      <IsBottomSheestProvider>
+      <IsBottomSheetProvider>
         <header className="h-12">
           {pathname === '/home' ? <HeaderHome /> : <HeaderBack />}
         </header>
@@ -22,7 +22,7 @@ const PrivateLayout = () => {
         ) : (
           <Navigate to="/intro" />
         )}
-      </IsBottomSheestProvider>
+      </IsBottomSheetProvider>
     </>
   );
 };

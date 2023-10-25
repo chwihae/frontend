@@ -4,7 +4,7 @@ import { ReactComponent as IConBackBlack } from '@/assets/icon_back_black.svg';
 import { ReactComponent as IConCloseBlack } from '@/assets/icon_close_black.svg';
 import { ReactComponent as IConKebabBlack } from '@/assets/icon_kebab_black.svg';
 import { ROUTER } from '@/constants/latyout';
-import { useIsBottomSheestContext } from '@/contexts/IsBottomSheetProvider';
+import { useIsBottomSheetContext } from '@/contexts/IsBottomSheetProvider';
 import useGetPostId from '@/hooks/useGetPostId';
 import useVoteQuery from '@/hooks/useVoteQuery';
 
@@ -15,7 +15,7 @@ const HeaderBack = () => {
   const findTitle = ROUTER.find((page) => pathname.includes(page.href));
   const isVotePage = findTitle?.href === 'vote';
   const isQuestionPage = findTitle?.href === 'question';
-  const { setIsBottomSheetOpen } = useIsBottomSheestContext();
+  const { setIsBottomSheetOpen } = useIsBottomSheetContext();
 
   const { postId } = useGetPostId();
 

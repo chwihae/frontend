@@ -15,7 +15,7 @@ const Home = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [solvedIndex, setSolvedIndex] = useState(0);
   const [completedToast, setCompletedToast] = useState(false);
-  const [toastMeassage, setToastMessage] = useState('');
+  const [toastMessage, setToastMessage] = useState('');
 
   // 질문작성에서 넘어올 때, 등록 완료 토스트
   useEffect(() => {
@@ -47,7 +47,7 @@ const Home = () => {
         </button>
       </Link>
       {completedToast && (
-        <Toast setToast={setCompletedToast} text={toastMeassage} />
+        <Toast setToast={setCompletedToast} text={toastMessage} />
       )}
     </>
   );

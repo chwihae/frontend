@@ -12,11 +12,7 @@ const initialContext: IContextType = {
 
 const IsBottomSheetContext = createContext(initialContext);
 
-const IsBottomSheestProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const IsBottomSheetProvider = ({ children }: { children: React.ReactNode }) => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState<boolean>(false);
 
   return (
@@ -28,11 +24,11 @@ const IsBottomSheestProvider = ({
   );
 };
 
-const useIsBottomSheestContext = () => {
+const useIsBottomSheetContext = () => {
   const { isBottomSheetOpen, setIsBottomSheetOpen } =
     useContext(IsBottomSheetContext);
   return { isBottomSheetOpen, setIsBottomSheetOpen };
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export { IsBottomSheestProvider, useIsBottomSheestContext };
+export { IsBottomSheetProvider, useIsBottomSheetContext };

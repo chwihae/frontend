@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { addVote, bookmarked, cancelVote } from '@/apis/vote';
 import { ReactComponent as IConClockBlack } from '@/assets/icon_clock_black.svg';
 import { ReactComponent as IConViewCountGray } from '@/assets/icon_viewCount_gray.svg';
-import { useIsBottomSheestContext } from '@/contexts/IsBottomSheetProvider';
+import { useIsBottomSheetContext } from '@/contexts/IsBottomSheetProvider';
 import useTimer from '@/hooks/useTimer';
 import useVoteQuery from '@/hooks/useVoteQuery';
 import BottomSheet from '@components/common/BottomSheet';
@@ -74,7 +74,7 @@ const Contents = ({ postId }: { postId: number }) => {
   };
 
   // 투표삭제
-  const { isBottomSheetOpen } = useIsBottomSheestContext();
+  const { isBottomSheetOpen } = useIsBottomSheetContext();
 
   return (
     <section className="scorebold16 mt-10 border-b-[10px] border-b-bg px-4 pb-6">
