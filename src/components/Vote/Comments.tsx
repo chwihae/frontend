@@ -7,6 +7,7 @@ import { useIsBottomSheetContext } from '@/contexts/IsBottomSheetProvider';
 import useAddCommentMutation from '@/hooks/comment/useAddCommentMutation';
 import useGetCommentQuery from '@/hooks/comment/useGetCommentQuery';
 import BottomSheet from '@components/common/BottomSheet';
+import Toast from '@components/common/Toast';
 
 const Comments = ({ postId }: { postId: number }) => {
   //댓글
@@ -14,6 +15,7 @@ const Comments = ({ postId }: { postId: number }) => {
   const [commentId, setCommentId] = useState(0);
   const commentList = useGetCommentQuery(postId);
   const addCommentMutate = useAddCommentMutation();
+  const [toastDeleteComment, setToastDeleteComment] = useState<boolean>(false);
 
   const handleInputCommentChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -97,11 +99,15 @@ const Comments = ({ postId }: { postId: number }) => {
             {inputComment === '' ? <IConSendGray /> : <IConSendOrange />}
           </button>
         </form>
+        {toastDeleteComment && (
+          <Toast text="댓글이 삭제됐습니다" setToast={setToastDeleteComment} />
+        )}
         {isBottomSheetOpen && (
           <BottomSheet
             modalId="bottomSheet-commentEdit-modal"
             commentId={commentId}
             listArray={['댓글 수정', '댓글 삭제']}
+            setToast={setToastDeleteComment}
             // content={inputComment}
           />
         )}

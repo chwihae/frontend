@@ -15,7 +15,7 @@ const Contents = ({ postId }: { postId: number }) => {
 
   const { pollPost, pollOptions } = useVoteQuery(postId);
   const [optionId, setOptionId] = useState<number>(0);
-  const [toast, setToast] = useState<boolean>(false);
+  const [toastDenied, setToastDenied] = useState<boolean>(false);
 
   // console.log(pollOptions);
 
@@ -46,7 +46,7 @@ const Contents = ({ postId }: { postId: number }) => {
   //옵션선택
   const handleChooseOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (pollPost?.editable) {
-      return setToast(true);
+      return setToastDenied(true);
     }
 
     const id = Number(e.target.value);
@@ -199,8 +199,11 @@ const Contents = ({ postId }: { postId: number }) => {
           </div>
         )}
       </div>
-      {toast && (
-        <Toast text="내가 쓴 글에는 투표할 수 없어요" setToast={setToast} />
+      {toastDenied && (
+        <Toast
+          text="내가 쓴 글에는 투표할 수 없어요"
+          setToast={setToastDenied}
+        />
       )}
       {isBottomSheetOpen && (
         <BottomSheet

@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { deleteQuestion } from '@/apis/question';
@@ -6,6 +7,7 @@ import useDeleteCommentMutation from '@/hooks/comment/useDeleteCommentMutation';
 import useGetPostId from '@/hooks/useGetPostId';
 
 interface IBottomSheet {
+  setToast?: Dispatch<SetStateAction<boolean>>;
   modalId: string;
   isInProgress?: boolean;
   commentId?: number;
@@ -13,6 +15,7 @@ interface IBottomSheet {
 }
 
 const BottomSheet = ({
+  setToast,
   modalId,
   isInProgress,
   commentId,
@@ -60,6 +63,8 @@ const BottomSheet = ({
           questionId: postId,
           commentId,
         });
+
+        setToast && setToast(true);
         setIsBottomSheetOpen(false);
       }
     }
