@@ -3,13 +3,12 @@ import { useState } from 'react';
 import { ReactComponent as IConKebabGray } from '@/assets/icon_kebab_gray.svg';
 import { ReactComponent as IConSendGray } from '@/assets/icon_send_gray.svg';
 import { ReactComponent as IConSendOrange } from '@/assets/icon_send_orange.svg';
+import { useIsBottomSheetContext } from '@/contexts/IsBottomSheetProvider';
 import useAddCommentMutation from '@/hooks/comment/useAddCommentMutation';
 import useGetCommentQuery from '@/hooks/comment/useGetCommentQuery';
-import ModalPreparing from '@components/common/ModalPreparing';
+import BottomSheet from '@components/common/BottomSheet';
 
 const Comments = ({ postId }: { postId: number }) => {
-  const [isModal, setIsModal] = useState(false);
-
   //댓글
   const [inputComment, setInputComment] = useState('');
   const [commentId, setCommentId] = useState(0);
@@ -30,6 +29,14 @@ const Comments = ({ postId }: { postId: number }) => {
     }
   };
 
+  // 댓글 삭제
+  const { setIsBottomSheetOpen } = useIsBottomSheetContext();
+  const handleKebabBtn = (id: number) => {
+    setIsBottomSheetOpen(true);
+    setCommentId(id);
+  };
+  const { isBottomSheetOpen } = useIsBottomSheetContext();
+
   return (
     <>
       <section className="px-4 pb-[49px] pt-10">
@@ -44,9 +51,9 @@ const Comments = ({ postId }: { postId: number }) => {
                   <div className="notosansmedium16 mb-3 flex items-center justify-between">
                     <span>{comment?.commenterAlias}</span>
                     <label
-                      htmlFor="temp-modal"
-                      className="cursor-pointer"
-                      onClick={() => setIsModal(true)}
+                      htmlFor="bottomSheet-commentEdit-modal"
+                      className="scoremedium16 flex h-12 cursor-pointer items-center justify-between"
+                      onClick={() => handleKebabBtn(comment?.id)}
                     >
                       <IConKebabGray />
                     </label>
@@ -83,8 +90,14 @@ const Comments = ({ postId }: { postId: number }) => {
             {inputComment === '' ? <IConSendGray /> : <IConSendOrange />}
           </button>
         </form>
+        {isBottomSheetOpen && (
+          <BottomSheet
+            modalId="bottomSheet-commentEdit-modal"
+            commentId={commentId}
+            listArray={['댓글 수정', '댓글 삭제']}
+          />
+        )}
       </section>
-      {isModal && <ModalPreparing name="temp-modal" />}
     </>
   );
 };
