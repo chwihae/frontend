@@ -29,6 +29,8 @@ const Comments = ({ postId }: { postId: number }) => {
     }
   };
 
+  console.log(commentList);
+
   // 댓글 삭제
   const { setIsBottomSheetOpen } = useIsBottomSheetContext();
   const handleKebabBtn = (id: number) => {
@@ -39,7 +41,7 @@ const Comments = ({ postId }: { postId: number }) => {
 
   return (
     <>
-      <section className="px-4 pb-[49px] pt-10">
+      <section className="px-4 pb-[52px] pt-12">
         <h3 className="scorebold16 mb-6">댓글 {commentList?.length}</h3>
         {/* 댓글목록 */}
         <ol className="grid gap-3">
@@ -47,16 +49,21 @@ const Comments = ({ postId }: { postId: number }) => {
             commentList
               ?.sort((a, b) => a.id - b.id)
               .map((comment) => (
-                <li key={comment?.id}>
-                  <div className="notosansmedium16 mb-3 flex items-center justify-between">
+                <li
+                  key={comment?.id}
+                  className="border-b-[1px] border-b-bg pb-3"
+                >
+                  <div className="notosansmedium16 mb-3 flex h-[26px] items-center justify-between">
                     <span>{comment?.commenterAlias}</span>
-                    <label
-                      htmlFor="bottomSheet-commentEdit-modal"
-                      className="scoremedium16 flex h-12 cursor-pointer items-center justify-between"
-                      onClick={() => handleKebabBtn(comment?.id)}
-                    >
-                      <IConKebabGray />
-                    </label>
+                    {comment.editable && (
+                      <label
+                        htmlFor="bottomSheet-commentEdit-modal"
+                        className="scoremedium16 flex cursor-pointer items-center justify-between"
+                        onClick={() => handleKebabBtn(comment?.id)}
+                      >
+                        <IConKebabGray />
+                      </label>
+                    )}
                   </div>
                   <p className="notosansregular16 mb-1 text-GS2">
                     {comment?.content}

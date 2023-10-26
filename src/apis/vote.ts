@@ -54,7 +54,6 @@ export const getComment = async (questionId: number) => {
     const { data } = await auth.get(
       `/api/v1/questions/${questionId}/comments?page=0&size=10`,
     );
-    console.log(data);
     return data.data.content;
   } catch (error) {
     console.error(error);
