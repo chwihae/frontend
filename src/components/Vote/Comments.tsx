@@ -1,31 +1,20 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { addComment, getComment } from '@/apis/vote';
 import { ReactComponent as IConKebabGray } from '@/assets/icon_kebab_gray.svg';
 import { ReactComponent as IConSendGray } from '@/assets/icon_send_gray.svg';
 import { ReactComponent as IConSendOrange } from '@/assets/icon_send_orange.svg';
-import type { ICommentRes } from '@/types/voteType';
+import useAddCommentMutation from '@/hooks/comment/useAddCommentMutation';
+import useGetCommentQuery from '@/hooks/comment/useGetCommentQuery';
 import ModalPreparing from '@components/common/ModalPreparing';
 
 const Comments = ({ postId }: { postId: number }) => {
-  const queryClient = useQueryClient();
-
   const [isModal, setIsModal] = useState(false);
 
   //댓글
   const [inputComment, setInputComment] = useState('');
-  const { data: commentList } = useQuery<ICommentRes[]>({
-    queryKey: ['comments', postId],
-    queryFn: () => getComment(postId),
-  });
-
-  const { mutate: addCommentMutate } = useMutation({
-    mutationFn: addComment,
-    onSuccess: () => {
-      queryClient.invalidateQueries(['comments', postId]);
-    },
-  });
+  const [commentId, setCommentId] = useState(0);
+  const commentList = useGetCommentQuery(postId);
+  const addCommentMutate = useAddCommentMutation();
 
   const handleInputCommentChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
