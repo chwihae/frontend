@@ -83,7 +83,7 @@ export interface IVoteOptionsRes {
 
 export interface ICommentReq {
   questionId: number;
-  comment: string;
+  content: string;
 }
 export interface ICommentRes {
   commenterAlias: string;
@@ -91,6 +91,10 @@ export interface ICommentRes {
   createdAt: string;
   editable: true;
   id: number;
+}
+
+export interface ICommentEdit extends ICommentReq {
+  commentId: number;
 }
 
 export interface ICommentDelete {

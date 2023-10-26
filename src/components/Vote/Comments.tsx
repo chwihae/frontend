@@ -24,7 +24,7 @@ const Comments = ({ postId }: { postId: number }) => {
   const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputComment !== '') {
-      addCommentMutate({ questionId: postId, comment: inputComment });
+      addCommentMutate({ questionId: postId, content: inputComment });
       setInputComment('');
     }
   };
@@ -95,6 +95,7 @@ const Comments = ({ postId }: { postId: number }) => {
             modalId="bottomSheet-commentEdit-modal"
             commentId={commentId}
             listArray={['댓글 수정', '댓글 삭제']}
+            content={inputComment}
           />
         )}
       </section>
