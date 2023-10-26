@@ -92,3 +92,8 @@ export interface ICommentRes {
   editable: true;
   id: number;
 }
+
+export interface ICommentDelete {
+  questionId: number;
+  commentId: number;
+}

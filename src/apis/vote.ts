@@ -1,4 +1,4 @@
-import type { ICommentReq } from '@/types/voteType';
+import type { ICommentDelete, ICommentReq } from '@/types/voteType';
 
 import { auth } from './axios';
 
@@ -50,8 +50,22 @@ export const getComment = async (questionId: number) => {
     const { data } = await auth.get(
       `/api/v1/questions/${questionId}/comments?page=0&size=10`,
     );
-
     return data.data.content;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// 댓글 삭제
+export const deleteComment = async ({
+  questionId,
+  commentId,
+}: ICommentDelete) => {
+  try {
+    const { data } = await auth.delete(
+      `/api/v1/questions/${questionId}/comments/${commentId}`,
+    );
+    return data;
   } catch (error) {
     console.error(error);
   }
