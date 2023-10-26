@@ -22,6 +22,16 @@ const BottomSheet = ({
   const { postId } = useGetPostId();
   const { setIsBottomSheetOpen } = useIsBottomSheetContext();
 
+  // 삭제 내용에 따른, 바텀시트 출력 list 변경
+  let convertListArray;
+  if (modalId === 'bottomSheet-voteEdit-modal') {
+    convertListArray = listArray.filter(
+      (list) => list !== (isInProgress ? '글 삭제' : '글 수정'),
+    );
+  } else {
+    convertListArray = listArray;
+  }
+
   // 질문 수정 및 삭제
   const handleVoteEditKebab = async (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -61,24 +71,20 @@ const BottomSheet = ({
       <div className="modal z-10">
         <div className="absolute bottom-0 flex w-[375px] flex-col rounded-t-xl bg-white px-4 pb-[18px] pt-5">
           <ul className="scoremedium16 text-GS1">
-            {listArray.map((list) =>
-              modalId === 'bottomSheet-voteEdit-modal' ? (
-                list === (isInProgress ? '글 수정' : '글 삭제')
-              ) : (
-                <li key={list} className="py-2">
-                  <button
-                    type="button"
-                    onClick={
-                      modalId !== undefined && modalId.includes('voteEdit')
-                        ? handleVoteEditKebab
-                        : handleCommentEditKebab
-                    }
-                  >
-                    {list}
-                  </button>
-                </li>
-              ),
-            )}
+            {convertListArray.map((list) => (
+              <li key={list} className="py-2">
+                <button
+                  type="button"
+                  onClick={
+                    modalId === 'bottomSheet-voteEdit-modal'
+                      ? handleVoteEditKebab
+                      : handleCommentEditKebab
+                  }
+                >
+                  {list}
+                </button>
+              </li>
+            ))}
             <li className="modal-action mt-0 justify-normal py-2 text-GS4">
               <label htmlFor={modalId} className="cursor-pointer">
                 취소
