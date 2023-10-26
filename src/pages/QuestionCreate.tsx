@@ -52,7 +52,9 @@ const QuestionCreate = () => {
   const onSubmit = async (data: IQuestion) => {
     const res = await addQuestion(data);
     if (res?.code === 201) {
-      navigate('/home', { state: { id: res?.id, toast: true } });
+      navigate('/home', {
+        state: { toastMessage: '고민이 등록되었어요' },
+      });
     } else {
       setFailedToast(true);
     }

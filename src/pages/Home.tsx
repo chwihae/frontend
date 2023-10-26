@@ -15,11 +15,13 @@ const Home = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [solvedIndex, setSolvedIndex] = useState(0);
   const [completedToast, setCompletedToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   // 질문작성에서 넘어올 때, 등록 완료 토스트
   useEffect(() => {
     if (location.state !== null) {
-      location.state.toast && setCompletedToast(true);
+      setToastMessage(location.state.toastMessage);
+      setCompletedToast(true);
       navigate('', { state: null });
     }
   }, [location, navigate]);
@@ -45,7 +47,7 @@ const Home = () => {
         </button>
       </Link>
       {completedToast && (
-        <Toast setToast={setCompletedToast} text="고민이 등록되었어요" />
+        <Toast setToast={setCompletedToast} text={toastMessage} />
       )}
     </>
   );

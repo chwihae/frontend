@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { addVote, bookmarked, cancelVote } from '@/apis/vote';
 import { ReactComponent as IConClockBlack } from '@/assets/icon_clock_black.svg';
 import { ReactComponent as IConViewCountGray } from '@/assets/icon_viewCount_gray.svg';
+import { useIsBottomSheetContext } from '@/contexts/IsBottomSheetProvider';
 import useTimer from '@/hooks/useTimer';
 import useVoteQuery from '@/hooks/useVoteQuery';
+import BottomSheet from '@components/common/BottomSheet';
 import Toast from '@components/common/Toast';
 
 const Contents = ({ postId }: { postId: number }) => {
@@ -70,6 +72,9 @@ const Contents = ({ postId }: { postId: number }) => {
   const handleBookMarked = () => {
     bookmarkMutation();
   };
+
+  // 투표삭제
+  const { isBottomSheetOpen } = useIsBottomSheetContext();
 
   return (
     <section className="scorebold16 mt-10 border-b-[10px] border-b-bg px-4 pb-6">
@@ -196,6 +201,13 @@ const Contents = ({ postId }: { postId: number }) => {
       </div>
       {toast && (
         <Toast text="내가 쓴 글에는 투표할 수 없어요" setToast={setToast} />
+      )}
+      {isBottomSheetOpen && (
+        <BottomSheet
+          modalId="bottomSheet-voteEdit-modal"
+          isInProgress={pollPost?.status === 'IN_PROGRESS'}
+          listArray={['글 수정', '글 삭제']}
+        />
       )}
     </section>
   );

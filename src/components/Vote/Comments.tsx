@@ -1,31 +1,19 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { addComment, getComment } from '@/apis/vote';
 import { ReactComponent as IConKebabGray } from '@/assets/icon_kebab_gray.svg';
 import { ReactComponent as IConSendGray } from '@/assets/icon_send_gray.svg';
 import { ReactComponent as IConSendOrange } from '@/assets/icon_send_orange.svg';
-import type { ICommentRes } from '@/types/voteType';
-import ModalPreparing from '@components/common/ModalPreparing';
+import { useIsBottomSheetContext } from '@/contexts/IsBottomSheetProvider';
+import useAddCommentMutation from '@/hooks/comment/useAddCommentMutation';
+import useGetCommentQuery from '@/hooks/comment/useGetCommentQuery';
+import BottomSheet from '@components/common/BottomSheet';
 
 const Comments = ({ postId }: { postId: number }) => {
-  const queryClient = useQueryClient();
-
-  const [isModal, setIsModal] = useState(false);
-
   //댓글
   const [inputComment, setInputComment] = useState('');
-  const { data: commentList } = useQuery<ICommentRes[]>({
-    queryKey: ['comments', postId],
-    queryFn: () => getComment(postId),
-  });
-
-  const { mutate: addCommentMutate } = useMutation({
-    mutationFn: addComment,
-    onSuccess: () => {
-      queryClient.invalidateQueries(['comments', postId]);
-    },
-  });
+  const [commentId, setCommentId] = useState(0);
+  const commentList = useGetCommentQuery(postId);
+  const addCommentMutate = useAddCommentMutation();
 
   const handleInputCommentChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -36,10 +24,18 @@ const Comments = ({ postId }: { postId: number }) => {
   const handleCommentSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputComment !== '') {
-      addCommentMutate({ questionId: postId, comment: inputComment });
+      addCommentMutate({ questionId: postId, content: inputComment });
       setInputComment('');
     }
   };
+
+  // 댓글 삭제
+  const { setIsBottomSheetOpen } = useIsBottomSheetContext();
+  const handleKebabBtn = (id: number) => {
+    setIsBottomSheetOpen(true);
+    setCommentId(id);
+  };
+  const { isBottomSheetOpen } = useIsBottomSheetContext();
 
   return (
     <>
@@ -55,9 +51,9 @@ const Comments = ({ postId }: { postId: number }) => {
                   <div className="notosansmedium16 mb-3 flex items-center justify-between">
                     <span>{comment?.commenterAlias}</span>
                     <label
-                      htmlFor="temp-modal"
-                      className="cursor-pointer"
-                      onClick={() => setIsModal(true)}
+                      htmlFor="bottomSheet-commentEdit-modal"
+                      className="scoremedium16 flex h-12 cursor-pointer items-center justify-between"
+                      onClick={() => handleKebabBtn(comment?.id)}
                     >
                       <IConKebabGray />
                     </label>
@@ -94,8 +90,15 @@ const Comments = ({ postId }: { postId: number }) => {
             {inputComment === '' ? <IConSendGray /> : <IConSendOrange />}
           </button>
         </form>
+        {isBottomSheetOpen && (
+          <BottomSheet
+            modalId="bottomSheet-commentEdit-modal"
+            commentId={commentId}
+            listArray={['댓글 수정', '댓글 삭제']}
+            content={inputComment}
+          />
+        )}
       </section>
-      {isModal && <ModalPreparing name="temp-modal" />}
     </>
   );
 };

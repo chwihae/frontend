@@ -1,9 +1,11 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IConBackBlack } from '@/assets/icon_back_black.svg';
 import { ReactComponent as IConCloseBlack } from '@/assets/icon_close_black.svg';
 import { ReactComponent as IConKebabBlack } from '@/assets/icon_kebab_black.svg';
 import { ROUTER } from '@/constants/latyout';
+import { useIsBottomSheetContext } from '@/contexts/IsBottomSheetProvider';
+import useGetPostId from '@/hooks/useGetPostId';
 import useVoteQuery from '@/hooks/useVoteQuery';
 
 const HeaderBack = () => {
@@ -13,9 +15,9 @@ const HeaderBack = () => {
   const findTitle = ROUTER.find((page) => pathname.includes(page.href));
   const isVotePage = findTitle?.href === 'vote';
   const isQuestionPage = findTitle?.href === 'question';
+  const { setIsBottomSheetOpen } = useIsBottomSheetContext();
 
-  const params = useParams();
-  const postId = Number(params.id);
+  const { postId } = useGetPostId();
 
   const { pollPost } = useVoteQuery(postId);
 
@@ -33,6 +35,10 @@ const HeaderBack = () => {
     }
   };
 
+  const handleKebabBtn = () => {
+    setIsBottomSheetOpen(true);
+  };
+
   return (
     <div className="relative flex h-full items-center justify-between px-4">
       <button onClick={handleBackBtn}>
@@ -42,9 +48,13 @@ const HeaderBack = () => {
         {findTitle?.title}
       </h1>
       {isVotePage && pollPost?.editable && (
-        <button>
+        <label
+          htmlFor="bottomSheet-voteEdit-modal"
+          className="scoremedium16 flex h-12 cursor-pointer items-center justify-between"
+          onClick={handleKebabBtn}
+        >
           <IConKebabBlack />
-        </button>
+        </label>
       )}
     </div>
   );

@@ -1,12 +1,9 @@
-import { useParams } from 'react-router-dom';
-
+import useGetPostId from '@/hooks/useGetPostId';
 import Comments from '@components/Vote/Comments';
 import Contents from '@components/Vote/Contents';
 
 const Vote = () => {
-  // 투표글 아이디
-  const params = useParams();
-  const postId = Number(params.id);
+  const { postId } = useGetPostId();
 
   return (
     <div>

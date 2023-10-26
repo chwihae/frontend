@@ -1,4 +1,8 @@
-import type { ICommentReq } from '@/types/voteType';
+import type {
+  ICommentDelete,
+  ICommentEdit,
+  ICommentReq,
+} from '@/types/voteType';
 
 import { auth } from './axios';
 
@@ -30,12 +34,12 @@ export const cancelVote = async (
 };
 
 // 댓글 생성
-export const addComment = async ({ questionId, comment }: ICommentReq) => {
+export const addComment = async ({ questionId, content }: ICommentReq) => {
   try {
     const { data } = await auth.post(
       `/api/v1/questions/${questionId}/comments`,
       {
-        content: comment,
+        content,
       },
     );
     return data;
@@ -50,8 +54,40 @@ export const getComment = async (questionId: number) => {
     const { data } = await auth.get(
       `/api/v1/questions/${questionId}/comments?page=0&size=10`,
     );
-
+    console.log(data);
     return data.data.content;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// 댓글 삭제
+export const deleteComment = async ({
+  questionId,
+  commentId,
+}: ICommentDelete) => {
+  try {
+    const { data } = await auth.delete(
+      `/api/v1/questions/${questionId}/comments/${commentId}`,
+    );
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// 댓글 수정
+export const editComment = async ({
+  questionId,
+  commentId,
+  content,
+}: ICommentEdit) => {
+  try {
+    const { data } = await auth.put(
+      `/api/v1/questions/${questionId}/comments/${commentId}`,
+      content,
+    );
+    return data;
   } catch (error) {
     console.error(error);
   }
@@ -63,6 +99,7 @@ export const bookmarked = async (questionId: number) => {
     const { data } = await auth.post(
       `/api/v1/questions/${questionId}/bookmark`,
     );
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);

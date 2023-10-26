@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
+import { useLocation } from 'react-router-dom';
 
 import { getVoteOption, getVoteSingle } from '@/apis/question';
 import type { IVoteOptionsRes, IVoteSingleRes } from '@/types/voteType';
 
 const useVoteQuery = (postId: number) => {
+  const location = useLocation();
   const pathname = location.pathname;
 
   // 투표글 데이터 가져오기

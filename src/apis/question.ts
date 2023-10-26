@@ -9,13 +9,23 @@ export const addQuestion = async (questions: IQuestion) => {
   try {
     const { closeAt, ...rest } = questions;
 
-    const converData = {
+    const convertData = {
       closeAt: nowIsoTime(closeAt),
       ...rest,
     };
 
-    const { data } = await auth.post('/api/v1/questions', converData);
+    const { data } = await auth.post('/api/v1/questions', convertData);
 
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// 질문 삭제
+export const deleteQuestion = async (id: number) => {
+  try {
+    const { data } = await auth.delete(`/api/v1/questions/${id}`);
     return data;
   } catch (error) {
     console.error(error);
