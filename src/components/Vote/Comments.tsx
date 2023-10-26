@@ -95,7 +95,7 @@ const Comments = ({ postId }: { postId: number }) => {
             modalId="bottomSheet-commentEdit-modal"
             commentId={commentId}
             listArray={['댓글 수정', '댓글 삭제']}
-            content={inputComment}
+            // content={inputComment}
           />
         )}
       </section>
