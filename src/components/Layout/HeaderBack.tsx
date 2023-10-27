@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ReactComponent as IConBackBlack } from '@/assets/icon_back_black.svg';
 import { ReactComponent as IConCloseBlack } from '@/assets/icon_close_black.svg';
 import { ReactComponent as IConKebabBlack } from '@/assets/icon_kebab_black.svg';
-import { ROUTER } from '@/constants/latyout';
+import { ROUTER } from '@/constants/layout';
 import { useIsBottomSheetContext } from '@/contexts/IsBottomSheetProvider';
 import useGetPostId from '@/hooks/useGetPostId';
 import useVoteQuery from '@/hooks/useVoteQuery';
