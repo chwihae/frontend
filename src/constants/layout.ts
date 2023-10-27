@@ -18,5 +18,9 @@ export const ROUTER = [
     title: '저장한 글',
     href: 'saved',
   },
+  {
+    title: '나의 별랑이',
+    href: 'level',
+  },
   { title: '마이페이지', href: 'mypage' },
 ];
