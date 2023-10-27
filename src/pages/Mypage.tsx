@@ -33,14 +33,13 @@ const Mypage = () => {
           <LevelImage className="h-[60px] w-[60px]" />
           <p className="scorebold20">별랑이{userId}</p>
         </div>
-        <label
-          htmlFor="temp-modal"
+        <Link
           className="scoremedium12 flex cursor-pointer items-center gap-[2px] rounded-[18px] bg-prime1 px-[9px] py-1 text-white hover:bg-prime1"
-          onClick={() => setIsModal(true)}
+          to="/mypage/level"
         >
           {userLevelInfo.name}별랑이
           <IConForwardWhite />
-        </label>
+        </Link>
       </div>
       {/* MY */}
       <div>

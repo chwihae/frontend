@@ -6,6 +6,7 @@ import PublicLayout from '@components/Layout/PublicLayout';
 import Home from '@pages/Home';
 import Intro from '@pages/Intro';
 import Login from '@pages/Login';
+import Mylevel from '@pages/Mylevel';
 import Mypage from '@pages/Mypage';
 import Mysaved from '@pages/Mysaved';
 import Myvoted from '@pages/Myvoted';
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
               { path: 'written', element: <MyWritten /> },
               { path: 'participated', element: <Myvoted /> },
               { path: 'saved', element: <Mysaved /> },
+              { path: 'level', element: <Mylevel /> },
             ],
           },
         ],
