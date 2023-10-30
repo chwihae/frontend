@@ -1,5 +1,9 @@
 import { useState } from 'react';
 
+import { ReactComponent as IConLevelOneRounded } from '@/assets/char_level1_round.svg';
+import { ReactComponent as IConLevelTwoRounded } from '@/assets/char_level2_round.svg';
+import { ReactComponent as IConLevelThreeRounded } from '@/assets/char_level3_round.svg';
+import { ReactComponent as IConLevelFourRounded } from '@/assets/char_level4_round.svg';
 import { ReactComponent as IconArrowBottomGray } from '@/assets/icon_arrow_bottom_gray.svg';
 import { LEVELSTEP } from '@/constants/home';
 
@@ -36,7 +40,7 @@ const Mylevel = () => {
           </div>
         </ul>
       </section>
-      <section>
+      <section className="pb-20">
         <h3 className="scorebold16 px-4 pb-6">별랑이 성장기</h3>
         <ul className="scoremedium14 flex flex-col">
           {LEVELSTEP.map((level, index) => (
@@ -47,7 +51,9 @@ const Mylevel = () => {
                 onClick={() => toggleAccordion(index)}
               >
                 <div className="flex items-center gap-2 ">
-                  <span className="block h-10 w-10 rounded-full border-[1px] border-GS6"></span>
+                  <span className="block h-10 w-10">
+                    {LEVEL_IMAGE.find((img) => img.name === level?.name)?.img}
+                  </span>
                   <span>{level.name} 별랑이</span>
                 </div>
                 <IconArrowBottomGray
@@ -57,7 +63,7 @@ const Mylevel = () => {
                 />
               </button>
               {accordionStates[index] && (
-                <div className="ml-[47px] pb-4 pt-2 text-GS3">
+                <div className="ml-[47px] pt-2 text-GS3">
                   {
                     <>
                       <h4>💡등급 조건</h4>
@@ -78,3 +84,10 @@ const Mylevel = () => {
 };
 
 export default Mylevel;
+
+const LEVEL_IMAGE = [
+  { name: '학사', img: <IConLevelOneRounded /> },
+  { name: '석사', img: <IConLevelTwoRounded /> },
+  { name: '박사', img: <IConLevelThreeRounded /> },
+  { name: '교수', img: <IConLevelFourRounded /> },
+];
