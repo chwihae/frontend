@@ -44,7 +44,10 @@ const Mylevel = () => {
         <h3 className="scorebold16 px-4 pb-6">별랑이 성장기</h3>
         <ul className="scoremedium14 flex flex-col">
           {LEVELSTEP.map((level, index) => (
-            <li key={level.name} className="p-4">
+            <li
+              key={level.name}
+              className={`${accordionStates[index] && 'bg-bg'} p-4`}
+            >
               <button
                 type="button"
                 className="flex w-full items-center justify-between"
