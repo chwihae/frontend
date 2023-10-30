@@ -1,16 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { getUserLevel } from '@/apis/auth';
 import { ReactComponent as IConLevelOneRounded } from '@/assets/char_level1_round.svg';
+import { ReactComponent as IConLevelOneRoundedLarge } from '@/assets/char_level1_round_100.svg';
 import { ReactComponent as IConLevelTwoRounded } from '@/assets/char_level2_round.svg';
+import { ReactComponent as IConLevelTwoRoundedLarge } from '@/assets/char_level2_round_100.svg';
 import { ReactComponent as IConLevelThreeRounded } from '@/assets/char_level3_round.svg';
+import { ReactComponent as IConLevelThreeRoundedLarge } from '@/assets/char_level3_round_100.svg';
 import { ReactComponent as IConLevelFourRounded } from '@/assets/char_level4_round.svg';
+import { ReactComponent as IConLevelFourRoundedLarge } from '@/assets/char_level4_round_100.svg';
 import { ReactComponent as IconArrowBottomGray } from '@/assets/icon_arrow_bottom_gray.svg';
 import { LEVELSTEP } from '@/constants/home';
+import type { IUserLevel } from '@/types/authType';
+import getLocalData from '@/utils/getLocalData';
 
 const Mylevel = () => {
   const [accordionStates, setAccordionStates] = useState(
     new Array(LEVELSTEP.length).fill(false),
   );
+  const [userLevel, setUserLevel] = useState<IUserLevel>();
 
   const toggleAccordion = (index: number) => {
     setAccordionStates((prevStates) => {
@@ -20,22 +28,32 @@ const Mylevel = () => {
     });
   };
 
+  const userId = getLocalData('userId');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getUserLevel();
+      setUserLevel(res);
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="pt-10">
       <section className="mb-10 flex flex-col items-center gap-6 px-4">
         <div className="flex flex-col items-center">
-          <div className="mb-3 h-[100px] w-[100px] rounded-full border-[1px] border-GS6"></div>
-          <h2 className="scorebold16">별랑이 1</h2>
+          {LEVEL_IMAGE.find((img) => img.name === userLevel?.name)?.imgLarge}
+          <h2 className="scorebold16">별랑이 {userId}</h2>
         </div>
         <ul className="scoremedium14 h-[70px] w-full rounded-[10px] border-[1px] border-GS6 p-[11px] text-GS4">
           <div className="flex h-full translate-x-[-14px] items-center justify-center">
             <li className="flex flex-col items-center gap-1 border-r-[1px] border-[#cecece] pr-5">
               <span>투표 활동</span>
-              <span className="text-prime1">121</span>
+              <span className="text-prime1">{userLevel?.voteCount}</span>
             </li>
             <li className="flex flex-col items-center gap-1 pl-5">
               <span>댓글</span>
-              <span className="text-prime1">20</span>
+              <span className="text-prime1">{userLevel?.commentCount}</span>
             </li>
           </div>
         </ul>
@@ -57,7 +75,10 @@ const Mylevel = () => {
                 >
                   <div className="flex items-center gap-2 ">
                     <span className="block h-10 w-10">
-                      {LEVEL_IMAGE.find((img) => img.name === level?.name)?.img}
+                      {
+                        LEVEL_IMAGE.find((img) => img.name === level?.name)
+                          ?.imgSmall
+                      }
                     </span>
                     <span>{level.name} 별랑이</span>
                   </div>
@@ -99,8 +120,24 @@ const Mylevel = () => {
 export default Mylevel;
 
 const LEVEL_IMAGE = [
-  { name: '학사', img: <IConLevelOneRounded /> },
-  { name: '석사', img: <IConLevelTwoRounded /> },
-  { name: '박사', img: <IConLevelThreeRounded /> },
-  { name: '교수', img: <IConLevelFourRounded /> },
+  {
+    name: '학사',
+    imgSmall: <IConLevelOneRounded />,
+    imgLarge: <IConLevelOneRoundedLarge />,
+  },
+  {
+    name: '석사',
+    imgSmall: <IConLevelTwoRounded />,
+    imgLarge: <IConLevelTwoRoundedLarge />,
+  },
+  {
+    name: '박사',
+    imgSmall: <IConLevelThreeRounded />,
+    imgLarge: <IConLevelThreeRoundedLarge />,
+  },
+  {
+    name: '교수',
+    imgSmall: <IConLevelFourRounded />,
+    imgLarge: <IConLevelFourRoundedLarge />,
+  },
 ];
