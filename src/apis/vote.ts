@@ -1,6 +1,7 @@
 import type {
   ICommentDelete,
   ICommentEdit,
+  ICommentGetReq,
   ICommentReq,
 } from '@/types/voteType';
 
@@ -49,12 +50,12 @@ export const addComment = async ({ questionId, content }: ICommentReq) => {
 };
 
 // 댓글 조회
-export const getComment = async (questionId: number) => {
+export const getComment = async ({ questionId, page }: ICommentGetReq) => {
   try {
     const { data } = await auth.get(
-      `/api/v1/questions/${questionId}/comments?page=0&size=10`,
+      `/api/v1/questions/${questionId}/comments?page=${page}&size=10`,
     );
-    return data.data.content;
+    return data.data;
   } catch (error) {
     console.error(error);
   }

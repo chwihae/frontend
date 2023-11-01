@@ -85,13 +85,6 @@ export interface ICommentReq {
   questionId: number;
   content: string;
 }
-export interface ICommentRes {
-  commenterAlias: string;
-  content: string;
-  createdAt: string;
-  editable: true;
-  id: number;
-}
 
 export interface ICommentEdit extends ICommentReq {
   commentId: number;
@@ -100,4 +93,31 @@ export interface ICommentEdit extends ICommentReq {
 export interface ICommentDelete {
   questionId: number;
   commentId: number;
+}
+
+export interface ICommentGetReq {
+  questionId: number;
+  page: number;
+}
+
+export interface ICommentGetRes {
+  commenterAlias: string;
+  content: string;
+  createdAt: string;
+  editable: true;
+  id: number;
+}
+
+export interface ICommentRes {
+  content: ICommentGetRes[];
+  empty: boolean;
+  first: boolean;
+  last: boolean;
+  number: number;
+  numberOfElements: number;
+  pageable: IVoteAllPageable;
+  size: number;
+  sort: IVoteAllSort[];
+  totalElements: number;
+  totalPages: number;
 }
