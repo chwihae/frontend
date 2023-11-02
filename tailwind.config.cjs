@@ -174,5 +174,38 @@ module.exports = {
         },
       });
     },
+    ({ addComponents }) => {
+      addComponents({
+        '.hide-scroll::-webkit-scrollbar': {
+          msOverflowStyle: 'none',
+          scrollbarWidth: 'none',
+          overflowY: 'scroll',
+          display: 'none',
+        },
+
+        /* progress bar */
+        '.rateProgress::-webkit-progress-bar': {
+          background: '#fff6ee',
+          borderRadius: '8px',
+          height: '16px',
+          width: '120px',
+          overflow: 'hidden',
+        },
+        '.rateProgress::-webkit-progress-value': {
+          background: '#f57f17',
+          height: '16px',
+        },
+        '.resultsProgress::-webkit-progress-bar': {
+          background: '#fff',
+          borderRadius: '10px',
+          border: '1px solid #cecece',
+          overflow: 'hidden',
+        },
+        '.resultsProgress::-webkit-progress-value': { background: '#cecece' },
+        '.resultsProgress_voted::-webkit-progress-value': {
+          background: '#ffca9c',
+        },
+      });
+    },
   ],
 };

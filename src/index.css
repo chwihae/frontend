@@ -1,16 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;400;500;600&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@font-face {
-  font-family: 'S-CoreDream-3Light';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
 
 html {
   font-family:
@@ -28,13 +21,6 @@ html {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.hide-scroll::-webkit-scrollbar {
-  -ms-overflow-style: none; /* for Internet Explorer, Edge */
-  scrollbar-width: none; /* for Firefox */
-  overflow-y: scroll;
-  display: none;
 }
 
 body {
@@ -59,37 +45,7 @@ body {
   }
 }
 
-/* 프로그레스바 */
-.rateProgress::-webkit-progress-bar {
-  background: #fff6ee;
-  border-radius: 8px;
-  height: 16px;
-  width: 120px;
-  overflow: hidden;
-}
-
-.rateProgress::-webkit-progress-value {
-  background: #f57f17;
-  height: 16px;
-}
-
-/* 프로그레스바 */
-.resultsProgress::-webkit-progress-bar {
-  background: #fff;
-  border-radius: 10px;
-  border: 1px solid #cecece;
-  overflow: hidden;
-}
-
-.resultsProgress::-webkit-progress-value {
-  background: #cecece;
-}
-
-.resultsProgress_voted::-webkit-progress-value {
-  background: #ffca9c;
-}
-
-[type='radio'] {
+input[type='radio'] {
   vertical-align: middle;
   appearance: none;
   border: 1px solid #cecece;
@@ -98,20 +54,20 @@ body {
   height: 1.25em;
 }
 
-[type='radio']:checked {
+input[type='radio']:checked {
   border: 0.4em solid #f57f17;
 }
 
-[type='radio']:focus-visible {
+input[type='radio']:focus-visible {
   outline: max(2px, 0.1em) dotted #f57f17;
   outline-offset: max(2px, 0.1em);
 }
 
-[type='radio']:disabled {
+input[type='radio']:disabled {
   border: 0.4em solid #cecece;
   cursor: not-allowed;
 }
 
-[type='radio']:disabled + span {
+input[type='radio']:disabled + span {
   cursor: not-allowed;
 }
