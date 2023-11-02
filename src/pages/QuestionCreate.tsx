@@ -66,7 +66,7 @@ const QuestionCreate = () => {
         <fieldset>
           <label
             htmlFor="category-modal"
-            className="scoremedium16 flex h-12 cursor-pointer items-center justify-between px-4"
+            className="flex h-12 cursor-pointer items-center justify-between px-4 score-medium16"
             onClick={() => setIsCategoryModal(true)}
           >
             <p>{watchFields[1] ? categoryName : '카테고리를 선택해주세요'}</p>
@@ -76,7 +76,7 @@ const QuestionCreate = () => {
         <fieldset>
           <input
             type="text"
-            className="notosansmedium16 h-[52px] w-full border-[1px] border-bg px-4 py-[13px] focus:outline-none "
+            className="h-[52px] w-full border-[1px] border-bg px-4 py-[13px] notosans-medium16 focus:outline-none "
             placeholder="제목을 입력해주세요 (20자 이내)"
             minLength={1}
             maxLength={20}
@@ -89,7 +89,7 @@ const QuestionCreate = () => {
         </fieldset>
         <fieldset>
           <textarea
-            className="notosansregular14 hide-scroll h-[259px] w-full resize-none border-b-[10px] border-bg px-4 py-6 placeholder:whitespace-pre-line placeholder:text-GS4 focus:outline-none"
+            className="hide-scroll h-[259px] w-full resize-none border-b-[10px] border-bg px-4 py-6 notosans-regular14 placeholder:whitespace-pre-line placeholder:text-GS4 focus:outline-none"
             placeholder={PLACEHOLDER_CONTENT}
             maxLength={800}
             {...register('content')}
@@ -98,7 +98,7 @@ const QuestionCreate = () => {
         <FieldsOptionArray />
         <fieldset className="mb-10 px-4">
           <div className="mb-6 flex items-center gap-1">
-            <legend className="scorebold16">고민 기간 설정</legend>
+            <legend className="score-bold16">고민 기간 설정</legend>
             <button
               type="button"
               className="relative cursor-pointer"
@@ -113,7 +113,7 @@ const QuestionCreate = () => {
               <label
                 key={period}
                 htmlFor={period}
-                className="scoreregular16 flex items-center"
+                className="flex items-center score-regular16"
               >
                 <input
                   type="radio"
@@ -131,7 +131,7 @@ const QuestionCreate = () => {
         </fieldset>
         <button
           type="submit"
-          className={`scoremedium20 mx-4 mb-10 h-14 rounded-2xl px-10 py-3  ${
+          className={`mx-4 mb-10 h-14 rounded-2xl px-10 py-3 score-medium20  ${
             watchFields[0] && watchFields[1]
               ? 'bg-prime1 text-white'
               : 'bg-GS6 text-white'

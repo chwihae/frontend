@@ -67,7 +67,7 @@ const Comments = ({ postId }: { postId: number }) => {
 
   return (
     <section className="px-4 pb-[52px] pt-12">
-      <h3 className="scorebold16 mb-6">댓글 {data?.pages[0].totalElements}</h3>
+      <h3 className="mb-6 score-bold16">댓글 {data?.pages[0].totalElements}</h3>
       {/* 댓글목록 */}
       <ol className="grid gap-3">
         {data && data?.pages[0].totalElements !== 0 ? (
@@ -77,22 +77,22 @@ const Comments = ({ postId }: { postId: number }) => {
                 {page.content.map((comment: ICommentGetRes) => (
                   <div key={comment?.id}>
                     <li className="border-b-[1px] border-b-bg pb-3">
-                      <div className="notosansmedium16 mb-3 flex h-[26px] items-center justify-between">
+                      <div className="mb-3 flex h-[26px] items-center justify-between notosans-medium16">
                         <span>{comment?.commenterAlias}</span>
                         {comment.editable && (
                           <label
                             htmlFor="bottomSheet-commentEdit-modal"
-                            className="scoremedium16 flex cursor-pointer items-center justify-between"
+                            className="flex cursor-pointer items-center justify-between score-medium16"
                             onClick={() => handleKebabBtn(comment?.id)}
                           >
                             <IConKebabGray />
                           </label>
                         )}
                       </div>
-                      <p className="notosansregular16 mb-1 text-GS2">
+                      <p className="mb-1 text-GS2 notosans-regular16">
                         {comment?.content}
                       </p>
-                      <span className="notosansregular12 text-GS4">
+                      <span className="text-GS4 notosans-regular12">
                         {comment?.createdAt
                           .replaceAll('-', '.')
                           .replace('T', '. ')}
@@ -105,7 +105,7 @@ const Comments = ({ postId }: { postId: number }) => {
             ))}
           </>
         ) : (
-          <p className="scoremedium12 my-16 text-center text-GS4">
+          <p className="my-16 text-center text-GS4 score-medium12">
             아직 댓글이 없어요
             <br />
             가장 먼저 댓글을 남겨보세요
@@ -122,7 +122,7 @@ const Comments = ({ postId }: { postId: number }) => {
           value={inputComment}
           placeholder="댓글을 입력해주세요"
           onChange={handleInputCommentChange}
-          className="notosansmedium14 w-full rounded-[10px] bg-bg px-5 py-[11px] placeholder:text-GS4 focus:outline-none"
+          className="w-full rounded-[10px] bg-bg px-5 py-[11px] notosans-medium14 placeholder:text-GS4 focus:outline-none"
         />
         <button type="submit" className="p-[10px]">
           {inputComment === '' ? <IConSendGray /> : <IConSendOrange />}

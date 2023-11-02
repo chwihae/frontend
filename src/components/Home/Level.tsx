@@ -36,14 +36,14 @@ const Level = () => {
         <LevelImage className="absolute right-[21.56px] top-[44.32px] h-[139px] w-[156px]" />
       </div>
       <div className="ml-[16px] mt-[41px] w-[180px]">
-        <p className="scorebold24 right-0 flex flex-col text-right">
+        <p className="right-0 flex flex-col text-right score-bold24">
           <span>나의 등급은</span>
           <span className="mb-[15px] translate-y-[-5px] text-prime1">
             {userLevel && userLevel?.name} 별랑이!
           </span>
-          <span className="scoreregular12 mb-2 text-GS2 ">다음 등급까지</span>
+          <span className="mb-2 text-GS2 score-regular12 ">다음 등급까지</span>
         </p>
-        <div className="scoremedium12 w-full text-GS3">
+        <div className="w-full text-GS3 score-medium12">
           <div className="mb-[7px] flex w-full justify-between">
             <IConVoteOrange className="w-4" />
             <progress max="100" value={turnout} className="rateProgress" />

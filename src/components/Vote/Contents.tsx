@@ -77,22 +77,22 @@ const Contents = ({ postId }: { postId: number }) => {
   const { isBottomSheetOpen } = useIsBottomSheetContext();
 
   return (
-    <section className="scorebold16 mt-10 border-b-[10px] border-b-bg px-4 pb-6">
+    <section className="mt-10 border-b-[10px] border-b-bg px-4 pb-6 score-bold16">
       {/* 글 내용 */}
       <div className="mb-[49px]">
-        <span className="scoremedium14 mb-6 flex w-fit items-center rounded-[37px] border-[1px] border-GS6 px-3 py-[6px] text-GS4">
+        <span className="mb-6 flex w-fit items-center rounded-[37px] border-[1px] border-GS6 px-3 py-[6px] text-GS4 score-medium14">
           {pollPost?.status === 'IN_PROGRESS' ? '해결중' : '해결완료'}
         </span>
-        <h2 className="notosansbold16 mb-3">{pollPost?.title}</h2>
-        <p className="notosansregular16">{pollPost?.content}</p>
+        <h2 className="mb-3 notosans-bold16">{pollPost?.title}</h2>
+        <p className="notosans-regular16">{pollPost?.content}</p>
       </div>
       {/* 투표바, 수치 */}
       <div>
-        <div className="scoremedium12 mb-3 flex items-center justify-between text-GS3 ">
+        <div className="mb-3 flex items-center justify-between text-GS3 score-medium12 ">
           {pollPost?.status === 'IN_PROGRESS' && (
             <div className="flex items-center gap-1">
               <IConClockBlack />
-              <span className="scoremedium12">{timer} 남음</span>
+              <span className="score-medium12">{timer} 남음</span>
             </div>
           )}
           {pollPost?.editable === false &&
@@ -100,7 +100,7 @@ const Contents = ({ postId }: { postId: number }) => {
             pollOptions?.showVoteCount && (
               <button
                 type="button"
-                className="scoremedium12"
+                className="score-medium12"
                 onClick={handleRevoteBtn}
               >
                 다시 투표 하기
@@ -119,7 +119,7 @@ const Contents = ({ postId }: { postId: number }) => {
               <li key={option.id}>
                 <label
                   htmlFor={option.name}
-                  className={`notosansregular14 flex h-14 w-[343px] cursor-pointer items-center rounded-[10px] ${
+                  className={`flex h-14 w-[343px] cursor-pointer items-center rounded-[10px] notosans-regular14 ${
                     pollOptions?.showVoteCount === false
                       ? 'border-[1px] border-GS6 px-4'
                       : ''
@@ -154,7 +154,7 @@ const Contents = ({ postId }: { postId: number }) => {
                         }`}
                       />
                       <span
-                        className={`notosansmedium14 absolute right-4 ${
+                        className={`absolute right-4 notosans-medium14 ${
                           pollOptions.votedOptionId === option.id &&
                           'text-prime1'
                         }`}
@@ -173,21 +173,21 @@ const Contents = ({ postId }: { postId: number }) => {
             ))}
         </ul>
         {pollOptions?.showVoteCount && (
-          <div className="scoreregular12 mb-[46px] text-right text-GS4 ">
+          <div className="mb-[46px] text-right text-GS4 score-regular12 ">
             투표 수 {sumOptionVoteCount}
           </div>
         )}
         {/* 통계치 */}
         {pollPost && (
           <div className="flex justify-between">
-            <p className="scoreregular12 flex items-center gap-1 text-GS4">
+            <p className="flex items-center gap-1 text-GS4 score-regular12">
               <IConViewCountGray />
               {pollPost?.viewCount}명이 봤어요
             </p>
             {!pollPost?.editable && (
               <button
                 type="button"
-                className={`scoremedium12 flex gap-1 rounded-[37px] border-[1px]  px-[9px] py-1  ${
+                className={`flex gap-1 rounded-[37px] border-[1px] px-[9px]  py-1 score-medium12  ${
                   pollPost.bookmarked
                     ? 'border-prime1 text-prime1'
                     : 'border-GS6 text-GS4'

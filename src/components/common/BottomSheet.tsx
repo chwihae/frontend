@@ -75,7 +75,7 @@ const BottomSheet = ({
       <input type="checkbox" id={modalId} className="modal-toggle" />
       <div className="modal z-10">
         <div className="absolute bottom-0 flex w-[375px] flex-col rounded-t-xl bg-white px-4 pb-[18px] pt-5">
-          <ul className="scoremedium16 text-GS1">
+          <ul className="text-GS1 score-medium16">
             {convertListArray.map((list) => (
               <li key={list} className="py-2">
                 <button

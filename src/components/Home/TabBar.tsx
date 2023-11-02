@@ -19,7 +19,7 @@ const TabBar = ({ tabIndex, setTabIndex, setSolvedIndex }: TTabBar) => {
           <li key={tab.type}>
             <button
               type="button"
-              className={`scoremedium16 px-[6.4px] pb-[7px] text-center ${
+              className={`px-[6.4px] pb-[7px] text-center score-medium16 ${
                 index === tabIndex
                   ? 'border-b-[3px] border-b-prime1 text-GS1 '
                   : 'border-b-[1px] border-b-GS6 text-GS4'

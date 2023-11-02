@@ -13,7 +13,7 @@ const FieldsOptionArray = () => {
   return (
     <fieldset className="px-4 py-10">
       <div className="mb-6 flex">
-        <legend className="scorebold16 text-GS1">투표 항목 입력</legend>
+        <legend className="text-GS1 score-bold16">투표 항목 입력</legend>
       </div>
       <ul className="mb-3 flex flex-col gap-3">
         {fields.map((item, index) => (
@@ -21,7 +21,7 @@ const FieldsOptionArray = () => {
             <input
               type="text"
               placeholder="항목 입력(20자 이내)"
-              className="notosansmedium14 h-11 w-full rounded-[10px] border-[1px] border-GS6 px-5 py-[11px] outline-none placeholder:text-GS4 focus:border-prime1"
+              className="h-11 w-full rounded-[10px] border-[1px] border-GS6 px-5 py-[11px] outline-none notosans-medium14 placeholder:text-GS4 focus:border-prime1"
               {...register(`options.${index}.name`, {
                 required: true,
                 maxLength: 20,
@@ -42,7 +42,7 @@ const FieldsOptionArray = () => {
       {fields.length < 10 && (
         <button
           type="button"
-          className="text-gs2 notosansmedium14 flex h-10 w-full items-center justify-center gap-1 rounded-[10px] bg-GS6 px-5 py-[11px] leading-none text-GS2"
+          className="text-gs2 flex h-10 w-full items-center justify-center gap-1 rounded-[10px] bg-GS6 px-5 py-[11px] leading-none text-GS2 notosans-medium14"
           onClick={() => {
             append({ name: '' });
           }}

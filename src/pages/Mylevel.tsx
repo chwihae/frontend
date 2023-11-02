@@ -66,9 +66,9 @@ const Mylevel = () => {
       <section className="mb-10 flex flex-col items-center gap-6 px-4">
         <div className="flex flex-col items-center">
           {LEVEL_IMAGE.find((img) => img.name === userLevel?.name)?.imgLarge}
-          <h2 className="scorebold16">별랑이 {userId}</h2>
+          <h2 className="score-bold16">별랑이 {userId}</h2>
         </div>
-        <ul className="scoremedium14 h-[70px] w-full rounded-[10px] border-[1px] border-GS6 p-[11px] text-GS4">
+        <ul className="h-[70px] w-full rounded-[10px] border-[1px] border-GS6 p-[11px] text-GS4 score-medium14">
           <div className="flex h-full translate-x-[-14px] items-center justify-center">
             <li className="flex flex-col items-center gap-1 border-r-[1px] border-[#cecece] pr-5">
               <span>투표 활동</span>
@@ -82,8 +82,8 @@ const Mylevel = () => {
         </ul>
       </section>
       <section className="pb-20">
-        <h3 className="scorebold16 px-4 pb-6">별랑이 성장기</h3>
-        <ul className="scoremedium14 flex flex-col">
+        <h3 className="px-4 pb-6 score-bold16">별랑이 성장기</h3>
+        <ul className="flex flex-col score-medium14">
           {LEVELSTEP.map((level, index) => {
             const nextLevelStep = LEVELSTEP[index - 1];
             return (

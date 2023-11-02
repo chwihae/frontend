@@ -52,10 +52,10 @@ const Mypage = () => {
       <div className="mb-11 flex items-center justify-between px-4 pt-[40px]">
         <div className="flex items-center gap-3">
           <LevelImage className="h-[60px] w-[60px]" />
-          <p className="scorebold20">별랑이{userId}</p>
+          <p className="score-bold20">별랑이{userId}</p>
         </div>
         <Link
-          className="scoremedium12 flex cursor-pointer items-center gap-[2px] rounded-[18px] bg-prime1 px-[9px] py-1 text-white hover:bg-prime1"
+          className="flex cursor-pointer items-center gap-[2px] rounded-[18px] bg-prime1 px-[9px] py-1 text-white score-medium12 hover:bg-prime1"
           to="/mypage/level"
         >
           {userLevelInfo.name}별랑이
@@ -64,13 +64,13 @@ const Mypage = () => {
       </div>
       {/* MY */}
       <div>
-        <h2 className="scoremedium14 mb-10 px-4 text-GS4">MY</h2>
+        <h2 className="mb-10 px-4 text-GS4 score-medium14">MY</h2>
         <ol className="p flex flex-col gap-8 border-b-[10px] border-bg px-4 pb-[40px]">
           {MYPOST.map((list) => (
             <li key={list.title}>
               <Link
                 to={list.href}
-                className="scoremedium16 flex cursor-pointer justify-between"
+                className="flex cursor-pointer justify-between score-medium16"
               >
                 <div className="flex items-center gap-1 ">
                   {list.icon}
@@ -84,8 +84,8 @@ const Mypage = () => {
       </div>
       {/* 도움말 */}
       <div className="relative flex-grow-0 px-4">
-        <h2 className="scoremedium14 pb-14 pt-10 text-GS4">도움말</h2>
-        <ol className="scoremedium16 mb-[313px] flex flex-col gap-8">
+        <h2 className="pb-14 pt-10 text-GS4 score-medium14">도움말</h2>
+        <ol className="mb-[313px] flex flex-col gap-8 score-medium16">
           {HELP.map((item) => (
             <li key={item} className="h-fit">
               <label
@@ -101,7 +101,7 @@ const Mypage = () => {
         {/* 로그아웃 버튼 */}
         <button
           type="button"
-          className="scoremedium12 mx-auto block cursor-pointer border-0 p-0 pb-10 text-center underline"
+          className="mx-auto block cursor-pointer border-0 p-0 pb-10 text-center underline score-medium12"
           onClick={handleSignOut}
         >
           로그아웃

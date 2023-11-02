@@ -20,7 +20,7 @@ const Statistics = ({
   ];
 
   return (
-    <ul className="notosansmedium12 flex gap-2  text-GS4">
+    <ul className="flex gap-2 text-GS4  notosans-medium12">
       {STATICS_ICON.map((value) => (
         <li key={value.type} className="flex items-center gap-[2px]">
           {value.icon}

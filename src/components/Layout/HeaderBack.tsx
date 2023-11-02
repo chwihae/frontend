@@ -44,13 +44,13 @@ const HeaderBack = () => {
       <button type="button" onClick={handleBackBtn}>
         {isQuestionPage ? <IConCloseBlack /> : <IConBackBlack />}
       </button>
-      <h1 className="scorebold18 absolute left-1/2 translate-x-[-50%]">
+      <h1 className="absolute left-1/2 translate-x-[-50%] score-bold18">
         {findTitle?.title}
       </h1>
       {isVotePage && pollPost?.editable && (
         <label
           htmlFor="bottomSheet-voteEdit-modal"
-          className="scoremedium16 flex h-12 cursor-pointer items-center justify-between"
+          className="flex h-12 cursor-pointer items-center justify-between score-medium16"
           onClick={handleKebabBtn}
         >
           <IConKebabBlack />

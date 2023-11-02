@@ -39,11 +39,11 @@ const PostList = ({ lists, fetchFn, currentPage }: TPostList) => {
               >
                 <div className="grid w-[294px] gap-2">
                   {/* 상태뱃지 */}
-                  <span className="scoremedium12 w-fit rounded-[37px] border-[1px] border-GS6 px-[9px] py-1 text-GS4">
+                  <span className="w-fit rounded-[37px] border-[1px] border-GS6 px-[9px] py-1 text-GS4 score-medium12">
                     {list.status === 'IN_PROGRESS' ? '해결중' : '해결완료'}
                   </span>
                   {/* 투표제목 */}
-                  <p className="notosansbold16 overflow-hidden text-ellipsis whitespace-nowrap">
+                  <p className="overflow-hidden text-ellipsis whitespace-nowrap notosans-bold16">
                     {list.title}
                   </p>
                   <Statistics
