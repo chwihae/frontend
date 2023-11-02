@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { IVoteAllReq } from '@/types/voteType';
 
 import { auth } from './axios';

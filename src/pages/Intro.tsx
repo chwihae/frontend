@@ -27,6 +27,7 @@ const Intro = () => {
           함께 고민을 해결하러 갈까요?
         </p>
         <button
+          type="button"
           className="scoremedium16 btn h-[50px] w-[343px] rounded-[15px] border-0 bg-[#FEE500] px-[58px] py-3 text-[#191919] hover:bg-amber-200"
           onClick={handleOAuthLogin}
         >

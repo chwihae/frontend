@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { IQuestion } from '@/types/questionType';
 import type { IVoteAllReq } from '@/types/voteType';
 import nowIsoTime from '@/utils/nowIsoTime';

@@ -110,9 +110,14 @@ const QuestionCreate = () => {
           </div>
           <ol className="mb-16 flex gap-10">
             {PERIODOPTIONS.map((period) => (
-              <label key={period} className="scoreregular16 flex items-center">
+              <label
+                key={period}
+                htmlFor={period}
+                className="scoreregular16 flex items-center"
+              >
                 <input
                   type="radio"
+                  id={period}
                   value={period}
                   className="mr-2"
                   {...register('closeAt', {

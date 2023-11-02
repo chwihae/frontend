@@ -18,6 +18,7 @@ const TabBar = ({ tabIndex, setTabIndex, setSolvedIndex }: TTabBar) => {
         {TABBAR.map((tab, index) => (
           <li key={tab.type}>
             <button
+              type="button"
               className={`scoremedium16 px-[6.4px] pb-[7px] text-center ${
                 index === tabIndex
                   ? 'border-b-[3px] border-b-prime1 text-GS1 '

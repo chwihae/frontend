@@ -19,11 +19,32 @@ const Mypage = () => {
 
   // 로그아웃
   const handleSignOut = () => {
-    if (confirm('로그아웃 하시겠습니까?')) {
+    if (window.confirm('로그아웃 하시겠습니까?')) {
       localStorage.removeItem('accessToken');
       navigate('/intro');
     }
   };
+
+  const MYPOST = [
+    {
+      type: 'ME',
+      title: '작성한 글',
+      icon: <IConEditOrange />,
+      href: '/mypage/written',
+    },
+    {
+      type: 'VOTED',
+      title: '투표한 글',
+      icon: <IConVoteOrange />,
+      href: '/mypage/participated',
+    },
+    {
+      type: 'BOOKMARKED',
+      title: '저장한 글',
+      icon: <IConBookmarkOrange />,
+      href: '/mypage/saved',
+    },
+  ];
 
   return (
     <div className="relative h-full">
@@ -92,24 +113,3 @@ const Mypage = () => {
 };
 
 export default Mypage;
-
-const MYPOST = [
-  {
-    type: 'ME',
-    title: '작성한 글',
-    icon: <IConEditOrange />,
-    href: '/mypage/written',
-  },
-  {
-    type: 'VOTED',
-    title: '투표한 글',
-    icon: <IConVoteOrange />,
-    href: '/mypage/participated',
-  },
-  {
-    type: 'BOOKMARKED',
-    title: '저장한 글',
-    icon: <IConBookmarkOrange />,
-    href: '/mypage/saved',
-  },
-];

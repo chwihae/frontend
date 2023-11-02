@@ -41,7 +41,7 @@ const HeaderBack = () => {
 
   return (
     <div className="relative flex h-full items-center justify-between px-4">
-      <button onClick={handleBackBtn}>
+      <button type="button" onClick={handleBackBtn}>
         {isQuestionPage ? <IConCloseBlack /> : <IConBackBlack />}
       </button>
       <h1 className="scorebold18 absolute left-1/2 translate-x-[-50%]">

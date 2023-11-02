@@ -118,6 +118,7 @@ const Contents = ({ postId }: { postId: number }) => {
             .map((option) => (
               <li key={option.id}>
                 <label
+                  htmlFor={option.name}
                   className={`notosansregular14 flex h-14 w-[343px] cursor-pointer items-center rounded-[10px] ${
                     pollOptions?.showVoteCount === false
                       ? 'border-[1px] border-GS6 px-4'
@@ -126,6 +127,7 @@ const Contents = ({ postId }: { postId: number }) => {
                 >
                   <input
                     type="radio"
+                    id={option.name}
                     name={`${postId}-option`}
                     value={option.id}
                     className="hidden"

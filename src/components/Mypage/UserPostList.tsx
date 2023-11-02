@@ -14,6 +14,27 @@ const UserPostList = () => {
   const [currentpage, setCurrentPage] = useState<number>(0);
   const [lists, setLists] = useState<IVoteAllContent[]>([]);
 
+  const MYPOST = [
+    {
+      type: 'ME',
+      title: '내가 작성한 글',
+      icon: <IConEditOrange />,
+      href: '/mypage/written',
+    },
+    {
+      type: 'VOTED',
+      title: '내가 투표한 글',
+      icon: <IConVoteOrange />,
+      href: '/mypage/participated',
+    },
+    {
+      type: 'BOOKMARKED',
+      title: '내가 저장한 글',
+      icon: <IConBookmarkOrange />,
+      href: '/mypage/saved',
+    },
+  ];
+
   const fetchData = async (page?: number) => {
     // type
     const findType = MYPOST.find((item) => item.href === pathname);
@@ -46,24 +67,3 @@ const UserPostList = () => {
 };
 
 export default UserPostList;
-
-const MYPOST = [
-  {
-    type: 'ME',
-    title: '내가 작성한 글',
-    icon: <IConEditOrange />,
-    href: '/mypage/written',
-  },
-  {
-    type: 'VOTED',
-    title: '내가 투표한 글',
-    icon: <IConVoteOrange />,
-    href: '/mypage/participated',
-  },
-  {
-    type: 'BOOKMARKED',
-    title: '내가 저장한 글',
-    icon: <IConBookmarkOrange />,
-    href: '/mypage/saved',
-  },
-];

@@ -13,9 +13,14 @@ const FieldsCategory = () => {
             게시글의 카테고리를 선택해주세요.
           </p>
           {CATEGORYOPTIONS.map((tab) => (
-            <label key={tab.title} className="scoremedium16 py-2">
+            <label
+              key={tab.title}
+              htmlFor={tab.title}
+              className="scoremedium16 py-2"
+            >
               <input
                 type="radio"
+                id={tab.title}
                 value={tab.type}
                 className="mr-3"
                 {...register('type', {

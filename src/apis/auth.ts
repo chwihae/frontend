@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { LEVELSTEP } from '@/constants/home';
 
 import { auth } from './axios';

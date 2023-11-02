@@ -40,7 +40,7 @@ const BottomSheet = ({
     e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     if (e.currentTarget.innerText === '글 수정') {
-      confirm('개발중입니다.') && setIsBottomSheetOpen(false);
+      window.confirm('개발중입니다.') && setIsBottomSheetOpen(false);
     } else {
       const res = await deleteQuestion(postId);
       res.message === 'OK' &&
@@ -56,7 +56,7 @@ const BottomSheet = ({
     e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     if (e.currentTarget.innerText === '댓글 수정') {
-      confirm('개발중입니다.') && setIsBottomSheetOpen(false);
+      window.confirm('개발중입니다.') && setIsBottomSheetOpen(false);
     } else if (e.currentTarget.innerText === '댓글 삭제') {
       if (commentId) {
         deleteCommentMutate({

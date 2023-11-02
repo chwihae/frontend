@@ -38,6 +38,29 @@ const Mylevel = () => {
     fetchData();
   }, []);
 
+  const LEVEL_IMAGE = [
+    {
+      name: '학사',
+      imgSmall: <IConLevelOneRounded />,
+      imgLarge: <IConLevelOneRoundedLarge />,
+    },
+    {
+      name: '석사',
+      imgSmall: <IConLevelTwoRounded />,
+      imgLarge: <IConLevelTwoRoundedLarge />,
+    },
+    {
+      name: '박사',
+      imgSmall: <IConLevelThreeRounded />,
+      imgLarge: <IConLevelThreeRoundedLarge />,
+    },
+    {
+      name: '교수',
+      imgSmall: <IConLevelFourRounded />,
+      imgLarge: <IConLevelFourRoundedLarge />,
+    },
+  ];
+
   return (
     <div className="pt-10">
       <section className="mb-10 flex flex-col items-center gap-6 px-4">
@@ -113,26 +136,3 @@ const Mylevel = () => {
 };
 
 export default Mylevel;
-
-const LEVEL_IMAGE = [
-  {
-    name: '학사',
-    imgSmall: <IConLevelOneRounded />,
-    imgLarge: <IConLevelOneRoundedLarge />,
-  },
-  {
-    name: '석사',
-    imgSmall: <IConLevelTwoRounded />,
-    imgLarge: <IConLevelTwoRoundedLarge />,
-  },
-  {
-    name: '박사',
-    imgSmall: <IConLevelThreeRounded />,
-    imgLarge: <IConLevelThreeRoundedLarge />,
-  },
-  {
-    name: '교수',
-    imgSmall: <IConLevelFourRounded />,
-    imgLarge: <IConLevelFourRoundedLarge />,
-  },
-];

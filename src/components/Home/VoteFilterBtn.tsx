@@ -15,6 +15,7 @@ const VoteFilterBtn = ({ solvedIndex, setSolvedIndex }: TVoteFilterBtn) => {
       {RADIOOPTIONS.map((option) => (
         <label
           key={option.value}
+          htmlFor={option.text}
           className={`rounded-[37px] px-3 py-[6px] ${
             solvedIndex === option.value
               ? ' bg-prime1 text-white'
@@ -24,6 +25,7 @@ const VoteFilterBtn = ({ solvedIndex, setSolvedIndex }: TVoteFilterBtn) => {
           <input
             type="radio"
             name="voteFilter"
+            id={option.text}
             value={option.value}
             checked={solvedIndex === option.value}
             onChange={handleRadioChange}

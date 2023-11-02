@@ -7,6 +7,33 @@ import { ReactComponent as IConVoteGray } from '@/assets/icon_vote_gray.svg';
 const NoResults = () => {
   const { pathname } = useLocation();
 
+  const MYNoResultText = [
+    {
+      href: '/mypage/written',
+      text: '작성한',
+      content: `글을 작성하면\n여기에서 모아볼 수 있어요!`,
+      icon: <IConEditGray className="h-[120px] w-[120px]" />,
+      btnTitle: '글 작성하기',
+      btnHref: '/question',
+    },
+    {
+      href: '/mypage/participated',
+      text: '투표한',
+      content: `투표페이지에서\n질문에 투표하면\n여기에서 모아볼 수 있어요!`,
+      icon: <IConVoteGray className="h-[120px] w-[120px]" />,
+      btnTitle: '글 보러가기',
+      btnHref: '/home',
+    },
+    {
+      href: '/mypage/saved',
+      text: '저장된',
+      content: `투표페이지에서\n북마크 버튼을 누르시면\n더욱 편리하게 이용하실 수 있어요!`,
+      icon: <IConBookmarkGray className="h-[120px] w-[120px]" />,
+      btnTitle: '글 보러가기',
+      btnHref: '/home',
+    },
+  ];
+
   const text = MYNoResultText.find((items) => items.href === pathname);
 
   return (
@@ -39,30 +66,3 @@ const NoResults = () => {
 };
 
 export default NoResults;
-
-export const MYNoResultText = [
-  {
-    href: '/mypage/written',
-    text: '작성한',
-    content: `글을 작성하면\n여기에서 모아볼 수 있어요!`,
-    icon: <IConEditGray className="h-[120px] w-[120px]" />,
-    btnTitle: '글 작성하기',
-    btnHref: '/question',
-  },
-  {
-    href: '/mypage/participated',
-    text: '투표한',
-    content: `투표페이지에서\n질문에 투표하면\n여기에서 모아볼 수 있어요!`,
-    icon: <IConVoteGray className="h-[120px] w-[120px]" />,
-    btnTitle: '글 보러가기',
-    btnHref: '/home',
-  },
-  {
-    href: '/mypage/saved',
-    text: '저장된',
-    content: `투표페이지에서\n북마크 버튼을 누르시면\n더욱 편리하게 이용하실 수 있어요!`,
-    icon: <IConBookmarkGray className="h-[120px] w-[120px]" />,
-    btnTitle: '글 보러가기',
-    btnHref: '/home',
-  },
-];

@@ -13,7 +13,7 @@ const Login = () => {
     if (res.code === 200) {
       navigate('/home');
     } else {
-      confirm('인가코드 발급 또는 다른 에러로 로그인에 실패했습니다.');
+      window.confirm('인가코드 발급 또는 다른 에러로 로그인에 실패했습니다.');
       navigate('/intro');
     }
   };

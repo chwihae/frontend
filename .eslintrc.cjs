@@ -27,15 +27,23 @@ module.exports = {
     // 변수 및 함수 중복
     'no-shadow': 'warn',
     'consistent-return': 'off',
+    'no-param-reassign': 'off',
+    'no-alert': 'off',
+    'react/require-default-props': 'off',
+    'react/jsx-no-constructed-context-values': 'off',
+    'react/jsx-no-useless-fragment': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'react-refresh/only-export-components': [
       'error',
       { allowConstantExport: true },
     ],
-    // React JSX 코드에서 React를 import 안해도 됨
     'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': 'off',
-    // 타입 단언 기능 끄기
+    'jsx-a11y/label-has-associated-control': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off',
     // TypeScript에서 타입 import 스타일을 지정
     '@typescript-eslint/consistent-type-imports': [
       'error',
@@ -57,6 +65,8 @@ module.exports = {
         allowSeparatedGroups: true,
       },
     ],
+    'import/prefer-default-export': 'off',
+    'import/no-named-as-default-member': 'off',
     // import 순서 규칙
     'import/order': [
       'error',
@@ -76,10 +86,5 @@ module.exports = {
         'newlines-between': 'always',
       },
     ],
-    // default export 사용에 대한 경고를 비활성화
-    'import/prefer-default-export': 'off',
-    'import/no-named-as-default-member': 'off',
-    // 모듈을 찾을 수 없을 때의 경고를 비활성화
-    // 'import/no-unresolved': 'off',
   },
 };

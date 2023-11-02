@@ -42,7 +42,10 @@ const Home = () => {
         <VoteList tabIndex={tabIndex} solvedIndex={solvedIndex} />
       </section>
       <Link to="/question">
-        <button className="btn absolute bottom-[41px] right-[16px] h-[50px] w-[50px] rounded-full border-0 bg-orange-500 p-0 hover:bg-orange-500">
+        <button
+          type="button"
+          className="btn absolute bottom-[41px] right-[16px] h-[50px] w-[50px] rounded-full border-0 bg-orange-500 p-0 hover:bg-orange-500"
+        >
           <IConEditWhite />
         </button>
       </Link>
