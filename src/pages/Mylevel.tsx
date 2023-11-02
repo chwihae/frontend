@@ -90,22 +90,17 @@ const Mylevel = () => {
                 </button>
                 {accordionStates[index] && (
                   <div className="ml-[47px] pt-2 text-GS3">
-                    {
-                      <>
-                        <h4>💡등급 조건</h4>
-                        <ul className="scoreregular14 pl-9">
-                          <li className="list-disc">
-                            투표 수{' '}
-                            {nextLevelStep ? nextLevelStep.goalVotes : 0} 이상
-                          </li>
-                          <li className="list-disc">
-                            댓글 수{' '}
-                            {nextLevelStep ? nextLevelStep.goalComments : 0}{' '}
-                            이상
-                          </li>
-                        </ul>
-                      </>
-                    }
+                    <h4>💡등급 조건</h4>
+                    <ul className="scoreregular14 pl-9">
+                      <li className="list-disc">
+                        투표 수 {nextLevelStep ? nextLevelStep.goalVotes : 0}{' '}
+                        이상
+                      </li>
+                      <li className="list-disc">
+                        댓글 수 {nextLevelStep ? nextLevelStep.goalComments : 0}{' '}
+                        이상
+                      </li>
+                    </ul>
                   </div>
                 )}
               </li>

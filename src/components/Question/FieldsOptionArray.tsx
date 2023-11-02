@@ -6,7 +6,7 @@ import { ReactComponent as IConMinus } from '@/assets/icon_minus_gray_filled.svg
 const FieldsOptionArray = () => {
   const { control, register } = useFormContext();
   const { fields, append, remove } = useFieldArray({
-    control: control,
+    control,
     name: 'options',
   });
 
@@ -16,30 +16,28 @@ const FieldsOptionArray = () => {
         <legend className="scorebold16 text-GS1">투표 항목 입력</legend>
       </div>
       <ul className="mb-3 flex flex-col gap-3">
-        {fields.map((item, index) => {
-          return (
-            <li key={item.id} className="relative flex">
-              <input
-                type="text"
-                placeholder="항목 입력(20자 이내)"
-                className={`notosansmedium14 h-11 w-full rounded-[10px] border-[1px] border-GS6 px-5 py-[11px] outline-none placeholder:text-GS4 focus:border-prime1`}
-                {...register(`options.${index}.name`, {
-                  required: true,
-                  maxLength: 20,
-                })}
-              />
-              {index >= 2 && (
-                <button
-                  type="button"
-                  className="absolute right-4 top-1/2 translate-y-[-50%]"
-                  onClick={() => remove(index)}
-                >
-                  <IConMinus />
-                </button>
-              )}
-            </li>
-          );
-        })}
+        {fields.map((item, index) => (
+          <li key={item.id} className="relative flex">
+            <input
+              type="text"
+              placeholder="항목 입력(20자 이내)"
+              className="notosansmedium14 h-11 w-full rounded-[10px] border-[1px] border-GS6 px-5 py-[11px] outline-none placeholder:text-GS4 focus:border-prime1"
+              {...register(`options.${index}.name`, {
+                required: true,
+                maxLength: 20,
+              })}
+            />
+            {index >= 2 && (
+              <button
+                type="button"
+                className="absolute right-4 top-1/2 translate-y-[-50%]"
+                onClick={() => remove(index)}
+              >
+                <IConMinus />
+              </button>
+            )}
+          </li>
+        ))}
       </ul>
       {fields.length < 10 && (
         <button

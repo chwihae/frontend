@@ -10,33 +10,31 @@ const NoResults = () => {
   const text = MYNoResultText.find((items) => items.href === pathname);
 
   return (
-    <>
-      <div className="mt-16 text-center ">
-        {pathname === '/home' ? (
-          <div className="scoremedium12 text-GS4">
-            글이 없어요!
-            <br />
-            별랑이의 고민을 올려주세요.
-            <br />
-            다른 별랑이들이 결정을 도와줄 거예요.
+    <div className="mt-16 text-center ">
+      {pathname === '/home' ? (
+        <div className="scoremedium12 text-GS4">
+          글이 없어요!
+          <br />
+          별랑이의 고민을 올려주세요.
+          <br />
+          다른 별랑이들이 결정을 도와줄 거예요.
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center gap-5">
+          <div>{text?.icon}</div>
+          <div className="scorebold16">{text?.text} 글이 텅 비었어요!</div>
+          <div className="scoremedium12 whitespace-pre-wrap text-GS4">
+            {text?.content}
           </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center gap-5">
-            <div>{text?.icon}</div>
-            <div className="scorebold16">{text?.text} 글이 텅 비었어요!</div>
-            <div className="scoremedium12 whitespace-pre-wrap text-GS4">
-              {text?.content}
-            </div>
-            <Link
-              to={text?.btnHref as string}
-              className={`scoremedium16 mt-5 rounded-xl bg-prime1 px-10 py-[10px] text-white`}
-            >
-              {text?.btnTitle}
-            </Link>
-          </div>
-        )}
-      </div>
-    </>
+          <Link
+            to={text?.btnHref as string}
+            className="scoremedium16 mt-5 rounded-xl bg-prime1 px-10 py-[10px] text-white"
+          >
+            {text?.btnTitle}
+          </Link>
+        </div>
+      )}
+    </div>
   );
 };
 

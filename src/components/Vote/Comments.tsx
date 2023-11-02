@@ -13,7 +13,7 @@ import BottomSheet from '@components/common/BottomSheet';
 import Toast from '@components/common/Toast';
 
 const Comments = ({ postId }: { postId: number }) => {
-  //댓글
+  // 댓글
   const [inputComment, setInputComment] = useState('');
   const [commentId, setCommentId] = useState(0);
   const addCommentMutate = useAddCommentMutation();
@@ -66,85 +66,81 @@ const Comments = ({ postId }: { postId: number }) => {
   }, [inView, hasNextPage]);
 
   return (
-    <>
-      <section className="px-4 pb-[52px] pt-12">
-        <h3 className="scorebold16 mb-6">
-          댓글 {data?.pages[0].totalElements}
-        </h3>
-        {/* 댓글목록 */}
-        <ol className="grid gap-3">
-          {data && data?.pages[0].totalElements !== 0 ? (
-            <>
-              {data.pages.map((page) => (
-                <div key={page.number}>
-                  {page.content.map((comment: ICommentGetRes) => (
-                    <div key={comment?.id}>
-                      <li className="border-b-[1px] border-b-bg pb-3">
-                        <div className="notosansmedium16 mb-3 flex h-[26px] items-center justify-between">
-                          <span>{comment?.commenterAlias}</span>
-                          {comment.editable && (
-                            <label
-                              htmlFor="bottomSheet-commentEdit-modal"
-                              className="scoremedium16 flex cursor-pointer items-center justify-between"
-                              onClick={() => handleKebabBtn(comment?.id)}
-                            >
-                              <IConKebabGray />
-                            </label>
-                          )}
-                        </div>
-                        <p className="notosansregular16 mb-1 text-GS2">
-                          {comment?.content}
-                        </p>
-                        <span className="notosansregular12 text-GS4">
-                          {comment?.createdAt
-                            .replaceAll('-', '.')
-                            .replace('T', '. ')}
-                        </span>
-                      </li>
-                      <div ref={ref} className="h-1"></div>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </>
-          ) : (
-            <p className="scoremedium12 my-16 text-center text-GS4">
-              아직 댓글이 없어요
-              <br />
-              가장 먼저 댓글을 남겨보세요
-            </p>
-          )}
-        </ol>
-        <form
-          onSubmit={handleCommentSubmit}
-          className="mt-9 flex h-11 items-center gap-[5px]"
-        >
-          <input
-            type="text"
-            maxLength={500}
-            value={inputComment}
-            placeholder="댓글을 입력해주세요"
-            onChange={handleInputCommentChange}
-            className="notosansmedium14 w-full rounded-[10px] bg-bg px-5 py-[11px] placeholder:text-GS4 focus:outline-none"
-          />
-          <button type="submit" className="p-[10px]">
-            {inputComment === '' ? <IConSendGray /> : <IConSendOrange />}
-          </button>
-        </form>
-        {toastDeleteComment && (
-          <Toast text="댓글이 삭제됐습니다" setToast={setToastDeleteComment} />
+    <section className="px-4 pb-[52px] pt-12">
+      <h3 className="scorebold16 mb-6">댓글 {data?.pages[0].totalElements}</h3>
+      {/* 댓글목록 */}
+      <ol className="grid gap-3">
+        {data && data?.pages[0].totalElements !== 0 ? (
+          <>
+            {data.pages.map((page) => (
+              <div key={page.number}>
+                {page.content.map((comment: ICommentGetRes) => (
+                  <div key={comment?.id}>
+                    <li className="border-b-[1px] border-b-bg pb-3">
+                      <div className="notosansmedium16 mb-3 flex h-[26px] items-center justify-between">
+                        <span>{comment?.commenterAlias}</span>
+                        {comment.editable && (
+                          <label
+                            htmlFor="bottomSheet-commentEdit-modal"
+                            className="scoremedium16 flex cursor-pointer items-center justify-between"
+                            onClick={() => handleKebabBtn(comment?.id)}
+                          >
+                            <IConKebabGray />
+                          </label>
+                        )}
+                      </div>
+                      <p className="notosansregular16 mb-1 text-GS2">
+                        {comment?.content}
+                      </p>
+                      <span className="notosansregular12 text-GS4">
+                        {comment?.createdAt
+                          .replaceAll('-', '.')
+                          .replace('T', '. ')}
+                      </span>
+                    </li>
+                    <div ref={ref} className="h-1" />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </>
+        ) : (
+          <p className="scoremedium12 my-16 text-center text-GS4">
+            아직 댓글이 없어요
+            <br />
+            가장 먼저 댓글을 남겨보세요
+          </p>
         )}
-        {isBottomSheetOpen && (
-          <BottomSheet
-            modalId="bottomSheet-commentEdit-modal"
-            commentId={commentId}
-            listArray={['댓글 수정', '댓글 삭제']}
-            setToast={setToastDeleteComment}
-            // content={inputComment}
-          />
-        )}
-      </section>
-    </>
+      </ol>
+      <form
+        onSubmit={handleCommentSubmit}
+        className="mt-9 flex h-11 items-center gap-[5px]"
+      >
+        <input
+          type="text"
+          maxLength={500}
+          value={inputComment}
+          placeholder="댓글을 입력해주세요"
+          onChange={handleInputCommentChange}
+          className="notosansmedium14 w-full rounded-[10px] bg-bg px-5 py-[11px] placeholder:text-GS4 focus:outline-none"
+        />
+        <button type="submit" className="p-[10px]">
+          {inputComment === '' ? <IConSendGray /> : <IConSendOrange />}
+        </button>
+      </form>
+      {toastDeleteComment && (
+        <Toast text="댓글이 삭제됐습니다" setToast={setToastDeleteComment} />
+      )}
+      {isBottomSheetOpen && (
+        <BottomSheet
+          modalId="bottomSheet-commentEdit-modal"
+          commentId={commentId}
+          listArray={['댓글 수정', '댓글 삭제']}
+          setToast={setToastDeleteComment}
+          // content={inputComment}
+        />
+      )}
+    </section>
   );
 };
 

@@ -17,9 +17,7 @@ auth.interceptors.request.use(
 
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  },
+  (error) => Promise.reject(error),
 );
 
 const getAccessToken = async (config: AxiosRequestConfig) => {
@@ -46,9 +44,7 @@ const getAccessToken = async (config: AxiosRequestConfig) => {
 };
 
 auth.interceptors.response.use(
-  (res) => {
-    return res;
-  },
+  (res) => res,
   async (err) => {
     const {
       config,

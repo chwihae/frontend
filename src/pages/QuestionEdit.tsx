@@ -1,5 +1,3 @@
-const QuestionEdit = () => {
-  return <div>QuestionEdit</div>;
-};
+const QuestionEdit = () => <div>QuestionEdit</div>;
 
 export default QuestionEdit;

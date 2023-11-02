@@ -6,7 +6,7 @@ import type { IVoteOptionsRes, IVoteSingleRes } from '@/types/voteType';
 
 const useVoteQuery = (postId: number) => {
   const location = useLocation();
-  const pathname = location.pathname;
+  const { pathname } = location;
 
   // 투표글 데이터 가져오기
   const { data: pollPost } = useQuery<IVoteSingleRes>({

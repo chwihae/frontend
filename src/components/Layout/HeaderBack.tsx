@@ -11,7 +11,7 @@ import useVoteQuery from '@/hooks/useVoteQuery';
 const HeaderBack = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const pathname = location.pathname;
+  const { pathname } = location;
   const findTitle = ROUTER.find((page) => pathname.includes(page.href));
   const isVotePage = findTitle?.href === 'vote';
   const isQuestionPage = findTitle?.href === 'question';

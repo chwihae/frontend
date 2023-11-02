@@ -7,23 +7,21 @@ import HeaderHome from '@components/Layout/HeaderHome';
 const PrivateLayout = () => {
   const isLogin = !!localStorage.getItem('accessToken');
   const location = useLocation();
-  const pathname = location.pathname;
+  const { pathname } = location;
 
   return (
-    <>
-      <IsBottomSheetProvider>
-        <header className="h-12">
-          {pathname === '/home' ? <HeaderHome /> : <HeaderBack />}
-        </header>
-        {isLogin ? (
-          <main className="hide-scroll h-[calc(100%-48px)] overflow-scroll">
-            <Outlet />
-          </main>
-        ) : (
-          <Navigate to="/intro" />
-        )}
-      </IsBottomSheetProvider>
-    </>
+    <IsBottomSheetProvider>
+      <header className="h-12">
+        {pathname === '/home' ? <HeaderHome /> : <HeaderBack />}
+      </header>
+      {isLogin ? (
+        <main className="hide-scroll h-[calc(100%-48px)] overflow-scroll">
+          <Outlet />
+        </main>
+      ) : (
+        <Navigate to="/intro" />
+      )}
+    </IsBottomSheetProvider>
   );
 };
 

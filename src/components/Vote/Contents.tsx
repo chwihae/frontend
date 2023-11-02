@@ -39,11 +39,11 @@ const Contents = ({ postId }: { postId: number }) => {
     .map((item) => item.voteCount)
     .reduce((prev, curr) => prev + curr, 0);
 
-  //타이머
+  // 타이머
   const future = pollPost?.closeAt || '';
   const timer = useTimer(future);
 
-  //옵션선택
+  // 옵션선택
   const handleChooseOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (pollPost?.editable) {
       return setToastDenied(true);
@@ -56,12 +56,12 @@ const Contents = ({ postId }: { postId: number }) => {
 
   // console.log(pollOptions);
 
-  //재투표
+  // 재투표
   const handleRevoteBtn = () => {
     deleteMutation();
   };
 
-  //북마크
+  // 북마크
   const { mutate: bookmarkMutation } = useMutation({
     mutationFn: () => bookmarked(postId),
     onSuccess: () => {
@@ -150,7 +150,7 @@ const Contents = ({ postId }: { postId: number }) => {
                           pollOptions.votedOptionId === option.id &&
                           'resultsProgress_voted'
                         }`}
-                      ></progress>
+                      />
                       <span
                         className={`notosansmedium14 absolute right-4 ${
                           pollOptions.votedOptionId === option.id &&

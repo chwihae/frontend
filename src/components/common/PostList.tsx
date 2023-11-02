@@ -58,7 +58,7 @@ const PostList = ({ lists, fetchFn, currentPage }: TPostList) => {
               </Link>
             </li>
           ))}
-          <div ref={ref} className="h-1"></div>
+          <div ref={ref} className="h-1" />
         </>
       ) : (
         <NoResults />

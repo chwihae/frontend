@@ -1,4 +1,5 @@
 import { RADIOOPTIONS } from '@/constants/home';
+
 type TVoteFilterBtn = {
   solvedIndex: number;
   setSolvedIndex: (arg: number) => void;

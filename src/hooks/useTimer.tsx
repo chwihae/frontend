@@ -19,11 +19,10 @@ const CountdownTimer = (time: string) => {
         return `${hh.toString().padStart(2, '0')}:${mm
           .toString()
           .padStart(2, '0')}:${ss.toString().padStart(2, '0')}`;
-      } else {
-        return `${days}일 ${hh.toString().padStart(2, '0')}:${mm
-          .toString()
-          .padStart(2, '0')}:${ss.toString().padStart(2, '0')}`;
       }
+      return `${days}일 ${hh.toString().padStart(2, '0')}:${mm
+        .toString()
+        .padStart(2, '0')}:${ss.toString().padStart(2, '0')}`;
     }
   };
 

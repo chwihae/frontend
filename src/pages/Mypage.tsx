@@ -47,18 +47,16 @@ const Mypage = () => {
         <ol className="p flex flex-col gap-8 border-b-[10px] border-bg px-4 pb-[40px]">
           {MYPOST.map((list) => (
             <li key={list.title}>
-              {
-                <Link
-                  to={list.href}
-                  className="scoremedium16 flex cursor-pointer justify-between"
-                >
-                  <div className="flex items-center gap-1 ">
-                    {list.icon}
-                    {list.title}
-                  </div>
-                  <IConForwardGray />
-                </Link>
-              }
+              <Link
+                to={list.href}
+                className="scoremedium16 flex cursor-pointer justify-between"
+              >
+                <div className="flex items-center gap-1 ">
+                  {list.icon}
+                  {list.title}
+                </div>
+                <IConForwardGray />
+              </Link>
             </li>
           ))}
         </ol>

@@ -46,32 +46,20 @@ const Level = () => {
         <div className="scoremedium12 w-full text-GS3">
           <div className="mb-[7px] flex w-full justify-between">
             <IConVoteOrange className="w-4" />
-            <progress
-              max="100"
-              value={turnout}
-              className="rateProgress"
-            ></progress>
+            <progress max="100" value={turnout} className="rateProgress" />
             {turnout && (
-              <>
-                <span className="min-w-[34px] text-right">
-                  {turnout > 100 ? 100 : turnout}%
-                </span>
-              </>
+              <span className="min-w-[34px] text-right">
+                {turnout > 100 ? 100 : turnout}%
+              </span>
             )}
           </div>
           <div className="flex w-full justify-between">
             <IConCommentOrange className="w-4" />
-            <progress
-              max="100"
-              value={commentRate}
-              className="rateProgress"
-            ></progress>
+            <progress max="100" value={commentRate} className="rateProgress" />
             {commentRate && (
-              <>
-                <span className="min-w-[34px] text-right">
-                  {commentRate > 100 ? 100 : commentRate}%
-                </span>
-              </>
+              <span className="min-w-[34px] text-right">
+                {commentRate > 100 ? 100 : commentRate}%
+              </span>
             )}
           </div>
         </div>
