@@ -72,7 +72,8 @@ module.exports = {
       'error',
       {
         groups: [
-          ['builtin', 'external'],
+          'builtin',
+          'external',
           'internal',
           'parent',
           'sibling',
