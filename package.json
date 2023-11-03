@@ -11,6 +11,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
+      "tsc --noEmit",
       "prettier --write --cache",
       "eslint --fix --cache"
     ]
