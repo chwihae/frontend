@@ -32,7 +32,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/types/common/custom.d.ts",
-    ".eslintrc.cjs"
+    ".eslintrc.cjs",
+    "tailwind.config.cjs"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

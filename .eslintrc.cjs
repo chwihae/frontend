@@ -8,7 +8,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'tailwind.config.cjs'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
