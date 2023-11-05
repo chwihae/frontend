@@ -12,10 +12,10 @@ const Intro = () => {
       <div className="absolute top-1/2 flex translate-y-[-55%]  flex-col items-center ">
         <p className="flex flex-col gap-1 text-black score-intro">
           <span>
-            <span className="text-prime1">취</span>준생 고민
+            <span className="font-semibold text-prime1">취</span>준생 고민
           </span>
           <span>
-            <span className="text-prime1">해</span>결 서비스
+            <span className="font-semibold text-prime1">해</span>결 서비스
           </span>
         </p>
         <div>
