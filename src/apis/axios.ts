@@ -1,5 +1,6 @@
-import type { AxiosRequestConfig } from 'axios';
-import axios, { AxiosError } from 'axios';
+/* eslint-disable no-console */
+// import type { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
 export const auth = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -7,66 +8,60 @@ export const auth = axios.create({
 
 auth.interceptors.request.use(
   (config) => {
-    if (!config.headers) return config;
-
-    const accessToken = JSON.parse(localStorage.getItem('accessToken') || '{}');
+    const accessToken = localStorage.getItem('accessToken');
 
     if (accessToken !== null) {
-      config.headers.Authorization = accessToken;
+      config.headers.Authorization = JSON.parse(accessToken);
     }
 
     return config;
   },
-  (error) => Promise.reject(error),
+  (error) => console.log(error),
 );
 
-const getAccessToken = async (config: AxiosRequestConfig) => {
-  try {
-    // 리프레쉬 토큰으로 액세스토큰 재요청
-    const refreshToken = JSON.parse(
-      localStorage.getItem('refreshToken') || '{}',
-    );
+// const getAccessToken = async (config: AxiosRequestConfig) => {
+//   try {
+//     // 리프레쉬 토큰으로 액세스토큰 재요청
+//     const refreshToken = localStorage.getItem('refreshToken');
 
-    const res = await axios({
-      method: 'POST',
-      url: `${config.baseURL}/auth/reissue`,
-      headers: { Authorization: `Bearer ${refreshToken}` },
-    });
+//     if (refreshToken !== null) {
+//       const res = await axios({
+//         method: 'POST',
+//         url: `${config.baseURL}/auth/reissue`,
+//         headers: { Authorization: `${JSON.parse(refreshToken)}` },
+//       });
 
-    // 액세스토큰 로컬저장 및 반환
-    const accessToken = res.data.data.token;
-    localStorage.setItem('accessToken', JSON.stringify(res.data.data));
+//       const accessToken = res.data.data.token;
+//       localStorage.setItem('accessToken', JSON.stringify(accessToken));
 
-    return accessToken;
-  } catch (e) {
-    localStorage.removeItem('accessToken');
-  }
-};
+//       return accessToken;
+//     }
+//   } catch (error) {
+//     return console.log(error);
+//   }
+// };
 
 auth.interceptors.response.use(
   (res) => res,
-  async (err) => {
-    const {
-      config,
-      response: { status },
-    } = err;
+  async (error) => {
+    // const { config } = error;
 
-    // 토큰 에러가 아닐 떄
-    if (config.url === config.baseURL || status !== 401 || config.sent) {
-      if (err instanceof AxiosError) {
-        return Promise.reject(err.response?.data);
-      }
+    // 액세스 토큰 유효하지 않음
+    if (error.response.data.code === 1001) {
+      console.log('토큰 유효하지 않음');
+
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userLevel');
+
+      // TODO : 리프레쉬토큰으로 액세스토큰 재발급 api 요청 필요
+      // const accessToken = await getAccessToken(config);
+      // if (accessToken) {
+      //   config.headers.Authorization = `${accessToken}`;
+      // }
     }
 
-    // 액세스 토큰 에러일 때
-    config.sent = true;
-    const accessToken = await getAccessToken(config);
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-
-    // 리프레쉬 토큰 에러일 때 대비
-
-    return axios(config);
+    return console.log(error);
   },
 );
