@@ -9,12 +9,8 @@ export const getUserPostInfo = async ({
   page = 0,
   size = 10,
 }: IVoteAllReq) => {
-  try {
-    const { data } = await auth.get(
-      `/api/v1/users/questions?type=${type}&page=${page}&size=${size}`,
-    );
-    return data.data;
-  } catch (error) {
-    console.error(error);
-  }
+  const { data } = await auth.get(
+    `/api/v1/users/questions?type=${type}&page=${page}&size=${size}`,
+  );
+  return data.data;
 };
