@@ -48,14 +48,13 @@
 
 ### 4. 공통사항
 
-- JWT 토큰을 이용한 카카오 간편 로그인 구현
-  - 토큰 발급 후 자동로그인
-- 유저 권한에 따른 라우터 설정
-- 클라이언트 전역상태관리는 contextAPI 사용
+- JWT 토큰을 이용한 카카오 소셜로그인 기능 개발
+- Router로 유저 권한에 따라 접속 허용범위 설정
+- tailwindCSS config 설정으로 디자인 시스템 적용
+- ESLint, Husky 설정으로 런타임 에러 최소화
 - Axios interceptor로 전역 request와 response에 대한 성공 및 에러 처리
-- tailwind.config.js에 color와 font의 디자인 시스템 설정
+- ContextAPI로 클라이언트 전역 상태 관리
 - tsconfig.json, vite.config.ts 를 통해 절대경로 설정
-- eslint import 규칙, airbnb, husky pre commit 설정하여 런타임 에러 최소화 작업
 - favicon, og 카드 설정
 
 </details>
