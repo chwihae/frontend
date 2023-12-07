@@ -2,17 +2,14 @@ import { useEffect, useState } from 'react';
 
 import { getUserLevel } from '@/apis/auth';
 import { ReactComponent as IConLevelOneRounded } from '@/assets/char_level1_round.svg';
-import { ReactComponent as IConLevelOneRoundedLarge } from '@/assets/char_level1_round_100.svg';
 import { ReactComponent as IConLevelTwoRounded } from '@/assets/char_level2_round.svg';
-import { ReactComponent as IConLevelTwoRoundedLarge } from '@/assets/char_level2_round_100.svg';
 import { ReactComponent as IConLevelThreeRounded } from '@/assets/char_level3_round.svg';
-import { ReactComponent as IConLevelThreeRoundedLarge } from '@/assets/char_level3_round_100.svg';
 import { ReactComponent as IConLevelFourRounded } from '@/assets/char_level4_round.svg';
-import { ReactComponent as IConLevelFourRoundedLarge } from '@/assets/char_level4_round_100.svg';
 import { ReactComponent as IconArrowBottomGray } from '@/assets/icon_arrow_bottom_gray.svg';
 import { LEVELSTEP } from '@/constants/home';
 import type { IUserLevel } from '@/types/authType';
 import getLocalData from '@/utils/getLocalData';
+import LevelImage from '@components/common/LevelImage';
 
 const Mylevel = () => {
   const [accordionStates, setAccordionStates] = useState(
@@ -42,22 +39,18 @@ const Mylevel = () => {
     {
       name: '학사',
       imgSmall: <IConLevelOneRounded />,
-      imgLarge: <IConLevelOneRoundedLarge />,
     },
     {
       name: '석사',
       imgSmall: <IConLevelTwoRounded />,
-      imgLarge: <IConLevelTwoRoundedLarge />,
     },
     {
       name: '박사',
       imgSmall: <IConLevelThreeRounded />,
-      imgLarge: <IConLevelThreeRoundedLarge />,
     },
     {
       name: '교수',
       imgSmall: <IConLevelFourRounded />,
-      imgLarge: <IConLevelFourRoundedLarge />,
     },
   ];
 
@@ -65,7 +58,7 @@ const Mylevel = () => {
     <div className="pt-10">
       <section className="mb-10 flex flex-col items-center gap-6 px-4">
         <div className="flex flex-col items-center">
-          {LEVEL_IMAGE.find((img) => img.name === userLevel?.name)?.imgLarge}
+          <LevelImage className="h-[100px] w-[100px]" />
           <h2 className="score-bold16">별랑이 {userId}</h2>
         </div>
         <ul className="h-[70px] w-full rounded-[10px] border-[1px] border-GS6 p-[11px] text-GS4 score-medium14">
