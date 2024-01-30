@@ -21,7 +21,7 @@
 
 |                                                                1.스플래쉬 및 로그인 페이지                                                                 |                                                                2.메인 홈의 등급, 탭, 필터, 무한스크롤                                                                 |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/chwihae/frontend/assets/90189513/7e525a0c-d517-4dfb-b87c-4b2fb3200cdd" alt="취해 스플래쉬 및 로그인 gif 화면" width="450px"/> | <img src="https://github.com/chwihae/frontend/assets/90189513/3d5078bc-1ba7-424c-8482-131ebd862f53" alt="취해 메인홈의 탭, 필터, 무한스크롤 gif 화면" width="450px"/> |
+| <img src="https://github.com/chwihae/frontend/assets/90189513/7e525a0c-d517-4dfb-b87c-4b2fb3200cdd" alt="취해 스플래쉬 및 로그인 gif 화면" width="400px"/> | <img src="https://github.com/chwihae/frontend/assets/90189513/3d5078bc-1ba7-424c-8482-131ebd862f53" alt="취해 메인홈의 탭, 필터, 무한스크롤 gif 화면" width="400px"/> |
 
 - 등급에 따른 Progress bar 게이지 및 캐릭터 변경
 - 카테고리 분류
@@ -30,7 +30,7 @@
 
 |                                                                3.글작성 페이지                                                                 |
 | :--------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/chwihae/frontend/assets/90189513/9209e2b8-8698-4323-a1da-8bf80a2f2018" alt="취해 글작성 gif 화면" width="450px"/> |
+| <img src="https://github.com/chwihae/frontend/assets/90189513/9209e2b8-8698-4323-a1da-8bf80a2f2018" alt="취해 글작성 gif 화면" width="400px"/> |
 
 - React-hook-form의 useFormContext를 통해, 폼의 필드 컴포넌트를 전역으로 관리하여 구현
 - React-hook-form의 useFieldArray를 사용해 투표 항목 필드를 배열로 관리하며 추가 및 삭제를 구현
@@ -39,7 +39,7 @@
 
 |                                                                  4.투표글 (내가 쓴) 진행중, 마감, 삭제                                                                  |                                                                  5.투표글 (타인이 쓴) 진행중, 댓글                                                                  |
 | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/chwihae/frontend/assets/90189513/2bf7d426-cb33-49bf-98a9-1ed41384ce96" alt="취해 내가쓴투표글 진행중, 마감, 삭제 gif 화면" width="450px"/> | <img src="https://github.com/chwihae/frontend/assets/90189513/a2117536-f8b9-4550-8370-5a2606c5dcfa" alt="취해 타인이쓴투표글 진행중, 댓글 gif 화면" width="450px"/> |
+| <img src="https://github.com/chwihae/frontend/assets/90189513/2bf7d426-cb33-49bf-98a9-1ed41384ce96" alt="취해 내가쓴투표글 진행중, 마감, 삭제 gif 화면" width="400px"/> | <img src="https://github.com/chwihae/frontend/assets/90189513/a2117536-f8b9-4550-8370-5a2606c5dcfa" alt="취해 타인이쓴투표글 진행중, 댓글 gif 화면" width="400px"/> |
 
 - Tanstack-Query의 useQuery, useMutation으로 새로고침없이 투표 및 댓글 기능 구현
 - Tanstack-Query의 useInfiniteQuery로 댓글 무한스크롤 구현
