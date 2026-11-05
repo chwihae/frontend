@@ -1,8 +1,19 @@
 import { ReactComponent as IConWarning } from '@/assets/icon_warning.svg';
 
-const ModalPreparing = ({ name }: { name: string }) => (
+type TModalPreparing = {
+  name: string;
+  defaultOpen?: boolean;
+  onClose?: () => void;
+};
+
+const ModalPreparing = ({ name, defaultOpen, onClose }: TModalPreparing) => (
   <>
-    <input type="checkbox" id={name} className="modal-toggle" />
+    <input
+      type="checkbox"
+      id={name}
+      className="modal-toggle"
+      defaultChecked={defaultOpen}
+    />
     <div className="modal">
       <div className="flex h-[250px] w-[250px] flex-col items-center gap-3 rounded-[20px] bg-white py-[27px]">
         <IConWarning />
@@ -16,6 +27,7 @@ const ModalPreparing = ({ name }: { name: string }) => (
           <label
             htmlFor={name}
             className="btn m-0 h-[42px] w-[95px] rounded-[10px] bg-prime1 py-[9px] text-center text-white score-medium14 hover:bg-prime1"
+            onClick={onClose}
           >
             알겠어요
           </label>

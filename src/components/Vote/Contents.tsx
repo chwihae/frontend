@@ -14,13 +14,12 @@ const Contents = ({ postId }: { postId: number }) => {
   const queryClient = useQueryClient();
 
   const { pollPost, pollOptions } = useVoteQuery(postId);
-  const [optionId, setOptionId] = useState<number>(0);
   const [toastDenied, setToastDenied] = useState<boolean>(false);
 
   // console.log(pollOptions);
 
   const { mutate: chooseOptMutation } = useMutation({
-    mutationFn: () => addVote(postId, optionId),
+    mutationFn: (optionId: number) => addVote(postId, optionId),
     onSuccess: () => {
       // queryClient.invalidateQueries(['voteSingle', postId]);
       queryClient.invalidateQueries(['voteOptions', postId]);
@@ -49,9 +48,8 @@ const Contents = ({ postId }: { postId: number }) => {
       return setToastDenied(true);
     }
 
-    const id = Number(e.target.value);
-    setOptionId(id);
-    chooseOptMutation();
+    // state 로 넘기면 mutationFn 이 이전 렌더의 값을 읽어 직전 선택지로 투표되므로 인자로 바로 넘긴다
+    chooseOptMutation(Number(e.target.value));
   };
 
   // console.log(pollOptions);

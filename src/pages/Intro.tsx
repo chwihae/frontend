@@ -1,14 +1,21 @@
+import { useNavigate } from 'react-router-dom';
+
 import { ReactComponent as IconKakao } from '@/assets/icon_kakao.svg';
 import { ReactComponent as ImgCharGroup } from '@/assets/img_charGroup.svg';
-import { KAKAO_AUTH_URL } from '@/constants/kakao';
+import useTempMockData from '@/hooks/useTempMockData';
 
 const Intro = () => {
+  const navigate = useNavigate();
+  const { loginPath } = useTempMockData();
+
+  // 서버 운영 종료로 카카오 인가 대신 목 인가코드로 로그인 흐름을 진행한다
+  // (기존: window.location.assign(KAKAO_AUTH_URL))
   const handleOAuthLogin = () => {
-    window.location.assign(KAKAO_AUTH_URL);
+    navigate(loginPath);
   };
 
   return (
-    <div className="relative flex h-screen flex-col items-center justify-between">
+    <div className="relative flex h-full flex-col items-center justify-between">
       <div className="absolute top-1/2 flex translate-y-[-55%]  flex-col items-center ">
         <p className="flex flex-col gap-1 text-black score-intro">
           <span>
@@ -22,7 +29,8 @@ const Intro = () => {
           <ImgCharGroup />
         </div>
       </div>
-      <div className="absolute bottom-10">
+      {/* 하단 30px 의 목데이터 안내 문구와 겹치지 않도록 위로 올린다 */}
+      <div className="absolute bottom-[70px]">
         <p className="mb-2 text-center text-GS3 score-medium14">
           함께 고민을 해결하러 갈까요?
         </p>
