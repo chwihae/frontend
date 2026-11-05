@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -5,6 +6,7 @@ import { deleteQuestion } from '@/apis/question';
 import { useIsBottomSheetContext } from '@/contexts/IsBottomSheetProvider';
 import useDeleteCommentMutation from '@/hooks/comment/useDeleteCommentMutation';
 import useGetPostId from '@/hooks/useGetPostId';
+import ModalPreparing from '@components/common/ModalPreparing';
 
 interface IBottomSheet {
   setToast?: Dispatch<SetStateAction<boolean>>;
@@ -24,6 +26,7 @@ const BottomSheet = ({
   const navigate = useNavigate();
   const { postId } = useGetPostId();
   const { setIsBottomSheetOpen } = useIsBottomSheetContext();
+  const [isPreparingModal, setIsPreparingModal] = useState(false);
 
   // 삭제 내용에 따른, 바텀시트 출력 list 변경
   let convertListArray;
@@ -40,7 +43,7 @@ const BottomSheet = ({
     e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     if (e.currentTarget.innerText === '글 수정') {
-      window.confirm('개발중입니다.') && setIsBottomSheetOpen(false);
+      setIsPreparingModal(true);
     } else {
       const res = await deleteQuestion(postId);
       res.message === 'OK' &&
@@ -56,7 +59,7 @@ const BottomSheet = ({
     e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     if (e.currentTarget.innerText === '댓글 수정') {
-      window.confirm('개발중입니다.') && setIsBottomSheetOpen(false);
+      setIsPreparingModal(true);
     } else if (e.currentTarget.innerText === '댓글 삭제') {
       if (commentId) {
         deleteCommentMutate({
@@ -69,6 +72,17 @@ const BottomSheet = ({
       }
     }
   };
+
+  // 바텀시트는 닫히면 언마운트되므로, 같은 컴포넌트 안에서 바텀시트를 준비중 모달로 바꿔 보여준다
+  if (isPreparingModal) {
+    return (
+      <ModalPreparing
+        name={`${modalId}-preparing`}
+        defaultOpen
+        onClose={() => setIsBottomSheetOpen(false)}
+      />
+    );
+  }
 
   return (
     <>
